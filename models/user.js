@@ -8,7 +8,7 @@ const User = new Schema(
     displayName: { type: String, required: true },
     avatar: { data: Buffer, contentType: String, required: false },
     rounds: [{ type: Schema.Types.ObjectId, ref: 'rounds' }],
-    groupId: [{ type: Schema.Types.ObjectId, ref: 'groups' }]
+    groups: [{ type: Schema.Types.ObjectId, ref: 'groups' }]
   },
   { timestamps: true }
 )
