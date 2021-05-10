@@ -7,7 +7,8 @@ const User = new Schema(
     password_digest: { type: String, required: true },
     displayName: { type: String, required: true },
     avatar: { data: Buffer, contentType: String, required: false },
-    rounds: [{ type: Schema.Types.ObjectId, ref: 'rounds' }]
+    rounds: [{ type: Schema.Types.ObjectId, ref: 'rounds' }],
+    groupId: [{ type: Schema.Types.ObjectId, ref: 'groups' }]
   },
   { timestamps: true }
 )

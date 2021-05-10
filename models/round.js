@@ -7,12 +7,12 @@ const Round = new Schema(
     par: { type: Number, required: true },
     holes: { type: Number, required: true },
     score: { type: Number, required: true },
-    fairwaysHit: { type: Number, required: true },
-    possibleFairways: { type: Number, required: true },
-    putts: { type: Number, required: true },
-    greens: { type: Number, required: true },
-    upAndDowns: { type: Number, required: true },
-    possibleUpAndDowns: { type: Number, required: true },
+    fairwaysHit: { type: Number, required: false },
+    possibleFairways: { type: Number, required: false },
+    putts: { type: Number, required: false },
+    greens: { type: Number, required: false },
+    upAndDowns: { type: Number, required: false },
+    possibleUpAndDowns: { type: Number, required: false },
     userId: {type: Schema.Types.ObjectId, ref: 'users'}
   },
   { timestamps: true }
