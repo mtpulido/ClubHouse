@@ -1,44 +1,61 @@
-const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../models/user");
 const db = require("../db/connection");
 
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
-const SALT_ROUNDS = 11
-const TOKEN_KEY = 'as983zZ2AKS4rhv3218isjTSK382ksfH1ks29sjdf3kjsh34bsSDjeB21k'
+const TOKEN_KEY = 'as983zZ2?AKS4rhv3218isjTSK3!82ksfH1ks29sj/df3kjsh34+bsSD-jeB21k'
+
+
+const handleErrors = (err) => {
+  let errors = { displayName: '', email: '', passwordDigest: '' }
+  // incorrect email login
+  if (err.message === 'incorrect email') {
+    errors.email = 'Email not registered'
+  }
+  // incorrect password login
+  if (err.message === 'incorrect password') {
+    errors.passwordDigest = 'Password is incorrect'
+  }
+  //duplicate email signup
+  if (err.code === 11000) {
+    errors.email = 'Email already in use'
+    return errors
+  }
+  // validation errors signup
+  if (err.message.includes('users validation failed')) {
+    Object.values(err.errors).forEach((error) => {
+      errors[error.properties.path] = error.properties.message
+    })
+  }
+  return errors
+}
 
 
 const signUp = async (req, res) => {
   try {
     const { displayName, email, password } = req.body
-    const passwordDigest = await bcrypt.hash(password, SALT_ROUNDS)
-    const user = new User({
-      displayName,
-      email,
-      passwordDigest
-    })
-    
-    await user.save()
-
+    const passwordDigest = password
+    const user = await User.create({ displayName, email, passwordDigest })
+    //password hashed in models/user.js
     const payload = {
       username: user.displayName,
       email: user.email,
       id: user._id
     }
-
     const token = jwt.sign(payload, TOKEN_KEY)
     res.status(201).json({ token })
   } catch (error) {
-    res.status(400).json({ error: error.message })
+    const errors = handleErrors(error)
+    res.status(400).json({ errors })
   }
 }
 
 const signIn = async (req, res) => {
   try {
     const { email, password } = req.body
-    const user = await User.findOne({ email: email })
-    if (await bcrypt.compare(password, user.passwordDigest)) {
+    const user = await User.login(email, password)
+    
       const payload = {
         displayName: user.displayName,
         email: user.email,
@@ -47,11 +64,10 @@ const signIn = async (req, res) => {
 
       const token = jwt.sign(payload, TOKEN_KEY)
       res.status(201).json({ token })
-    } else {
-      res.status(401).send('Invalid Credentials')
-    }
-  } catch (error) {
-    res.status(500).json({ error: error.message })
+    } 
+  catch (error) {
+    const errors = handleErrors(error)
+    res.status(400).json({ errors })
   }
 }
 
