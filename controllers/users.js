@@ -100,20 +100,38 @@ const getUsers = async (req, res) => {
   }
 }
 
-const createRound = async (req, res) => {
-  try {
-    let user = await User.findById(req.params.id)
-    let round = await new Round(req.body)
+// const createRound = async (req, res) => {
+//   try {
+//     let user = await User.findById(req.params.id)
+//     let round = await new Round(req.body)
 
-    round.userId = user
-    await round.save()
-    user.rounds.push(round)
-    await user.save()
-    console.log("user", user)
-    console.log("round", round)
-    res.status(201).json(round)
+//     round.userId = user
+//     await round.save()
+//     user.rounds.push(round)
+//     await user.save()
+//     console.log("user", user)
+//     console.log("round", round)
+//     res.status(201).json(round)
+//   } catch (error) {
+//     res.status(500).json({ error: error.message })
+//   }
+// }
+
+const addGroup = async (user, group) => {
+  try {
+    user.groups.push(group)
+    return await user.save()
   } catch (error) {
-    res.status(500).json({ error: error.message })
+    throw error
+  }
+}
+
+const addRound = async (user, round) => {
+  try {
+    user.rounds.push(round)
+    return await user.save()
+  } catch (error) {
+    throw error
   }
 }
 
@@ -122,6 +140,7 @@ module.exports = {
   signIn,
   verify,
   getUsers,
-  createRound,
+  addGroup,
+  addRound
   // changePassword,
 };

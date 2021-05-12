@@ -1,6 +1,7 @@
 const Round = require('../models/round')
 const db = require('../db/connection')
 const User = require('../models/user')
+const { addRound } = require('./users')
 
 db.on('error', console.error.bind(console, 'MongoDB connection error:'))
 
@@ -30,6 +31,23 @@ const getRound = async (req, res) => {
   }
 }
 
+
+const createRound = async (req, res) => {
+  try {
+    let user = res.locals.user
+    const round = await new Round(req.body)
+
+    round.userId = user
+    await round.save()
+  
+    res.status(201).json(round)
+    addRound(user, round)
+  } catch (error) {
+    console.log("step 6 ERROR in createRound")
+    res.status(500).json({ error: error.message })
+  }
+}
+
 const updateRound = async (req, res) => {
   const { id } = req.params
   await Round.findByIdAndUpdate(id, req.body, { new: true }, { runValidators: true }, (error, round) => {
@@ -46,6 +64,6 @@ const updateRound = async (req, res) => {
 module.exports = {
   getRounds,
   getRound,
-  // createRound,
+  createRound,
   updateRound
 }

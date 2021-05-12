@@ -1,12 +1,13 @@
-// const { Router } = require("express");
-// const controllers = require("../controllers/groups");
+const { Router } = require("express");
+const controllers = require("../controllers/groups");
+const { checkAuth } = require("../middleware/requireAuth")
 
-// const router = Router();
+const router = Router();
 
-// router.get("/", controllers.getGroups);
+router.get("/", controllers.getGroups);
 // router.get("/:id", controllers.getGroup);
-// router.post("/", controllers.createGroup);
+router.post("/", checkAuth, controllers.createGroup);
 // router.put("/:id", controllers.editGroup);
 // router.delete("/:id", controllers.deleteGroup);
 
-// module.exports = router;
+module.exports = router;
