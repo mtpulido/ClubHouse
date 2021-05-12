@@ -93,31 +93,29 @@ const verify =  async (req, res) => {
 
 const getUsers = async (req, res) => {
   try {
-    const users = await User.find().populate('rounds')
+    const users = await User.find().populate('rounds').populate('groups')
     res.json(users)
   } catch (error) {
     res.status(500).json({ error: error.message })
   }
 }
 
-// const createRound = async (req, res) => {
-//   try {
-//     let user = await User.findById(req.params.id)
-//     let round = await new Round(req.body)
+const getUser = async (req, res) => {
+  try {
+    const { id } = req.params
+    const user = await User.findById(id).populate('rounds')
 
-//     round.userId = user
-//     await round.save()
-//     user.rounds.push(round)
-//     await user.save()
-//     console.log("user", user)
-//     console.log("round", round)
-//     res.status(201).json(round)
-//   } catch (error) {
-//     res.status(500).json({ error: error.message })
-//   }
-// }
+    if (user) {
+      res.status(201).json(user)
+    } else {
+      res.status(404).json({ message: "Round not found" })
+    }
+  } catch (error) {
+    res.status(500).json({ error: error.message })
+  }
+}
 
-const addGroup = async (user, group) => {
+const addJustCreatedGroup = async (user, group) => {
   try {
     user.groups.push(group)
     return await user.save()
@@ -126,7 +124,7 @@ const addGroup = async (user, group) => {
   }
 }
 
-const addRound = async (user, round) => {
+const addJustCreatedRound = async (user, round) => {
   try {
     user.rounds.push(round)
     return await user.save()
@@ -140,7 +138,8 @@ module.exports = {
   signIn,
   verify,
   getUsers,
-  addGroup,
-  addRound
+  getUser,
+  addJustCreatedGroup,
+  addJustCreatedRound
   // changePassword,
 };

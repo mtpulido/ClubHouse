@@ -21,7 +21,7 @@ const checkAuth = async (req, res, next) => {
   //   res.status(403).json({ error: "Must be logged in" });
   // }
 
-  const user = await User.findById('609bfc68654e503305430da5')
+  const user = await User.findById('609c07aa26f2f03a2144332b')
   res.locals.user = user
   next()
 };

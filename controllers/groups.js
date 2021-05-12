@@ -1,6 +1,7 @@
 const Group = require('../models/group')
 const db = require('../db/connection')
-const { addGroup } = require('./users')
+const { addJustCreatedGroup } = require('./users')
+const user = require('../models/user')
 
 db.on('error', console.error.bind(console, 'MongoDB connection error:'))
 
@@ -9,6 +10,22 @@ const getGroups = async (req, res) => {
   try {
     const groups = await Group.find().populate('members').populate('adminId')
     res.status(201).json(groups)
+  } catch (error) {
+    res.status(500).json({ error: error.message })
+  }
+}
+
+const getGroup = async (req, res) => {
+  try {
+    const { id } = req.params
+    const group = await Group.findById(id).populate('members').populate('adminId')
+
+    if (group) {
+      return res.status(201).json(group)
+    } else {
+      res.status(404).json({ message: "Group not found" })
+    }
+
   } catch (error) {
     res.status(500).json({ error: error.message })
   }
@@ -24,15 +41,37 @@ const createGroup = async (req, res) => {
     await group.save()
 
     res.status(201).json(group)
-    addGroup(user, group)
+    addJustCreatedGroup(user, group)
   } catch (error) {
     res.status(500).json({ error: error.message })
   }
 }
 
+const deleteGroup = async (req, res) => {
+  try {
+    const { id } = req.params
+    const deleted = await Group.findByIdAndDelete(id)
+    if (deleted) {
+      return res.status(201).send('Group has been deleted')
+    }
+    throw new Error('Group not found')
+  } catch (error) {
+    res.status(500).json({ error: error.message })
+  }
+}
+
+const editGroup = async (req, res) => {
+  const group = await Group.findById(req.params.id)
+  const user = await user.findById(req.body._id)
+
+
+}
+
 
 module.exports = {
   getGroups,
-  // getGroup,
-createGroup
+  getGroup,
+  createGroup,
+  deleteGroup,
+  editGroup
 }

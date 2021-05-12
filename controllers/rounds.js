@@ -1,15 +1,14 @@
 const Round = require('../models/round')
 const db = require('../db/connection')
 const User = require('../models/user')
-const { addRound } = require('./users')
+const { addJustCreatedRound } = require('./users')
 
 db.on('error', console.error.bind(console, 'MongoDB connection error:'))
 
 const getRounds = async (req, res) => {
   try {
     const rounds = await Round.find().populate('userId')
-    console.log(rounds)
-    res.json(rounds)
+    res.status(201).json(rounds)
   } catch (error) {
     res.status(500).json({ error: error.message })
   }
@@ -21,7 +20,6 @@ const getRound = async (req, res) => {
     const round = await Round.findById(id).populate('userId')
 
     if (round) {
-      console.log(round)
       res.status(201).json(round)
     } else {
       res.status(404).json({ message: "Round not found" })
@@ -41,9 +39,8 @@ const createRound = async (req, res) => {
     await round.save()
   
     res.status(201).json(round)
-    addRound(user, round)
+    addJustCreatedRound(user, round)
   } catch (error) {
-    console.log("step 6 ERROR in createRound")
     res.status(500).json({ error: error.message })
   }
 }
@@ -57,7 +54,7 @@ const updateRound = async (req, res) => {
     if (!round) {
       return res.status(404).json({ message: 'Round not found'})
     }
-    res.status(200).json(round)
+    res.status(201).json(round)
   })
 }
 
