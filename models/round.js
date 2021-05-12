@@ -13,7 +13,7 @@ const Round = new Schema(
     greens: { type: Number, required: false },
     upAndDowns: { type: Number, required: false },
     possibleUpAndDowns: { type: Number, required: false },
-    userId: {type: Schema.Types.ObjectId, ref: 'users'}
+    userId: { type: Schema.Types.ObjectId, ref: 'users' }
   },
   { timestamps: true }
 )

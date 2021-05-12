@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 const User = require("../models/user");
 const db = require("../db/connection");
+const Round = require("../models/round")
 
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
@@ -90,9 +91,37 @@ const verify =  async (req, res) => {
   }
 }
 
+const getUsers = async (req, res) => {
+  try {
+    const users = await User.find().populate('rounds')
+    res.json(users)
+  } catch (error) {
+    res.status(500).json({ error: error.message })
+  }
+}
+
+const createRound = async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id)
+    const round = await new Round(req.body)
+
+    round.userId = user._id
+    await round.save()
+    console.log("round", round)
+    user.rounds.push(round)
+    await user.save()
+    console.log("user", user)
+    res.status(201).json(round)
+  } catch (error) {
+    res.status(500).json({ error: error.message })
+  }
+}
+
 module.exports = {
   signUp,
   signIn,
   verify,
+  getUsers,
+  createRound,
   // changePassword,
 };
