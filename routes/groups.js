@@ -7,7 +7,7 @@ const router = Router();
 router.get("/", controllers.getGroups);
 router.get("/:id", controllers.getGroup);
 router.post("/", checkAuth, controllers.createGroup);
-router.put("/:id", controllers.editGroup);
-router.delete("/:id", controllers.deleteGroup);
+router.put("/:id", checkAuth, controllers.editGroup);
+router.delete("/:id", checkAuth, controllers.deleteGroup);
 
 module.exports = router;

@@ -6,7 +6,7 @@ const router = Router();
 
 router.get("/", controllers.getRounds);
 router.get("/:id", controllers.getRound);
-router.put("/:id", controllers.updateRound);
+router.put("/:id", checkAuth, controllers.updateRound);
 router.post("/", checkAuth, controllers.createRound);
 
 module.exports = router;

@@ -12,8 +12,7 @@ const checkAuth = async (req, res, next) => {
   //       let user = await User.findById(decodedToken.payload.id)
   //       console.log(decodedToken)
   //       console.log(user)
-  //       res.locals.user = user
-  //       // req.user = user
+  //       res.locals.authorizedUser = user
   //       next();
   //     }
   //   });
@@ -22,7 +21,7 @@ const checkAuth = async (req, res, next) => {
   // }
 
   const user = await User.findById('609c07aa26f2f03a2144332b')
-  res.locals.user = user
+  res.locals.authorizedUser = user
   next()
 };
 

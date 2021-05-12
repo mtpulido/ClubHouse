@@ -52,7 +52,7 @@ const getRound = async (req, res) => {
 
 const createRound = async (req, res) => {
   try {
-    let user = res.locals.user
+    let user = res.locals.authorizedUser
     const round = await new Round(req.body)
 
     round.userId = user
@@ -67,6 +67,7 @@ const createRound = async (req, res) => {
 }
 
 const updateRound = async (req, res) => {
+  //need middleware to determine if round userID === user ID sending request.
   const { id } = req.params
   await Round.findByIdAndUpdate(id, req.body, { new: true }, { runValidators: true }, (error, round) => {
     if (error) {

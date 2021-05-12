@@ -45,7 +45,7 @@ const getGroup = async (req, res) => {
 
 const createGroup = async (req, res) => {
   try {
-    let user = res.locals.user
+    let user = res.locals.authorizedUser
     const group = await new Group(req.body)
 
     group.members.push(user)
@@ -61,6 +61,7 @@ const createGroup = async (req, res) => {
 }
 
 const deleteGroup = async (req, res) => {
+  //need middleware to check if user ID sending request = group admin ID
   try {
     const { id } = req.params
     const deleted = await Group.findByIdAndDelete(id)
