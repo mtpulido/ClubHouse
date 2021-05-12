@@ -102,15 +102,15 @@ const getUsers = async (req, res) => {
 
 const createRound = async (req, res) => {
   try {
-    const user = await User.findById(req.params.id)
-    const round = await new Round(req.body)
+    let user = await User.findById(req.params.id)
+    let round = await new Round(req.body)
 
-    round.userId = user._id
+    round.userId = user
     await round.save()
-    console.log("round", round)
     user.rounds.push(round)
     await user.save()
     console.log("user", user)
+    console.log("round", round)
     res.status(201).json(round)
   } catch (error) {
     res.status(500).json({ error: error.message })

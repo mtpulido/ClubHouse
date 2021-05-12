@@ -21,9 +21,19 @@ const User = new Schema(
       type: String,
       required: [true, "Please enter a display name"],
     },
-    avatar: { data: Buffer, contentType: String, required: false },
-    rounds: [{ type: Schema.Types.ObjectId, ref: "rounds" }],
-    groups: [{ type: Schema.Types.ObjectId, ref: "groups" }],
+    avatar: {
+      data: Buffer,
+      contentType: String,
+      required: false
+    },
+    rounds: [{
+      type: Schema.Types.ObjectId,
+      ref: "rounds"
+    }],
+    groups: [{
+      type: Schema.Types.ObjectId,
+      ref: "groups"
+    }],
   },
   { timestamps: true }
 );

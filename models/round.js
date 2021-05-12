@@ -1,5 +1,5 @@
-const mongoose = require('mongoose')
-const Schema = mongoose.Schema
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
 const Round = new Schema(
   {
@@ -13,9 +13,9 @@ const Round = new Schema(
     greens: { type: Number, required: false },
     upAndDowns: { type: Number, required: false },
     possibleUpAndDowns: { type: Number, required: false },
-    userId: { type: Schema.Types.ObjectId, ref: 'users' }
+    userId: { type: Schema.Types.ObjectId, ref: "users" },
   },
   { timestamps: true }
-)
+);
 
-module.exports = mongoose.model('rounds', Round)
+module.exports = mongoose.model("rounds", Round);

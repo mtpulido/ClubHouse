@@ -6,7 +6,7 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'))
 
 const getRounds = async (req, res) => {
   try {
-    const rounds = await Round.find().populate('users')
+    const rounds = await Round.find().populate('userId')
     console.log(rounds)
     res.json(rounds)
   } catch (error) {
@@ -17,7 +17,7 @@ const getRounds = async (req, res) => {
 const getRound = async (req, res) => {
   try {
     const { id } = req.params
-    const round = await Round.findById(id).populate('users')
+    const round = await Round.findById(id).populate('userId')
 
     if (round) {
       console.log(round)
