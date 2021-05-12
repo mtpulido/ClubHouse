@@ -13,7 +13,7 @@ const User = new Schema(
       validate: [isEmail, "Please enter valid email"],
     },
     passwordDigest: {
-      type: String,
+      type: String, 
       required: [true, "Please enter a password"],
       minlength: [8, "Password must have 8+ characters"],
     },

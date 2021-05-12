@@ -6,6 +6,18 @@ const user = require('../models/user')
 db.on('error', console.error.bind(console, 'MongoDB connection error:'))
 
 
+const handleErrors = (err) => {
+  let errors = { }
+
+  // validation errors create group
+  if (err.message.includes('groups validation failed')) {
+    Object.values(err.errors).forEach((error) => {
+      errors[error.properties.path] = error.properties.message
+    })
+  }
+  return errors
+}
+
 const getGroups = async (req, res) => {
   try {
     const groups = await Group.find().populate('members').populate('adminId')
@@ -43,7 +55,8 @@ const createGroup = async (req, res) => {
     res.status(201).json(group)
     addJustCreatedGroup(user, group)
   } catch (error) {
-    res.status(500).json({ error: error.message })
+    const errors = handleErrors(error)
+    res.status(500).json({ errors })
   }
 }
 

@@ -5,6 +5,26 @@ const { addJustCreatedRound } = require('./users')
 
 db.on('error', console.error.bind(console, 'MongoDB connection error:'))
 
+const handleErrors = (err) => {
+  let errors = {}
+
+  if (err.message.includes('Cast to Number')) {
+    Object.values(err.errors).forEach((error) => {
+      errors[error.path] = `${error.path} requires a number`
+    })
+    return errors
+    }
+  
+  if (err.message.includes('rounds validation failed')) {
+    Object.values(err.errors).forEach((error) => {
+      errors[error.properties.path] = error.properties.message
+    })
+  }
+  return errors
+}
+
+
+
 const getRounds = async (req, res) => {
   try {
     const rounds = await Round.find().populate('userId')
@@ -41,7 +61,8 @@ const createRound = async (req, res) => {
     res.status(201).json(round)
     addJustCreatedRound(user, round)
   } catch (error) {
-    res.status(500).json({ error: error.message })
+    const errors = handleErrors(error)
+    res.status(500).json({ errors })
   }
 }
 
