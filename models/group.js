@@ -12,11 +12,11 @@ const Group = new Schema(
       required: false
     },
     members: [{ type: Schema.Types.ObjectId, ref: 'users' }],
-    adminId: {
-      type: Schema.Types.ObjectId,
-      ref: 'users',
-      // required: true
-    }
+    admin: {
+      email: { type: String, required: true },
+      id: { type: String, required: true },
+      displayName: { type: String, required: true },
+    }, 
   },
   { timestamps: true }
 )

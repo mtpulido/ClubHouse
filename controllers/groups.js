@@ -23,9 +23,7 @@ const getGroups = async (req, res) => {
       .populate({
         path: "members",
         select: { passwordDigest: 0, groups: 0 },
-        populate: { path: 'rounds' },
       })
-      .populate("adminId", { groups: 0, rounds: 0, passwordDigest: 0 });
     res.status(201).json(groups);
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -38,9 +36,7 @@ const getGroup = async (req, res) => {
     const group = await Group.findById(id).populate({
       path: "members",
       select: { passwordDigest: 0, groups: 0 },
-      populate: { path: 'rounds' },
-    })
-    .populate("adminId", { groups: 0, rounds: 0, passwordDigest: 0 });
+    });
 
     if (group) {
       return res.status(201).json(group);
@@ -58,7 +54,11 @@ const createGroup = async (req, res) => {
     const group = await new Group(req.body);
 
     group.members.push(user);
-    group.adminId = user;
+    group.admin = {
+      email: user.email,
+      id: user._id,
+      displayName: user.displayName,
+    }
     await group.save();
 
     res.status(201).json(group);
@@ -70,7 +70,6 @@ const createGroup = async (req, res) => {
 };
 
 const deleteGroup = async (req, res) => {
-  //need middleware to check if user ID sending request = group admin ID
   try {
     const { id } = req.params;
     const deleted = await Group.findByIdAndDelete(id);
@@ -83,6 +82,7 @@ const deleteGroup = async (req, res) => {
   }
 };
 
+//this is no where close to finished. Need to figure out the joining groups and removing from groups for members.
 const editGroup = async (req, res) => {
   const group = await Group.findById(req.params.id);
   const user = await user.findById(req.body._id);

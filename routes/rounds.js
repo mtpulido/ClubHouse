@@ -1,12 +1,12 @@
 const { Router } = require("express");
 const controllers = require("../controllers/rounds");
-const { checkAuth } = require("../middleware/requireAuth")
+const { checkAuthentication, roundAuthorization } = require("../middleware/requireAuth")
 
 const router = Router();
 
 router.get("/", controllers.getRounds);
 router.get("/:id", controllers.getRound);
-router.put("/:id", checkAuth, controllers.updateRound);
-router.post("/", checkAuth, controllers.createRound);
+router.put("/:id", controllers.updateRound); // roundAuthorization
+router.post("/", controllers.createRound); //need checkAuthentication
 
 module.exports = router;

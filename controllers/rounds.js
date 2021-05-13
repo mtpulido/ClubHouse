@@ -2,6 +2,7 @@ const Round = require('../models/round')
 const db = require('../db/connection')
 const User = require('../models/user')
 const { addJustCreatedRound } = require('./users')
+const { editRecentRound } = require('./users')
 
 db.on('error', console.error.bind(console, 'MongoDB connection error:'))
 
@@ -67,18 +68,19 @@ const createRound = async (req, res) => {
 }
 
 const updateRound = async (req, res) => {
-  //need middleware to determine if round userID === user ID sending request.
   const { id } = req.params
-  await Round.findByIdAndUpdate(id, req.body, { new: true }, { runValidators: true }, (error, round) => {
-    if (error) {
-      return res.status(500).json({ error: error.message })
-    }
-    if (!round) {
-      return res.status(404).json({ message: 'Round not found'})
-    }
-    res.status(201).json(round)
-  })
-}
+    await Round.findByIdAndUpdate(id, req.body, { new: true }, { runValidators: true }, (error, round) => {
+      if (error) {
+        return res.status(500).json({ error: error.message })
+      }
+      if (!round) {
+        return res.status(404).json({ message: 'Round not found' })
+      }
+      res.status(201).json(round)
+      editRecentRound(res.locals.authorizedUser, round)
+    })
+  }
+
 
 module.exports = {
   getRounds,

@@ -8,7 +8,5 @@ router.post("/sign-in", controllers.signIn);
 router.get("/verify", controllers.verify);
 router.get("/", controllers.getUsers);
 router.get("/:id", controllers.getUser)
-// router.put("/:id/rounds", controllers.addRound)
-// router.put("/:id/groups", controllers.addGroup)
 
 module.exports = router;
