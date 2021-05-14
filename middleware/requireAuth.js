@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 const Group = require("../models/group");
 const User = require("../models/user");
 const Round = require("../models/round")
-const TOKEN_KEY = "as983zZ2?AKS4rhv3218isjTSK3!82ksfH1ks29sj/df3kjsh34+bsSD-jeB21k";
+const TOKEN_KEY = require("../secrets")
 
 const checkAuthentication = async (req, res, next) => {
   const token = req.headers.authorization.split(" ")[1];
