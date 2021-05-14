@@ -6,7 +6,7 @@ const router = Router();
 
 router.get("/", controllers.getRounds);
 router.get("/:id", controllers.getRound);
-router.put("/:id", controllers.updateRound); // roundAuthorization
-router.post("/", controllers.createRound); //need checkAuthentication
+router.put("/:id", roundAuthorization, controllers.updateRound); // roundAuthorization
+router.post("/", checkAuthentication, controllers.createRound); //need checkAuthentication
 
 module.exports = router;

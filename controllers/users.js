@@ -1,12 +1,9 @@
 const jwt = require("jsonwebtoken");
 const User = require("../models/user");
 const db = require("../db/connection");
-const Round = require("../models/round")
 const TOKEN_KEY = require("../secrets")
 
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
-
-// const TOKEN_KEY = 'as983zZ2?AKS4rhv3218isjTSK3!82ksfH1ks29sj/df3kjsh34+bsSD-jeB21k'
 
 
 const handleErrors = (err) => {
@@ -137,6 +134,7 @@ const addJustCreatedRound = async (user, round) => {
     throw error
   }
 }
+
 
 const editRecentRound = async (user, round) => {
   try {

@@ -6,8 +6,8 @@ const router = Router();
 
 router.get("/", controllers.getGroups);
 router.get("/:id", controllers.getGroup);
-router.post("/", controllers.createGroup); // need checkAuthentication
+router.post("/", checkAuthentication, controllers.createGroup); // need checkAuthentication
 router.put("/:id", controllers.editGroup);
-router.delete("/:id", controllers.deleteGroup); // need adminAuthorization
+router.delete("/:id", adminAuthorization, controllers.deleteGroup); // need adminAuthorization
 
 module.exports = router;

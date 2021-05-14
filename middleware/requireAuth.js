@@ -23,7 +23,7 @@ const checkAuthentication = async (req, res, next) => {
   }
 };
 
-const adminAuthorization = (req, res, next) => {
+const adminAuthorization = async (req, res, next) => {
   const token = req.headers.authorization.split(" ")[1];
   if (token) {
     jwt.verify(token, TOKEN_KEY, async (err, decodedToken) => {
@@ -45,7 +45,7 @@ const adminAuthorization = (req, res, next) => {
   }
 };
 
-const roundAuthorization = (req, res, next) => {
+const roundAuthorization = async (req, res, next) => {
   const token = req.headers.authorization.split(" ")[1];
   if (token) {
     jwt.verify(token, TOKEN_KEY, async (err, decodedToken) => {
@@ -65,6 +65,7 @@ const roundAuthorization = (req, res, next) => {
   } else {
     res.status(403).json({ error: "Must be logged in" });
   }
+
 };
 
 
