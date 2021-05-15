@@ -19,11 +19,10 @@ const handleErrors = (err) => {
 
 const getGroups = async (req, res) => {
   try {
-    const groups = await Group.find()
-      .populate({
-        path: "members",
-        select: { passwordDigest: 0, groups: 0 },
-      })
+    const groups = await Group.find().populate({
+      path: "members",
+      select: { passwordDigest: 0, groups: 0 },
+    });
     res.status(201).json(groups);
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -58,7 +57,7 @@ const createGroup = async (req, res) => {
       email: user.email,
       id: user._id,
       displayName: user.displayName,
-    }
+    };
     await group.save();
 
     res.status(201).json(group);
