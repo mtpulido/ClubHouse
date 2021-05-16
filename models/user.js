@@ -26,11 +26,48 @@ const User = new Schema(
       contentType: String,
       required: false
     },
-    rounds: [{
-      type: Schema.Types.ObjectId,
-      ref: "rounds"
-    }],
-    recentRounds: [],
+    recentRounds: [{
+      course: {
+        type: String,
+        required: [true, "Please enter a course"]
+      },
+      par: {
+        type: Number,
+        required: [true, "Please enter par for course"]
+      },
+      holes: {
+        type: Number,
+        required: [true, "Please enter holes for round"]
+      },
+      score: {
+        type: Number,
+        required: [true, "Please enter score for round"]
+      },
+      fairwaysHit: {
+        type: Number,
+        required: false
+      },
+      possibleFairways: {
+        type: Number,
+        required: false
+      },
+      putts: {
+        type: Number,
+        required: false
+      },
+      greens: {
+        type: Number,
+        required: false
+      },
+      upAndDowns: {
+        type: Number,
+        required: false
+      },
+      possibleUpAndDowns: {
+        type: Number,
+        required: false
+      }
+    }], 
     groups: [{
       type: Schema.Types.ObjectId,
       ref: "groups"

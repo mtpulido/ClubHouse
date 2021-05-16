@@ -4,7 +4,6 @@ const { checkAuthentication, adminAuthorization } = require("../middleware/requi
 
 const router = Router();
 
-router.get("/", controllers.getGroups);
 router.get("/:id", controllers.getGroup);
 router.post("/", checkAuthentication, controllers.createGroup); // need checkAuthentication
 router.put("/:id", controllers.editGroup);

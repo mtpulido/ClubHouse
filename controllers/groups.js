@@ -17,17 +17,6 @@ const handleErrors = (err) => {
   return errors;
 };
 
-const getGroups = async (req, res) => {
-  try {
-    const groups = await Group.find().populate({
-      path: "members",
-      select: { passwordDigest: 0, groups: 0 },
-    });
-    res.status(201).json(groups);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-};
 
 const getGroup = async (req, res) => {
   try {
@@ -88,7 +77,6 @@ const editGroup = async (req, res) => {
 };
 
 module.exports = {
-  getGroups,
   getGroup,
   createGroup,
   deleteGroup,

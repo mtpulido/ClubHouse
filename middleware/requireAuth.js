@@ -1,7 +1,6 @@
 const jwt = require("jsonwebtoken");
 const Group = require("../models/group");
 const User = require("../models/user");
-const Round = require("../models/round")
 const TOKEN_KEY = require("../secrets")
 
 const checkAuthentication = async (req, res, next) => {
@@ -45,28 +44,5 @@ const adminAuthorization = async (req, res, next) => {
   }
 };
 
-const roundAuthorization = async (req, res, next) => {
-  const token = req.headers.authorization.split(" ")[1];
-  if (token) {
-    jwt.verify(token, TOKEN_KEY, async (err, decodedToken) => {
-      if (err) {
-        return res.status(403).json({ error: "Must be logged in" });
-      }
-      let user = await User.findById(decodedToken.payload.id);
-      let round = await Round.findById(req.params.id);
 
-      if (user._id !== round.userId) {
-        res.status(403).json({ error: "Not authorized" });
-      } else {
-        res.locals.authorizedUser = user;
-        next();
-      }
-    });
-  } else {
-    res.status(403).json({ error: "Must be logged in" });
-  }
-
-};
-
-
-module.exports = { checkAuthentication, adminAuthorization, roundAuthorization };
+module.exports = { checkAuthentication, adminAuthorization };
