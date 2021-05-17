@@ -20,6 +20,7 @@ const User = new Schema(
     displayName: {
       type: String,
       required: [true, "Please enter a display name"],
+      maxlength: [30, "Display Name max. 30 characters"]
     },
     avatar: {
       data: Buffer,
