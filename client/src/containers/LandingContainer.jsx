@@ -15,7 +15,7 @@ const LandingContainer = (props) => {
     try {
       const userData = await signIn(credentials);
       setCurrentUser(userData);
-      history.push("/dashboard");
+      history.push("/user/dashboard");
     } catch (error) {
       setCredentialsError(error);
     }
@@ -25,7 +25,7 @@ const LandingContainer = (props) => {
     try {
       const userData = await signUp(credentials);
       setCurrentUser(userData);
-      history.push("/dashboard");
+      history.push("/user/dashboard");
     } catch (error) {
       setCredentialsError(error);
     }
@@ -52,7 +52,7 @@ const LandingContainer = (props) => {
           />
         </Route>
         
-        <Route path="/">
+        <Route exact path="/">
         <Landing />
           </Route>
       </Switch>

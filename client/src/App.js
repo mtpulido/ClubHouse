@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import { Route, useHistory, Switch } from "react-router-dom";
 import { signOut, verifyUser } from "./services/auth";
 import LandingContainer from "./containers/LandingContainer"
+import UserContainer from "./containers/UserContainer"
+import { getUser } from "./services/user"
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
@@ -10,26 +12,31 @@ function App() {
 
   useEffect(() => {
     const handleVerify = async () => {
-      const userData = await verifyUser();
-      setCurrentUser(userData);
+      const payload = await verifyUser();
+      const user = await getUser(payload.id)
+      setCurrentUser(user)
     };
     handleVerify();
   }, []);
-
-  const handleSignOut = () => {
-    setCurrentUser(null);
-    localStorage.removeItem("token");
-    signOut();
-    history.push("/");
-  };
+  // const handleSignOut = () => {
+  //   setCurrentUser(null);
+  //   localStorage.removeItem("token");
+  //   signOut();
+  //   history.push("/");
+  // };
 
   return (
     <div className="app">
       <Switch>
+
+      <Route path="/user">
+          <UserContainer currentUser={currentUser} />
+        </Route>
+
         <Route path="/">
           <LandingContainer setCurrentUser={setCurrentUser} />
         </Route>
-        
+
       </Switch>
     </div>
   );
