@@ -1,0 +1,22 @@
+.landing-container {
+  width: 280px;
+  min-height: 480px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.landing-label {
+  font-size: 35px;
+  margin-bottom: -15px;
+  margin-top: -15px;
+  font-weight: 500;
+}
+
+.landing-caption {
+  font-size: 16px;
+  font-weight: 500;
+}
+a {
+  text-decoration: none;
+}
