@@ -31,6 +31,7 @@ const Landing = () => {
           size="large"
           fullWidth={true}
           className={classes.root}
+          onClick={(e) => setTimeout(() => history.push("/sign-in"), 190)}
         >
           Sign In
         </Button>

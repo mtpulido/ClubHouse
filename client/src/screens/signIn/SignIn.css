@@ -1,0 +1,7 @@
+.auth-form-sign-in {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 285px;
+  min-height: 300px;
+}

@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { Route, useHistory, Switch } from "react-router-dom";
 import { signUp, signIn, signOut, verifyUser } from "./services/auth";
 import SignUp from "./screens/signUp/SignUp";
+import SignIn from "./screens/signIn/SignIn";
 import Landing from "./screens/landingPage/Landing";
 
 function App() {
@@ -55,6 +56,13 @@ function App() {
         <Route exact path="/sign-up">
           <SignUp
             handleSignUp={handleSignUp}
+            setCredentialsError={setCredentialsError}
+            credentialsError={credentialsError}
+          />
+        </Route>
+
+        <Route exact path="/sign-in">
+          <SignIn
             handleSignIn={handleSignIn}
             setCredentialsError={setCredentialsError}
             credentialsError={credentialsError}
