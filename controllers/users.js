@@ -9,15 +9,15 @@ const handleErrors = (err) => {
   let errors = { displayName: "", email: "", passwordDigest: "" };
   // incorrect email login
   if (err.message === "incorrect email") {
-    errors.email = "Email not registered";
+    errors.email = "Email provided is not registered";
   }
   // incorrect password login
   if (err.message === "incorrect password") {
-    errors.passwordDigest = "Password is incorrect";
+    errors.passwordDigest = "Password provided is incorrect";
   }
   //duplicate email signup
   if (err.code === 11000) {
-    errors.email = "Email already in use";
+    errors.email = "Email address already in use";
     return errors;
   }
   // non number entered into required number field.

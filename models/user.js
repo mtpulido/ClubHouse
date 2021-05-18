@@ -7,20 +7,20 @@ const User = new Schema(
   {
     email: {
       type: String,
-      required: [true, "Please enter an email"],
+      required: [true, "-Please enter an email address"],
       unique: true,
       lowercase: true,
-      validate: [isEmail, "Please enter valid email"],
+      validate: [isEmail, "-Please enter a valid email address"],
     },
     passwordDigest: {
       type: String, 
-      required: [true, "Please enter a password"],
-      minlength: [8, "Password must have 8+ characters"],
+      required: [true, "-Please enter a password"],
+      minlength: [8, "-Password must have 8+ characters"],
     },
     displayName: {
       type: String,
-      required: [true, "Please enter a display name"],
-      maxlength: [30, "Display Name max. 30 characters"]
+      required: [true, "-Please enter a display name"],
+      maxlength: [30, "-Display Name max. 30 characters"]
     },
     avatar: {
       data: Buffer,
