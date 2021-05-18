@@ -16,7 +16,7 @@ const useStyles = makeStyles({
       opacity: 1,
     },
     "& .MuiButton-label": {
-      color: "white",
+      color: "black",
       fontSize: "16px",
     },
   },
@@ -60,7 +60,6 @@ const SignUp = (props) => {
         <div className="auth-form-label">Create Your Account</div>
 
         <TextField
-          id="outlined-basic"
           label="Display Name"
           id="display name"
           variant="outlined"
@@ -74,7 +73,6 @@ const SignUp = (props) => {
           error={(props.credentialsError[0]) ? true : false}
         />
         <TextField
-          id="outlined-basic"
           id="email"
           label="Email"
           variant="outlined"
@@ -88,7 +86,6 @@ const SignUp = (props) => {
           error={(props.credentialsError[1]) ? true : false}
         />
         <TextField
-          id="outlined-basic"
           id="password"
           label="Password"
           variant="outlined"
@@ -102,7 +99,6 @@ const SignUp = (props) => {
           error={(props.credentialsError[2]) ? true : false}
         />
         <TextField
-          id="outlined-basic"
           id="confirm password"
           label="confirm password"
           variant="outlined"

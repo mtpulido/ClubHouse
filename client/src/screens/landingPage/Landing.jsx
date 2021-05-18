@@ -8,6 +8,12 @@ import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles({
   root: {
     "& .MuiButton-label": {
+      color: "black",
+      fontSize: "16px"
+    }
+  },
+  root1: {
+    "& .MuiButton-label": {
       color: "white",
       fontSize: "16px"
     }
@@ -24,7 +30,7 @@ const Landing = () => {
         <div className="landing-caption">
           Improve your game, beat your friends.
         </div>
-        <img src={golfPhoto} alt="golf photo" />
+        <img src={golfPhoto} alt="golf course" />
         <Button
           variant="contained"
           color="primary"
@@ -41,7 +47,7 @@ const Landing = () => {
             color="secondary"
             size="large"
             fullWidth={true}
-          className={classes.root}
+          className={classes.root1}
           onClick={(e) => setTimeout(() => history.push("/sign-up"), 190)}
           >
             Sign Up

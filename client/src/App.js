@@ -1,14 +1,11 @@
 import "./App.css";
 import { useState, useEffect } from "react";
 import { Route, useHistory, Switch } from "react-router-dom";
-import { signUp, signIn, signOut, verifyUser } from "./services/auth";
-import SignUp from "./screens/signUp/SignUp";
-import SignIn from "./screens/signIn/SignIn";
-import Landing from "./screens/landingPage/Landing";
+import { signOut, verifyUser } from "./services/auth";
+import LandingContainer from "./containers/LandingContainer"
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
-  const [credentialsError, setCredentialsError] = useState([]);
   const history = useHistory();
 
   useEffect(() => {
@@ -18,26 +15,6 @@ function App() {
     };
     handleVerify();
   }, []);
-
-  const handleSignIn = async (credentials) => {
-    try {
-      const userData = await signIn(credentials);
-      setCurrentUser(userData);
-      history.push("/dashboard");
-    } catch (error) {
-      setCredentialsError(error);
-    }
-  };
-
-  const handleSignUp = async (credentials) => {
-    try {
-      const userData = await signUp(credentials);
-      setCurrentUser(userData);
-      history.push("/dashboard");
-    } catch (error) {
-      setCredentialsError(error);
-    }
-  };
 
   const handleSignOut = () => {
     setCurrentUser(null);
@@ -49,25 +26,10 @@ function App() {
   return (
     <div className="app">
       <Switch>
-        <Route exact path="/">
-          <Landing />
+        <Route path="/">
+          <LandingContainer setCurrentUser={setCurrentUser} />
         </Route>
-
-        <Route exact path="/sign-up">
-          <SignUp
-            handleSignUp={handleSignUp}
-            setCredentialsError={setCredentialsError}
-            credentialsError={credentialsError}
-          />
-        </Route>
-
-        <Route exact path="/sign-in">
-          <SignIn
-            handleSignIn={handleSignIn}
-            setCredentialsError={setCredentialsError}
-            credentialsError={credentialsError}
-          />
-        </Route>
+        
       </Switch>
     </div>
   );
