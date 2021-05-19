@@ -32,14 +32,24 @@
   top: 0;
   left: 0;
   z-index: 10;
-  transition: opacity .18s;
+  border-bottom: 1px solid rgb(158, 157, 157, .6);
+  transition: 0.3s
+}
+
+.nav-bar-open {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  z-index: 10;
+  border-bottom: 1px solid rgb(158, 157, 157, .5);
 }
 
 .children-open {
   opacity: .85;
-  transition: opacity .12s;
   background-color: #000410;
   min-height: 100vh;
+  transition: .12s;
 }
 
 .children-closed {
@@ -52,7 +62,7 @@
   position: fixed;
   top: 0;
   left: 205px;
-  transition: opacity .25s;
+  transition: opacity .8s;
 }
 
 .burger-button-closed {
@@ -62,3 +72,4 @@
 span {
   font-weight: 500;
 }
+

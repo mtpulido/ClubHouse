@@ -30,7 +30,7 @@ function App() {
       <Switch>
 
       <Route path="/user">
-          <UserContainer currentUser={currentUser} />
+          <UserContainer currentUser={currentUser} setCurrentUser={setCurrentUser}/>
         </Route>
 
         <Route path="/">

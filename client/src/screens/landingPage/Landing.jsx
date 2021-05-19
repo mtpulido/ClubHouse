@@ -14,7 +14,7 @@ const useStyles = makeStyles({
   },
   root1: {
     "& .MuiButton-label": {
-      color: "white",
+      color: "primary",
       fontSize: "16px"
     }
   },
@@ -43,8 +43,8 @@ const Landing = () => {
         </Button>
 
           <Button
-            variant="contained"
-            color="secondary"
+            variant="outlined"
+            color="primary"
             size="large"
             fullWidth={true}
           className={classes.root1}
