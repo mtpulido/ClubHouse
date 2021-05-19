@@ -6,8 +6,7 @@
   z-index: 600;
   background-color: #000410;
   width: 0;
-  opacity: 0;
-  transition: width 0.3s, opacity 0.3s;
+  transition: width 0.3s;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -20,14 +19,12 @@
   left: 0;
   z-index: 600;
   background-color: #000410;
-  width: 200px;
-  opacity: 1;
-  transition: width 0.3s, opacity 0.3s;
+  width: 250px;
+  transition: width 0.3s;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  filter: drop-shadow(0 0 5px rgb(0, 0, 0));
-  border-right: 1px solid rgba(152, 151, 151, 0.2);
+  filter: drop-shadow(0 0 6px rgb(121, 120, 120, .4));
 }
 
 .nav-bar {
@@ -35,16 +32,33 @@
   top: 0;
   left: 0;
   z-index: 10;
+  transition: opacity .18s;
+}
+
+.children-open {
+  opacity: .85;
+  transition: opacity .12s;
+  background-color: #000410;
+  min-height: 100vh;
+}
+
+.children-closed {
+  transition: opacity .18s;
+  background-color: #000410;
+  min-height: 100vh;
 }
 
 .burger-button-open {
   position: fixed;
   top: 0;
-  left: 170px;
-  opacity: 1;
-  transition: opacity 1s;
+  left: 205px;
+  transition: opacity .25s;
 }
 
 .burger-button-closed {
   opacity: 0;
+}
+
+span {
+  font-weight: 500;
 }

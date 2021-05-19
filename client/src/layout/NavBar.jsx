@@ -22,10 +22,10 @@ const NavBar = (props) => {
               aria-label="menu"
               onClick={(e) => setOpen((curr) => !curr)}
             >
-              <MenuIcon />
+              <MenuIcon fontSize="large"/>
             </IconButton>
 
-            <Typography variant="h6">ClubHouse⛳️</Typography>
+            <Typography variant="h5"><span>ClubHouse</span>⛳️</Typography>
           </Toolbar>
         </AppBar>
       </div>
@@ -37,11 +37,11 @@ const NavBar = (props) => {
             aria-label="menu"
             onClick={(e) => setOpen((curr) => !curr)}
           >
-            <CloseIcon />
+            <CloseIcon fontSize="large"/>
           </IconButton>
         </div>
       </div>
-      {props.children}
+      <div className={open ? "children-open" : "children-closed"}>{props.children}</div>
     </div>
   );
 };

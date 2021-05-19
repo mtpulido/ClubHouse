@@ -10,9 +10,9 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 
 const theme = createMuiTheme({
   palette: {
-    background: {
-      default: "#000410",
-    },
+    // background: {
+    //   default: "#000410",
+    // },
     text: {
       primary: "#fafafa",
       secondary: "#b6b6b6",
