@@ -383,18 +383,19 @@ const NewRound = (props) => {
               </div>
             </StepContent>
           </Step>
-          <Step key="4" className={classes.stepContent}>
-            {props.isError ? (
+          {props.isError ? (
+            <Step key="4" className={classes.stepContent}>
+            
               <Button
-                onClick={handleBack}
+                onClick={(e) => setActiveStep(0)}
                 className={classes.button}
                 variant="contained"
                 size="large"
               >
                 Back
               </Button>
-            ) : null}
           </Step>
+            ) : null}
         </Stepper>
       </form>
     </div>

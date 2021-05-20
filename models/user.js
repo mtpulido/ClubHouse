@@ -30,19 +30,19 @@ const User = new Schema(
     recentRounds: [{
       course: {
         type: String,
-        required: [true, "Please enter a course"]
+        required: [true, "-Please enter the course played"]
       },
       par: {
         type: Number,
-        required: [true, "Please enter par for course"]
+        required: [true, "-Please enter par for the course"]
       },
       holes: {
         type: Number,
-        required: [true, "Please enter holes for round"]
+        required: [true, "-Please enter holes for your round"]
       },
       score: {
         type: Number,
-        required: [true, "Please enter score for round"]
+        required: [true, "-Please enter score for your round"]
       },
       fairwaysHit: {
         type: Number,
