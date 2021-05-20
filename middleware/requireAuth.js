@@ -10,9 +10,7 @@ const checkAuthentication = async (req, res, next) => {
       if (err) {
         return res.status(403).json({ error: "Must be logged in" });
       } else {
-        console.log(decodedToken)
-        let user = await User.findById(decodedToken.payload.id)
-        console.log(user)
+        let user = await User.findById(decodedToken.id)
         res.locals.authorizedUser = user
         next();
       }
@@ -29,7 +27,7 @@ const adminAuthorization = async (req, res, next) => {
       if (err) {
         return res.status(403).json({ error: "Must be logged in" });
       }
-      let user = await User.findById(decodedToken.payload.id);
+      let user = await User.findById(decodedToken.id);
       let group = await Group.findById(req.params.id);
 
       if (user._id !== group.admin.id) {

@@ -6,7 +6,15 @@ const TOKEN_KEY = require("../secrets");
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
 const handleErrors = (err) => {
-  let errors = { displayName: "", email: "", passwordDigest: "" };
+  let errors = {
+    displayName: "",
+    email: "",
+    passwordDigest: "",
+    course: "",
+    par: "",
+    holes: "",
+    score: "",
+  };
   // incorrect email login
   if (err.message === "incorrect email") {
     errors.email = "Email provided is not registered";
@@ -18,13 +26,6 @@ const handleErrors = (err) => {
   //duplicate email signup
   if (err.code === 11000) {
     errors.email = "Email address already in use";
-    return errors;
-  }
-  // non number entered into required number field.
-  if (err.message.includes("Cast to Number")) {
-    Object.values(err.errors).forEach((error) => {
-      errors[error.path] = `${error.path} requires a number`;
-    });
     return errors;
   }
   // validation errors signup
@@ -119,6 +120,7 @@ const addRound = async (req, res) => {
   try {
     const user = res.locals.authorizedUser;
     const round = req.body;
+
     if (user.recentRounds.length === 100) {
       user.recentRounds.pop();
     }
@@ -134,9 +136,11 @@ const addRound = async (req, res) => {
 const editRound = async (req, res) => {
   try {
     const user = res.locals.authorizedUser;
-    const round = req.body
+    const round = req.body;
 
-    const index = user.recentRounds.findIndex((recentRound) => recentRound._id === round._id);
+    const index = user.recentRounds.findIndex(
+      (recentRound) => recentRound._id === round._id
+    );
     user.recentRounds[index] = round;
     await user.save();
     res.status(201).json(user);
