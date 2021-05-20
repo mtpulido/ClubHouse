@@ -8,14 +8,23 @@ import NewRound from "../screens/newRound/NewRound"
 
 const UserContainer = (props) => {
   const history = useHistory()
-  const {currentUser, setCurrentUser} = props
+  const { currentUser, setCurrentUser } = props
+  const [entryError, setEntryError] = useState([])
+  const [isError, setIsError] = useState(false)
   const [open, setOpen] = useState(false)
 
 
   const handlePostRound = async (roundData) => {
-    const updatedUser = await postRound(roundData)
-    setCurrentUser(updatedUser)
-    history.push("/user/dashboard")
+    setIsError(false)
+    try {
+      const updatedUser = await postRound(roundData)
+      setCurrentUser(updatedUser)
+      setEntryError([])
+      history.push("/user/dashboard")
+    } catch (error) {
+      setIsError(true)
+      setEntryError(error)
+    }
   }
 
   return (
@@ -27,7 +36,7 @@ const UserContainer = (props) => {
           </Route>
 
           <Route path="/user/new-round">
-            <NewRound handlePostRound={handlePostRound}/>
+            <NewRound handlePostRound={handlePostRound} entryError={entryError} isError={isError}/>
           </Route>
 
           </NavBar>
