@@ -2,7 +2,7 @@ import React from "react";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import "./SignUp.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles({
@@ -32,6 +32,10 @@ const SignUp = (props) => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordError, setPasswordError] = useState("");
 
+  useEffect(() => {
+    // props.setCredentialsError([]);
+  }, [])
+
   const handleChangeSignUp = (event) => {
     const { name, value } = event.target;
     setSignUpCredentials((prevState) => ({
@@ -43,13 +47,13 @@ const SignUp = (props) => {
   const handleSubmit = (event) => {
     setPasswordError("");
     props.setCredentialsError([]);
-    if (confirmPassword === signUpCredentials.password) {
-      event.preventDefault();
-      props.handleSignUp(signUpCredentials);
-    }
     if (confirmPassword !== signUpCredentials.password) {
       event.preventDefault();
       setPasswordError("Passwords do not match");
+      // props.handleSignUp(signUpCredentials);
+    }
+    if (confirmPassword === signUpCredentials.password) {
+      event.preventDefault();
       props.handleSignUp(signUpCredentials);
     }
   };

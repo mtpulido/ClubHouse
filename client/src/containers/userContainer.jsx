@@ -14,6 +14,7 @@ const UserContainer = (props) => {
   const [open, setOpen] = useState(false)
 
 
+
   const handlePostRound = async (roundData) => {
     setIsError(false)
     try {
@@ -30,9 +31,9 @@ const UserContainer = (props) => {
   return (
     <>
       <Switch>
-            <NavBar setOpen={setOpen} open={open}>
+        <NavBar setOpen={setOpen} open={open}>
         <Route path="/user/dashboard">
-          <Dashboard open={open}/>
+            <Dashboard open={open} />
           </Route>
 
           <Route path="/user/new-round">
