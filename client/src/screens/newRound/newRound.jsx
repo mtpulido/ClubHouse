@@ -14,7 +14,7 @@ import "./NewRound.css";
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
-    backgroundColor: "#000410",
+    backgroundColor: "#1e2124",
   },
   button: {
     width: "100px",
@@ -94,6 +94,11 @@ const NewRound = (props) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
     props.handlePostRound(newRound);
   };
 

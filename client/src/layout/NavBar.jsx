@@ -10,15 +10,13 @@ import CloseIcon from "@material-ui/icons/Close";
 import GolfCourseIcon from "@material-ui/icons/GolfCourse";
 import { makeStyles } from "@material-ui/core/styles";
 import { useLocation, useHistory } from "react-router-dom";
-import { useState, useEffect } from "react";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 
 const useStyles = makeStyles({
   root: {
-    ".MuiAppBar-colorPrimary": {
-      backgroundColor: "#000410",
+    backgroundColor: "#1e2124",
+    color: "white"
     },
-  },
 });
 
 const NavBar = (props) => {
@@ -26,31 +24,12 @@ const NavBar = (props) => {
   const classes = useStyles();
   let { pathname } = useLocation();
   const history = useHistory();
-  const [urls, setUrls] = useState([]);
-
-  useEffect(() => {
-    let newArray = urls.slice();
-    if (newArray[newArray.length - 1] === pathname) {
-      return null;
-    }
-    newArray.push(pathname);
-    setUrls(newArray);
-  }, [pathname]);
-
-  const handleBack = () => {
-    history.push(urls[urls.length - 2]);
-    let newArray = urls.slice();
-    newArray.pop();
-    setUrls(newArray);
-  };
-
-  console.log(pathname);
-  console.log(urls);
+  
 
   return (
     <div className="nav-container">
       <div className={open ? "nav-bar-open" : "nav-bar"}>
-        <AppBar position="static" color="secondary">
+        <AppBar position="static" className={classes.root}>
           <Toolbar>
             {pathname === "/user/dashboard" ? (
               <IconButton
@@ -66,11 +45,7 @@ const NavBar = (props) => {
                 edge="start"
                 color="inherit"
                 aria-label="menu"
-                onClick={
-                  urls.length < 2
-                    ? (e) => history.push("/user/dashboard")
-                    : handleBack
-                }
+                onClick={(e) => setTimeout(() => history.goBack(), 120)}
               >
                 <ArrowBackIcon fontSize="large" color="primary" />
               </IconButton>
@@ -90,6 +65,7 @@ const NavBar = (props) => {
             edge="start"
             color="inherit"
             aria-label="menu"
+            disabled={!open}
             onClick={(e) => setOpen((curr) => !curr)}
           >
             <CloseIcon fontSize="large" color="primary" />

@@ -9,12 +9,14 @@ import { getUser } from "./services/user"
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const history = useHistory();
+  // const [toggleFetch, setToggleFetch] = useState(false)
 
   useEffect(() => {
     const handleVerify = async () => {
       const payload = await verifyUser();
       const user = await getUser(payload.id)
       setCurrentUser(user)
+      // console.log("user has been updated")
     };
     handleVerify();
   }, []);
@@ -30,7 +32,7 @@ function App() {
       <Switch>
 
       <Route path="/user">
-          <UserContainer currentUser={currentUser} setCurrentUser={setCurrentUser}/>
+          <UserContainer currentUser={currentUser} setCurrentUser={setCurrentUser} />
         </Route>
 
         <Route path="/">

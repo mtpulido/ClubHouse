@@ -2,11 +2,18 @@
   position: fixed;
   bottom: 40px;
   right: 15px;
-  filter: drop-shadow(0 0 6px rgb(121, 120, 120, .4));
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
 }
 
 .dashboard-container {
   max-width: 100vw;
   overflow-x: hidden;
   padding-top: 20px;
+}
+
+.pie-chart {
+  height: 210px;
+  width: 100vw;
+  display: flex;
+  justify-content: flex-end;
 }
