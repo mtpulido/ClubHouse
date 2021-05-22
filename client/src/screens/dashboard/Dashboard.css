@@ -2,7 +2,7 @@
   position: fixed;
   bottom: 40px;
   right: 15px;
-  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
+  filter: drop-shadow(0 0 7px rgba(255, 255, 255, 0.3));
 }
 
 .dashboard-container {
@@ -16,4 +16,5 @@
   width: 100vw;
   display: flex;
   justify-content: flex-end;
+  margin-bottom: 10px;
 }
