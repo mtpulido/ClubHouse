@@ -1,0 +1,6 @@
+.filter-container{
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+  padding-left: 180px;
+}

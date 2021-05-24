@@ -12,6 +12,7 @@ import TabPanel from "@material-ui/lab/TabPanel";
 import { useState } from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Donut from "../../components/donutChart/Donut";
+import Filter from "../../components/Filter/Filter";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -24,14 +25,37 @@ const useStyles = makeStyles((theme) => ({
 const Dashboard = (props) => {
   const history = useHistory();
   const classes = useStyles();
-  const [value, setValue] = useState("1");
+  const [value, setValue] = useState("0");
+  const [userRounds, setUserRounds] = useState([]);
+
+  const handleFilter = (type) => {
+    switch (type) {
+      case "5 rounds":
+        setUserRounds(props.currentUser.recentRounds.slice(0, 5));
+        break;
+      case "10 rounds":
+        setUserRounds(props.currentUser.recentRounds.slice(0, 10));
+        break;
+      case "15 rounds":
+        setUserRounds(props.currentUser.recentRounds.slice(0, 15));
+        break;
+      case "25 rounds":
+        setUserRounds(props.currentUser.recentRounds.slice(0, 25));
+        break;
+      case "50 rounds":
+        setUserRounds(props.currentUser.recentRounds.slice(0, 50));
+        break;
+      case "All rounds":
+        setUserRounds(props.currentUser.recentRounds);
+        break;
+    }
+  };
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  console.log(value);
 
-  const roundJSX = props.currentUser?.recentRounds.map((round, index) => (
+  const roundJSX = userRounds.map((round, index) => (
     <Round
       course={round.course}
       score={round.score}
@@ -45,10 +69,7 @@ const Dashboard = (props) => {
     <div className="dashboard-container">
       <div className="app-bar-">
         <TabContext value={value}>
-          <AppBar
-            position="static"
-            style={{ marginTop: "-5px", marginBottom: "20px" }}
-          >
+          <AppBar position="static" style={{ marginTop: "-5px" }}>
             <Tabs
               onChange={handleChange}
               aria-label="simple tabs example"
@@ -63,31 +84,18 @@ const Dashboard = (props) => {
               }}
               className={classes.root}
             >
-              <Tab label="Scoring" value="1" style={{ zIndex: 9 }} />
-              <Tab label="Driving" value="2" style={{ zIndex: 9 }} />
-              <Tab label="Greens" value="3" style={{ zIndex: 9 }} />
-              <Tab label="Putting" value="4" style={{ zIndex: 9 }} />
+              <Tab label="Scoring" value="0" style={{ zIndex: 9 }} />
+              <Tab label="Driving" value="1" style={{ zIndex: 9 }} />
+              <Tab label="Greens" value="2" style={{ zIndex: 9 }} />
+              <Tab label="Putting" value="3" style={{ zIndex: 9 }} />
             </Tabs>
           </AppBar>
-
-              <TabPanel value="1">
-                
-                <Donut />
-              </TabPanel>
-              <TabPanel value="2">
-                
-                <Donut />
-              </TabPanel>
-              <TabPanel value="3">
-                
-                <Donut />
-              </TabPanel>
-              <TabPanel value="4">
-                
-                <Donut />
-              </TabPanel>
         </TabContext>
       </div>
+
+      <Filter handleFilter={handleFilter} currentUser={props.currentUser} />
+
+      <Donut value={value} />
 
       <div className="rounds-container-dashboard">{roundJSX}</div>
 

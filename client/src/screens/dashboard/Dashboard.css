@@ -11,10 +11,3 @@
   padding-top: 20px;
 }
 
-.pie-chart {
-  height: 210px;
-  width: 100vw;
-  display: flex;
-  justify-content: flex-end;
-  margin-bottom: 10px;
-}
