@@ -52,7 +52,7 @@ const Filter = (props) => {
         <MenuItem
           value="5 rounds"
           style={{
-            backgroundColor: "#1e2124",
+            backgroundColor: "#303539",
             borderBottom: "1px solid rgba(193, 193, 193, 0.2)",
             marginTop: "-10px"
           }}
@@ -62,7 +62,7 @@ const Filter = (props) => {
         <MenuItem
           value="10 rounds"
           style={{
-            backgroundColor: "#1e2124",
+            backgroundColor: "#303539",
             borderBottom: "1px solid rgba(193, 193, 193, 0.2)",
           }}
         >
@@ -71,7 +71,7 @@ const Filter = (props) => {
         <MenuItem
           value="15 rounds"
           style={{
-            backgroundColor: "#1e2124",
+            backgroundColor: "#303539",
             borderBottom: "1px solid rgba(193, 193, 193, 0.2)",
           }}
         >
@@ -80,7 +80,7 @@ const Filter = (props) => {
         <MenuItem
           value="25 rounds"
           style={{
-            backgroundColor: "#1e2124",
+            backgroundColor: "#303539",
             borderBottom: "1px solid rgba(193, 193, 193, 0.2)",
           }}
         >
@@ -89,7 +89,7 @@ const Filter = (props) => {
         <MenuItem
           value="50 rounds"
           style={{
-            backgroundColor: "#1e2124",
+            backgroundColor: "#303539",
             borderBottom: "1px solid rgba(193, 193, 193, 0.2)",
           }}
         >
@@ -98,7 +98,7 @@ const Filter = (props) => {
         <MenuItem
           value="All rounds"
           style={{
-            backgroundColor: "#1e2124",
+            backgroundColor: "#303539",
             borderBottom: "1px solid rgba(193, 193, 193, 0.2)",
             marginBottom: "-10px"
           }}

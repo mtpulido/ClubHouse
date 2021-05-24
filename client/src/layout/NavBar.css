@@ -45,14 +45,12 @@
   background-color: #353b40;
   border-bottom: 1px solid rgb(158, 157, 157, .6);
   transition: .12s;
-  filter: blur(1.5px);
 }
 
 .children-open {
   background-color: #2a2e32;
   min-height: 100vh;
   transition: .12s;
-  filter: blur(1.5px);
 }
 
 .children-closed {

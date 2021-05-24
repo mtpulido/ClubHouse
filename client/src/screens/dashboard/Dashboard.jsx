@@ -69,7 +69,7 @@ const Dashboard = (props) => {
     <div className="dashboard-container">
       <div className="app-bar-">
         <TabContext value={value}>
-          <AppBar position="static" style={{ marginTop: "-5px" }}>
+          <AppBar position="static" style={{ marginTop: "-5px"}}>
             <Tabs
               onChange={handleChange}
               aria-label="simple tabs example"
@@ -95,7 +95,7 @@ const Dashboard = (props) => {
 
       <Filter handleFilter={handleFilter} currentUser={props.currentUser} />
 
-      <Donut value={value} />
+      <Donut value={value} userRounds={userRounds}/>
 
       <div className="rounds-container-dashboard">{roundJSX}</div>
 
