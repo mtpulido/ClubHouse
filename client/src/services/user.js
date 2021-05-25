@@ -17,3 +17,12 @@ export const postRound = async (roundData) => {
     throw Object.values(error.response.data.errors)
   }
 }
+
+export const editRound = async (roundData) => {
+  try {
+    const response = await api.put('/users/edit-round', roundData)
+    return response.data;
+  } catch (error) {
+    throw Object.values(error.response.data.errors)
+  }
+}
