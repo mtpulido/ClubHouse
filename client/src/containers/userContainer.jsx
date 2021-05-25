@@ -32,7 +32,7 @@ const UserContainer = (props) => {
   return (
     <>
       <Switch>
-        <NavBar setOpen={setOpen} open={open}>
+        <NavBar setOpen={setOpen} open={open} currentUser={currentUser}>
         <Route path="/user/dashboard">
             <Dashboard open={open} currentUser={currentUser} />
           </Route>

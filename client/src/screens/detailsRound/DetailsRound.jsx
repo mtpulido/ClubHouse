@@ -1,40 +1,104 @@
-import React from 'react'
-import {useState, useEffect } from "react"
-import { useParams } from "react-router-dom"
-import "./DetailsRound.css"
+import React from "react";
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import "./DetailsRound.css";
+import ReactStoreIndicator from "react-score-indicator";
 
 const DetailsRound = (props) => {
-  const {currentUser} = props
-  const { id } = useParams()
-  const [round, setRound] = useState({})
+  const { currentUser } = props;
+  const { id } = useParams();
+  const [round, setRound] = useState({});
 
   useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+    });
     if (currentUser) {
-      setRound(currentUser.recentRounds[id])
+      setRound(currentUser.recentRounds[id]);
     }
-  }, [currentUser])
-  
+  }, [currentUser]);
 
   const convertDate = (roundDate) => {
-   let date = new Date(roundDate);
-    return (date.getMonth() + 1) + '-' + date.getDate() + '-' + date.getFullYear();
-  } 
+    let date = new Date(roundDate);
+    return (
+      date.getMonth() + 1 + "-" + date.getDate() + "-" + date.getFullYear()
+    );
+  };
 
   return (
     <div className="round-details-container">
-      <div>{round.course}</div>
-      <div>{convertDate(round.createdAt)}</div>
-      <div>{round.par}</div>
-      <div>{round.holes}</div>
-      <div>{round.score}</div>
-      <div>{round.fairwaysHit}</div>
-      <div>{round.possibleFairways}</div>
-      <div>{round.putts}</div>
-      <div>{round.greens}</div>
-      <div>{round.upAndDowns}</div>
-      <div>{round.possibleUpAndDowns}</div>
-    </div>
-  )
-}
+      <div className="details-date">{convertDate(round.createdAt)}</div>
+      <div className="details-info-container">
+        <div className="info-one">
+          <div className="details-course">{round.course}</div>
+          <div className="details-score">{round.score}</div>
+        </div>
+        <div className="info-two">
+          <div className="details-par">Par {round.par}</div>
+          <div className="details-holes">{round.holes} holes</div>
+        </div>
+      </div>
 
-export default DetailsRound
+      <div className="details-longgame-container">
+        <div className="details-label">Long Game:</div>
+        <div className="details-analysis">
+          <div className="details-fairways">
+            Fairways:{" "}
+            {round.fairwaysHit
+              ? round.fairwaysHit + " / " + round.possibleFairways
+              : "No Data"}
+          </div>
+          <div><ReactStoreIndicator
+        value={Math.round((round?.fairwaysHit / round?.possibleFairways) * 125)}
+        maxValue={100}
+        width={140}
+        fadedOpacity={25}
+      /></div>
+        </div>
+        <div className="details-analysis">
+        <div className="details-greens">
+          Greens: {round.greens ? round.greens + " / " + round.holes : "No Data"}
+          </div>
+          <div><ReactStoreIndicator
+                value={Math.round((round?.greens / round?.holes) * 133)}
+                maxValue={100}
+                width={140}
+                fadedOpacity={25}
+              /></div>
+          </div>
+      </div>
+
+      <div className="details-longgame-container">
+        <div className="details-label">Short Game:</div>
+        <div className="details-analysis">
+        <div className="details-fairways">
+          Chipping:{" "}
+          {round.upAndDowns
+            ? round.upAndDowns + " / " + round.possibleUpAndDowns
+            : "No Data"}
+          </div>
+          <div><ReactStoreIndicator
+                value={Math.round((round.upAndDowns / round.possibleUpAndDowns) * 150)}
+                maxValue={100}
+                width={140}
+                fadedOpacity={25}
+              /></div>
+        </div>
+        <div className="details-analysis">
+        <div className="details-greens">
+          Putting: {round.putts ? round.putts : "No Data"}
+          </div>
+          <div><ReactStoreIndicator
+                value={Math.round(Math.pow(round.holes / round.putts, 2) * 250)}
+                maxValue={100}
+                width={140}
+                fadedOpacity={25}
+              /></div>
+          </div>
+      </div>
+    </div>
+  );
+};
+
+export default DetailsRound;

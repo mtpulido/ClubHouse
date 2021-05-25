@@ -2,14 +2,13 @@
   min-height: 100vh;
   position: fixed;
   top: 0;
-  left: 0;
+  left: -250px;
   z-index: 600;
   background-color: #1e2124;
-  width: 0;
-  transition: width 0.3s;
+  width: 250;
+  transition: 0.45s;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
 }
 
 .burger-open {
@@ -20,11 +19,10 @@
   z-index: 600;
   background-color: #1e2124;
   width: 250px;
-  transition: width 0.3s;
+  transition: 0.3s;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
-  filter: drop-shadow(0 0 6px rgb(121, 120, 120, .4));
+  filter: drop-shadow(0 0 6px rgba(163, 163, 163, 0.4));
 }
 
 .nav-bar {
@@ -33,7 +31,7 @@
   left: 0;
   z-index: 10;
   border-bottom: 1px solid rgb(158, 157, 157, .6);
-  transition: .18s;
+  transition: .35s;
 }
 
 .nav-bar-open {
@@ -42,35 +40,62 @@
   left: 0;
   max-width: 100vw;
   z-index: 10;
-  background-color: #353b40;
   border-bottom: 1px solid rgb(158, 157, 157, .6);
-  transition: .12s;
+  transition: .25s;
 }
 
 .children-open {
-  background-color: #2a2e32;
+  background-color: #363b40;
   min-height: 100vh;
-  transition: .12s;
+  transition: .25s;
 }
 
 .children-closed {
   background-color: #1e2124;
   min-height: 100vh;
-  transition: .18s;
+  transition: .35s;
 }
 
-.burger-button-open {
-  position: fixed;
-  top: 0;
-  left: 205px;
-  transition: opacity .8s;
+
+.menu-header {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 15px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.burger-button-closed {
-  opacity: 0;
-}
-
-span {
+.menu-menu {
+  font-size: 25px;
+  align-self: center;
   font-weight: 500;
 }
 
+.menu-user-icons {
+  display: flex;
+  align-items: center;
+  padding-left: 15px;
+  margin-top: 15px;
+}
+
+.menu-display-name {
+  padding-left: 8px;
+  font-size: 15px;
+  font-weight: 500;
+  display: flex;
+  align-items: flex-end;
+  height: 50px;
+}
+
+.menu-rounds {
+  padding-left: 20px;
+  margin: 10px 0 40px 0;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.menu-links {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-left: 15px;
+}
