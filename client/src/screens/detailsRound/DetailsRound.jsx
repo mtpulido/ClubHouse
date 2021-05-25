@@ -4,13 +4,13 @@ import { useParams } from "react-router-dom";
 import "./DetailsRound.css";
 import ReactStoreIndicator from "react-score-indicator";
 import Button from "@material-ui/core/Button";
-import {useHistory} from "react-router-dom"
+import { useHistory } from "react-router-dom";
 
 const DetailsRound = (props) => {
   const { currentUser } = props;
   const { id } = useParams();
   const [round, setRound] = useState({});
-  const history = useHistory()
+  const history = useHistory();
 
   useEffect(() => {
     window.scrollTo({
@@ -43,7 +43,6 @@ const DetailsRound = (props) => {
         >
           Edit
         </Button>
-        
       </div>
       <div className="details-info-container">
         <div className="info-one">
@@ -65,53 +64,66 @@ const DetailsRound = (props) => {
               ? round?.fairwaysHit + " / " + round?.possibleFairways
               : "No Data"}
           </div>
-          <div><ReactStoreIndicator
-        value={Math.round((round?.fairwaysHit / round?.possibleFairways) * 125)}
-        maxValue={100}
-        width={140}
-        fadedOpacity={25}
-      /></div>
+          <div>
+            <ReactStoreIndicator
+              value={Math.round(
+                (round?.fairwaysHit / round?.possibleFairways) * 128
+              )}
+              maxValue={100}
+              width={140}
+              fadedOpacity={25}
+            />
+          </div>
         </div>
         <div className="details-analysis">
-        <div className="details-greens">
-          Greens: {round?.greens ? round?.greens + " / " + round?.holes : "No Data"}
+          <div className="details-greens">
+            Greens:{" "}
+            {round?.greens ? round?.greens + " / " + round?.holes : "No Data"}
           </div>
-          <div><ReactStoreIndicator
-                value={Math.round((round?.greens / round?.holes) * 133)}
-                maxValue={100}
-                width={140}
-                fadedOpacity={25}
-              /></div>
+          <div>
+            <ReactStoreIndicator
+              value={Math.round((round?.greens / round?.holes) * 128)}
+              maxValue={100}
+              width={140}
+              fadedOpacity={25}
+            />
           </div>
+        </div>
       </div>
 
       <div className="details-longgame-container">
         <div className="details-label">Short Game:</div>
         <div className="details-analysis">
-        <div className="details-fairways">
-          Chipping:{" "}
-          {round?.upAndDowns
-            ? round?.upAndDowns + " / " + round?.possibleUpAndDowns
-            : "No Data"}
+          <div className="details-fairways">
+            Chipping:{" "}
+            {round?.upAndDowns
+              ? round?.upAndDowns + " / " + round?.possibleUpAndDowns
+              : "No Data"}
           </div>
-          <div><ReactStoreIndicator
-                value={Math.round((round?.upAndDowns / round?.possibleUpAndDowns) * 150)}
-                maxValue={100}
-                width={140}
-                fadedOpacity={25}
-              /></div>
+          <div>
+            <ReactStoreIndicator
+              value={Math.round(
+                (round?.upAndDowns / round?.possibleUpAndDowns) * 140
+              )}
+              maxValue={100}
+              width={140}
+              fadedOpacity={25}
+            />
+          </div>
         </div>
         <div className="details-analysis">
-        <div className="details-greens">
-          Putting: {round?.putts ? round?.putts : "No Data"}
+          <div className="details-greens">
+            Putting: {round?.putts ? round?.putts : "No Data"}
           </div>
-          <div><ReactStoreIndicator
-                value={Math.round(Math.pow(round?.holes / round?.putts, 2) * 250)}
-                maxValue={100}
-                width={140}
-                fadedOpacity={25}
-              /></div>
+          <div>
+            <ReactStoreIndicator
+              value={Math.round(Math.pow(round?.holes / round?.putts, 2) * 220)}
+              maxValue={100}
+              width={140}
+              fadedOpacity={25}
+            />
           </div>
+        </div>
       </div>
     </div>
   );
