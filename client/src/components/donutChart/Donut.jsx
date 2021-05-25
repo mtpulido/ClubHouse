@@ -4,7 +4,8 @@ import { ChartLabel, ChartLegend } from "@patternfly/react-charts";
 import "./Donut.css";
 import { useState, useEffect } from "react";
 import { SwitchTransition, CSSTransition } from "react-transition-group";
-import {populateScoring, populateDriving, populateGreens, populatePutting} from "../../utils/donutChart"
+import { populateScoring, populateDriving, populateGreens, populatePutting } from "../../utils/donutChart"
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const Donut = (props) => {
   const { value, userRounds } = props;
@@ -13,37 +14,35 @@ const Donut = (props) => {
   const [data, setData] = useState([])
 
   useEffect(() => {
-    toggleDonutX();
+    toggleDonutX()
   }, [value, userRounds]);
 
   const toggleDonutX = () => {
-    if (value === "0") {
-      setDonutX(["100+", "90s", "80s", "70s", "60s"]);
-      setDonutTitle("Scoring")
-      setData(populateScoring(userRounds))
-    }
-    if (value === "1") {
-      setDonutX(["<15%", "16-30%", "31-45%", "46-60%", "60%+"]);
-      setDonutTitle("Driving")
-      setData(populateDriving(userRounds))
-    }
-    if (value === "2") {
-      setDonutX(["<15%", "16-30%", "31-45%", "46-65%", "66%+"]);
-      setDonutTitle("Greens")
-      setData(populateGreens(userRounds))
-    }
-    if (value === "3") {
-      setDonutX(["45+", "40-44", "35-39", "30-34", "<30"]);
-      setDonutTitle("Putting")
-      setData(populatePutting(userRounds))
-    }
+      if (value === "0") {
+        setDonutX(["100+", "90s", "80s", "70s", "60s"]);
+        setDonutTitle("Scoring")
+        setData(populateScoring(userRounds))
+      }
+      if (value === "1") {
+        setDonutX(["<15%", "16-30%", "31-45%", "46-60%", "60%+"]);
+        setDonutTitle("Driving")
+        setData(populateDriving(userRounds))
+      }
+      if (value === "2") {
+        setDonutX(["<15%", "16-30%", "31-45%", "46-65%", "66%+"]);
+        setDonutTitle("Greens")
+        setData(populateGreens(userRounds))
+      }
+      if (value === "3") {
+        setDonutX(["45+", "40-44", "35-39", "30-34", "<30"]);
+        setDonutTitle("Putting")
+        setData(populatePutting(userRounds))
+      }
   };
-
-  console.log(data)
-
-
+  
   return (
     <div className="pie-chart">
+      {props.loading ? <div className="loading-container"> <CircularProgress color="primary" /></div> :
       <SwitchTransition>
         <CSSTransition
           key={value}
@@ -123,7 +122,8 @@ const Donut = (props) => {
           />
         </CSSTransition>
       </SwitchTransition>
-    </div>
+      }
+    </div >
   );
 };
 

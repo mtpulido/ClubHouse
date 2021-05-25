@@ -13,6 +13,7 @@ import { useState } from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Donut from "../../components/donutChart/Donut";
 import Filter from "../../components/Filter/Filter";
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -26,7 +27,8 @@ const Dashboard = (props) => {
   const history = useHistory();
   const classes = useStyles();
   const [value, setValue] = useState("0");
-  const [userRounds, setUserRounds] = useState([]);
+  const [userRounds, setUserRounds] = useState([])
+  const [loading, setLoading] = useState(false)
 
   const handleFilter = (type) => {
     switch (type) {
@@ -93,11 +95,11 @@ const Dashboard = (props) => {
         </TabContext>
       </div>
 
-      <Filter handleFilter={handleFilter} currentUser={props.currentUser} />
+      <Filter handleFilter={handleFilter} currentUser={props.currentUser} setLoading={setLoading}/>
 
-      <Donut value={value} userRounds={userRounds}/>
+      <Donut value={value} userRounds={userRounds} loading={loading}/>
 
-      <div className="rounds-container-dashboard">{roundJSX}</div>
+      {loading ? <div className="loading-container"><CircularProgress color="primary" /></div> : <div className="rounds-container-dashboard">{roundJSX}</div>}
 
       <div className="add-button">
         <Fab

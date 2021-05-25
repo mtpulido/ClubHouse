@@ -35,14 +35,20 @@ const Filter = (props) => {
     }
   }, [query, props.currentUser])
 
-
+  const onChange = (e) => {
+    props.setLoading(true)
+    setQuery(e.target.value)
+    setTimeout(() => {
+      props.setLoading(false)
+    }, (Math.random() * 1500))
+  }
   return (
     <div className="filter-container">
       <Select
         labelId="demo-simple-select-label"
         id="demo-simple-select"
         value={query}
-        onChange={(e) => setQuery(e.target.value)}
+        onChange={onChange}
         style={{ width: "125px", height: "45px", marginTop: "10px" }}
         className={classes.select}
         inputProps={{

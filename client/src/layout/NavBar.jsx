@@ -25,7 +25,6 @@ const NavBar = (props) => {
   let { pathname } = useLocation();
   const history = useHistory();
   
-
   return (
     <div className="nav-container">
       <div className={open ? "nav-bar-open" : "nav-bar"}>

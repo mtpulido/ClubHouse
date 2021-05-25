@@ -33,7 +33,7 @@ const UserContainer = (props) => {
       <Switch>
         <NavBar setOpen={setOpen} open={open}>
         <Route path="/user/dashboard">
-            <Dashboard open={open} currentUser={currentUser}/>
+            <Dashboard open={open} currentUser={currentUser} />
           </Route>
 
           <Route path="/user/new-round">

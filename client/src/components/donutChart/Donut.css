@@ -1,6 +1,6 @@
 .fade-enter{
   opacity: 0;
-  transform: translateX(-100%);
+  transform: translateX(100%);
 }
 .fade-exit{
   opacity: 1;
@@ -12,7 +12,7 @@
 }
 .fade-exit-active{
   opacity: 0;
-  transform: translateX(100%);
+  transform: translateX(-100%);
 }
 .fade-enter-active,
 .fade-exit-active{
@@ -24,6 +24,16 @@
   width: 100vw;
   display: flex;
   justify-content: flex-start;
+  padding-right: 15px;
+  margin-bottom: 10px;
+}
+
+.loading-container {
+  height: 250px;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding-right: 15px;
   margin-bottom: 10px;
 }

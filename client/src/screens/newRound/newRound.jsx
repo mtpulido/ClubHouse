@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Stepper from "@material-ui/core/Stepper";
@@ -76,6 +76,13 @@ const NewRound = (props) => {
     upAndDowns: "",
     possibleUpAndDowns: "",
   });
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+    });
+  }, [])
 
   const handleChangeRound = (event) => {
     const { name, value } = event.target;
