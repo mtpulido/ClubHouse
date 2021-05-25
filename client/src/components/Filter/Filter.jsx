@@ -40,7 +40,7 @@ const Filter = (props) => {
     setQuery(e.target.value)
     setTimeout(() => {
       props.setLoading(false)
-    }, (Math.random() * 1500))
+    }, (Math.random() * 1000) + 500)
   }
   return (
     <div className="filter-container">

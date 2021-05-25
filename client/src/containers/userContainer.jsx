@@ -5,6 +5,7 @@ import NavBar from "../layout/NavBar"
 import { Switch, Route, useHistory } from "react-router-dom"
 import Dashboard from "../screens/dashboard/Dashboard"
 import NewRound from "../screens/newRound/NewRound"
+import DetailsRound from "../screens/detailsRound/DetailsRound"
 
 const UserContainer = (props) => {
   const history = useHistory()
@@ -38,6 +39,10 @@ const UserContainer = (props) => {
 
           <Route path="/user/new-round">
             <NewRound handlePostRound={handlePostRound} entryError={entryError} isError={isError}/>
+          </Route>
+
+          <Route path="/user/round/:id">
+            <DetailsRound currentUser={currentUser}/>
           </Route>
 
           </NavBar>

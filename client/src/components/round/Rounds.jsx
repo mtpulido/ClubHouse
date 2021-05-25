@@ -1,9 +1,11 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
 import "./Round.css"
+import{useHistory} from "react-router-dom"
 
 const Rounds = (props) => {
   const { id, score, course, open } = props;
+  const history = useHistory()
   return (
     <div className="one-round">
       <div className="round-row">
@@ -17,8 +19,9 @@ const Rounds = (props) => {
           color="primary"
           size="small"
           disabled={open}
-          // onClick={}
-          // className={classes.button}
+          onClick={(e) =>
+            setTimeout(() => history.push(`/user/round/${id}`), 120)
+          }
         >
           Details
         </Button>
