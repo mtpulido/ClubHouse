@@ -67,8 +67,9 @@ const User = new Schema(
       possibleUpAndDowns: {
         type: Number,
         required: false
-      }
-    }], 
+      },
+      createdAt: {type: Date, default: Date.now}
+    }],
     groups: [{
       type: Schema.Types.ObjectId,
       ref: "groups"
