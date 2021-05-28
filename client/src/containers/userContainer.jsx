@@ -19,10 +19,10 @@ const UserContainer = (props) => {
 
   const handlePostRound = async (roundData) => {
     setIsError(false)
+    setEntryError([])
     try {
       const updatedUser = await postRound(roundData)
       setCurrentUser(updatedUser)
-      setEntryError([])
       history.push("/user/dashboard")
     } catch (error) {
       setIsError(true)

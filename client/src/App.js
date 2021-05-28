@@ -4,6 +4,7 @@ import { Route, useHistory, Switch } from "react-router-dom";
 import { signOut, verifyUser } from "./services/auth";
 import LandingContainer from "./containers/LandingContainer"
 import UserContainer from "./containers/UserContainer"
+import GroupContainer from "./containers/GroupContainer"
 import { getUser } from "./services/user"
 
 function App() {
@@ -33,6 +34,10 @@ function App() {
 
       <Route path="/user">
           <UserContainer currentUser={currentUser} setCurrentUser={setCurrentUser} />
+        </Route>
+
+        <Route path="/group">
+          <GroupContainer setCurrentUser={setCurrentUser} currentUser={currentUser}/>
         </Route>
 
         <Route path="/">

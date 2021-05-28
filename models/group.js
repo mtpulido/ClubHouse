@@ -16,7 +16,17 @@ const Group = new Schema(
       email: { type: String, required: true },
       id: { type: String, required: true },
       displayName: { type: String, required: true },
-    }, 
+    },
+    requests: [{
+      id: { type: String, required: true },
+      displayName: { type: String, required: true },
+      avatar: {
+        data: Buffer,
+        contentType: String,
+        required: false
+      },
+    }],
+    isOpen:  { type: Boolean, default: true }
   },
   { timestamps: true }
 )

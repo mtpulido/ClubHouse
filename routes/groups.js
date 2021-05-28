@@ -5,8 +5,8 @@ const { checkAuthentication, adminAuthorization } = require("../middleware/requi
 const router = Router();
 
 router.get("/:id", controllers.getGroup);
-router.post("/", checkAuthentication, controllers.createGroup); // need checkAuthentication
-router.put("/:id", controllers.editGroup);
-router.delete("/:id", adminAuthorization, controllers.deleteGroup); // need adminAuthorization
+router.post("/add-group", checkAuthentication, controllers.createGroup); // need checkAuthentication
+router.put("/edit-group/:id/", controllers.editGroup);
+router.delete("/delete-group/:id", adminAuthorization, controllers.deleteGroup); // need adminAuthorization
 
 module.exports = router;

@@ -107,15 +107,6 @@ const getUser = async (req, res) => {
   }
 };
 
-const addJustCreatedGroup = async (user, group) => {
-  try {
-    user.groups.push(group);
-    return await user.save();
-  } catch (error) {
-    throw error;
-  }
-};
-
 const addRound = async (req, res) => {
   try {
     const user = res.locals.authorizedUser;
@@ -139,8 +130,9 @@ const editRound = async (req, res) => {
     const round = req.body;
 
     const index = user.recentRounds.findIndex(
-      (recentRound) => recentRound._id === round._id
+      (recentRound) => recentRound._id == round._id
     );
+
     user.recentRounds[index] = round;
     await user.save();
     res.status(201).json(user);
@@ -155,7 +147,6 @@ module.exports = {
   signIn,
   verify,
   getUser,
-  addJustCreatedGroup,
   addRound,
   editRound,
   // changePassword,

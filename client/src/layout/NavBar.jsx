@@ -17,6 +17,7 @@ import DashboardIcon from '@material-ui/icons/Dashboard';
 import GroupIcon from '@material-ui/icons/Group';
 import GroupAddIcon from '@material-ui/icons/GroupAdd';
 import CreateIcon from '@material-ui/icons/Create';
+import SearchIcon from '@material-ui/icons/Search';
 
 const useStyles = makeStyles({
   root: {
@@ -114,7 +115,8 @@ const NavBar = (props) => {
         <Button
         className={classes.button}
             startIcon={<DashboardIcon style={{ height: "28px", width: "28px" }}/>}
-            style={{ marginBottom: "10px", fontSize: "18px"}}
+            style={{ marginBottom: "10px", fontSize: "18px" }}
+            onClick={(e) => setTimeout(() => history.push("/user/dashboard"), 120)}
       >
             Dashboard
       </Button>
@@ -126,10 +128,19 @@ const NavBar = (props) => {
             Groups
       </Button>
           <div className="menu-groups"></div>{/* GROUPS GO HERE */}
+
+          <Button
+        className={classes.button}
+            startIcon={<SearchIcon style={{ height: "28px", width: "28px" }}/>}
+            style={{ marginBottom: "10px", fontSize: "18px"}}
+      >
+            Find Group
+      </Button>
           <Button
         className={classes.button}
             startIcon={<GroupAddIcon style={{ height: "28px", width: "28px" }}/>}
-            style={{ marginBottom: "10px", fontSize: "18px"}}
+            style={{ marginBottom: "10px", fontSize: "18px" }}
+            onClick={(e) => setTimeout(() => history.push("/group/new-group"), 120)}
       >
             New Group
       </Button>

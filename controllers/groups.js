@@ -1,7 +1,6 @@
 const Group = require("../models/group");
 const db = require("../db/connection");
-const { addJustCreatedGroup } = require("./users");
-const user = require("../models/user");
+const User = require("../models/user");
 
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
@@ -49,8 +48,10 @@ const createGroup = async (req, res) => {
     };
     await group.save();
 
-    res.status(201).json(group);
-    addJustCreatedGroup(user, group);
+    user.groups.push(group)
+    await user.save();
+
+    res.status(201).json(user);
   } catch (error) {
     const errors = handleErrors(error);
     res.status(500).json({ errors });
