@@ -9,12 +9,14 @@ const GroupContainer = (props) => {
 
   const { currentUser, setCurrentUser } = props
   const [entryError, setEntryError] = useState([])
+  const history = useHistory()
   
   const handlePostGroup = async (groupData) => {
     setEntryError([])
     try {
       const updatedUser = await postGroup(groupData)
       setCurrentUser(updatedUser)
+      history.push("/user/dashboard")
     } catch (error) {
       setEntryError(error)
     }
@@ -25,7 +27,8 @@ const GroupContainer = (props) => {
     <>
       <NavBar currentUser={currentUser}>
         
-      <Route path="/group/:id">
+        <Route path="/group/:id">
+          
       </Route>
 
       

@@ -23,8 +23,7 @@ const User = new Schema(
       maxlength: [30, "-Display Name max. 30 characters"]
     },
     avatar: {
-      data: Buffer,
-      contentType: String,
+      type: String,
       required: false
     },
     recentRounds: [{

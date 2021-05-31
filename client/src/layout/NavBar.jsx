@@ -18,6 +18,7 @@ import GroupIcon from '@material-ui/icons/Group';
 import GroupAddIcon from '@material-ui/icons/GroupAdd';
 import CreateIcon from '@material-ui/icons/Create';
 import SearchIcon from '@material-ui/icons/Search';
+import {useState, useEffect} from "react"
 
 const useStyles = makeStyles({
   root: {
@@ -41,6 +42,14 @@ const NavBar = (props) => {
   const classes = useStyles();
   let { pathname } = useLocation();
   const history = useHistory();
+  const [groups, setGroups] = useState([])
+  const [groupId, setGroupId] = useState("")
+
+  useEffect(() => {
+    if (currentUser) {
+      setGroups(currentUser.groups)
+    }
+  }, [currentUser])
 
   const scrollToTop = () => {
     window.scrollTo({
@@ -49,6 +58,26 @@ const NavBar = (props) => {
       behavior: "smooth",
     });
   }
+
+  const handleGroupOpen = (id) => {
+    history.push(`/group/${id}`)
+    setGroupId(id)
+  }
+
+  const groupJSX = groups.map((group, index) => (
+    <div className="group-menu" onClick={() => handleGroupOpen(group._id)}>
+      <div className="avatar">
+    <Avatar
+              src={`/uploads/groups/${group.avatar}`}
+              alt={group.name}
+        className={classes.large}
+        />
+        </div>
+    <div className="group-name">{group.name}</div>
+    </div>
+  ))
+
+  console.log(pathname)
 
   return (
     <div className="nav-container">
@@ -127,7 +156,7 @@ const NavBar = (props) => {
       >
             Groups
       </Button>
-          <div className="menu-groups"></div>{/* GROUPS GO HERE */}
+          <div className="menu-groups">{groupJSX}</div>{/* GROUPS GO HERE */}
 
           <Button
         className={classes.button}

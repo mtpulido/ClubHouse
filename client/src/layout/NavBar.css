@@ -1,5 +1,5 @@
 .burger-closed {
-  min-height: 100vh;
+  height: 100vh;
   position: fixed;
   top: 0;
   left: -250px;
@@ -9,10 +9,11 @@
   transition: 0.45s;
   display: flex;
   flex-direction: column;
+  overflow-y: scroll;
 }
 
 .burger-open {
-  min-height: 100vh;
+  height: 100vh;
   position: fixed;
   top: 0;
   left: 0;
@@ -22,6 +23,7 @@
   transition: 0.3s;
   display: flex;
   flex-direction: column;
+  overflow-y: scroll;
   filter: drop-shadow(0 0 6px rgba(163, 163, 163, 0.4));
 }
 
@@ -98,4 +100,28 @@
   flex-direction: column;
   align-items: flex-start;
   padding-left: 15px;
+}
+
+.group-menu {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  max-width: 220px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-left: 15px;
+}
+
+.group-name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-left: 5px;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.avatar {
+  filter: drop-shadow(0 0 1px rgba(163, 163, 163, .4));
 }

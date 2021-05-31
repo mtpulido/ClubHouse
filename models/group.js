@@ -7,8 +7,7 @@ const Group = new Schema(
       type: String, required: [true, "Groups must have a name"]
     },
     avatar: {
-      data: Buffer,
-      contentType: String,
+      type: String,
       required: false
     },
     members: [{ type: Schema.Types.ObjectId, ref: 'users' }],

@@ -37,15 +37,17 @@ const getGroup = async (req, res) => {
 
 const createGroup = async (req, res) => {
   try {
+    console.log("start of controller")
     let user = res.locals.authorizedUser;
     const group = await new Group(req.body);
-
+ 
     group.members.push(user);
     group.admin = {
       email: user.email,
       id: user._id,
       displayName: user.displayName,
     };
+    group.avatar = req.file.filename
     await group.save();
 
     user.groups.push(group)
@@ -53,6 +55,7 @@ const createGroup = async (req, res) => {
 
     res.status(201).json(user);
   } catch (error) {
+    console.log(error)
     const errors = handleErrors(error);
     res.status(500).json({ errors });
   }

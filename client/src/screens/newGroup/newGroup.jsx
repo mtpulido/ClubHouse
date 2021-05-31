@@ -49,25 +49,49 @@ const NewGroup = (props) => {
       [name]: value,
     }));
   };
+
+  const handleChangePhoto = (event) => {
+    console.log(event.target.files[0])
+    setNewGroup((prevState) => ({
+      ...prevState,
+      avatar: event.target.files[0]
+   })) 
+  };
+
+
+
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    const formData = new FormData()
+
+    formData.append("name", newGroup.name)
+    formData.append("avatar", newGroup.avatar)
+
+    console.log(formData)
+
+    props.handlePostGroup(formData)
+  }
+  
   return (
     <div>
-      <form>
+      <form
+        enctype="multipart/form-data"
+        onSubmit={handleSubmit}
+      >
       <input
         accept="image/*"
         className={classes.input}
-        id="contained-button-file"
-        multiple
+        id="avatar"
         name="avatar"
         type="file"
-        onChange={handleChange}
-        value={newGroup.avatar}
+        onChange={handleChangePhoto}
       />
-      <label htmlFor="contained-button-file">
-        <Button variant="contained" color="primary" component="span">
-          Upload
+      <label htmlFor="avatar">
+        <Button variant="outlined" color="primary" component="span">
+          Choose New Photo
         </Button>
       </label>
-      <div>{newGroup.avatar}</div>
+      <div>{newGroup.avatar.name}</div>
 
       <div className="text-field-stepper">
         <TextField
@@ -84,6 +108,15 @@ const NewGroup = (props) => {
           // error={props.entryError[3] ? true : false}
         />
         </div>
+        <Button
+          variant="contained"
+          color="primary"
+          type="submit"
+          // size="large"
+          className={classes.root}
+        >
+          Submit
+        </Button>
         </form>
     </div>
   );

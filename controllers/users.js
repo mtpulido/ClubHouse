@@ -5,6 +5,7 @@ const TOKEN_KEY = require("../secrets");
 
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
+
 const handleErrors = (err) => {
   let errors = {
     displayName: "",
@@ -142,6 +143,18 @@ const editRound = async (req, res) => {
   }
 };
 
+const editAvatar = async (req, res) => {
+  try {
+    const user = res.locals.authorizedUser
+    user.avatar = req.file.filename
+
+    await user.save()
+    res.status(201).json(user);
+  } catch (error) {
+    res.status(400).json({error: "image too large or not an image"})
+  }
+}
+
 module.exports = {
   signUp,
   signIn,
@@ -149,5 +162,6 @@ module.exports = {
   getUser,
   addRound,
   editRound,
+  editAvatar
   // changePassword,
 };
