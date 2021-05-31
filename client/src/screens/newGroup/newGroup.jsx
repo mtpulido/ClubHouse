@@ -42,6 +42,13 @@ const NewGroup = (props) => {
     avatar: "",
   });
 
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+    });
+  }, [])
+
   const handleChange = (event) => {
     const { name, value } = event.target;
     setNewGroup((prevState) => ({

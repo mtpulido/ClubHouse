@@ -2,7 +2,7 @@
   height: 100vh;
   position: fixed;
   top: 0;
-  left: -250px;
+  left: -280px;
   z-index: 600;
   background-color: #1e2124;
   width: 250;
@@ -19,7 +19,7 @@
   left: 0;
   z-index: 600;
   background-color: #1e2124;
-  width: 250px;
+  width: 280px;
   transition: 0.3s;
   display: flex;
   flex-direction: column;
@@ -75,12 +75,12 @@
 .menu-user-icons {
   display: flex;
   align-items: center;
-  padding-left: 15px;
+  padding-left: 10px;
   margin-top: 15px;
 }
 
 .menu-display-name {
-  padding-left: 8px;
+  padding-left: 5px;
   font-size: 15px;
   font-weight: 500;
   display: flex;
@@ -89,7 +89,7 @@
 }
 
 .menu-rounds {
-  padding-left: 20px;
+  padding-left: 15px;
   margin: 10px 0 40px 0;
   font-size: 15px;
   font-weight: 500;
@@ -103,10 +103,10 @@
 }
 
 .group-menu {
-  margin-bottom: 10px;
+  margin-bottom: 12px;
   display: flex;
   align-items: center;
-  max-width: 220px;
+  max-width: 255px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -114,14 +114,23 @@
 }
 
 .group-name {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
   padding-left: 5px;
   font-size: 15px;
   font-weight: 500;
+  margin-top: 25px;
+  white-space: nowrap;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
 }
 
 .avatar {
   filter: drop-shadow(0 0 1px rgba(163, 163, 163, .4));
+}
+
+.group-button-nav {
+  display: flex;
+  position: fixed;
+  right: 0;
+  top: 0;
+  padding-right: 10px;
 }

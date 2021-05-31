@@ -1,0 +1,77 @@
+.group-burger-closed {
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  right: -280px;
+  z-index: 600;
+  background-color: #1e2124;
+  width: 250;
+  transition: 0.45s;
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+}
+
+.group-burger-open {
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 600;
+  background-color: #1e2124;
+  width: 280px;
+  max-width: 280px;
+  transition: 0.3s;
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  filter: drop-shadow(0 0 6px rgba(163, 163, 163, 0.4));
+}
+
+.members-menu {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  max-width: 230px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-left: 25px;
+}
+
+.group-burger-menu {
+  margin-bottom: 35px;
+  display: flex;
+  align-items: center;
+  max-width: 230px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-left: 15px;
+}
+
+.members-name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-left: 5px;
+  font-size: 15px;
+  font-weight: 500;
+  max-width: 200px;
+  margin-top: 25px;
+}
+
+.header-group-name {
+  /* display: flex;
+  align-items: center; */
+  margin-top: 17px;
+  max-width: 215px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 17px;
+}
+
+.avatar {
+  filter: drop-shadow(0 0 1px rgba(163, 163, 163, .4));
+}

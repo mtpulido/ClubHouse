@@ -18,7 +18,9 @@ import GroupIcon from '@material-ui/icons/Group';
 import GroupAddIcon from '@material-ui/icons/GroupAdd';
 import CreateIcon from '@material-ui/icons/Create';
 import SearchIcon from '@material-ui/icons/Search';
-import {useState, useEffect} from "react"
+import { useState, useEffect } from "react"
+import GroupMenu from "./GroupIcon"
+import Badge from '@material-ui/core/Badge';
 
 const useStyles = makeStyles({
   root: {
@@ -35,15 +37,19 @@ const useStyles = makeStyles({
     width: "50px",
     height: "50px",
   },
+  customBadge: {
+    backgroundColor: "#b82828",
+    color: "white"
+  }
 });
 
 const NavBar = (props) => {
-  const { open, setOpen, currentUser } = props;
+  const { open, setOpen, currentUser, group } = props;
   const classes = useStyles();
   let { pathname } = useLocation();
   const history = useHistory();
   const [groups, setGroups] = useState([])
-  const [groupId, setGroupId] = useState("")
+  const [openGroupSettings, setOpenGroupSettings] = useState(false)
 
   useEffect(() => {
     if (currentUser) {
@@ -61,7 +67,6 @@ const NavBar = (props) => {
 
   const handleGroupOpen = (id) => {
     history.push(`/group/${id}`)
-    setGroupId(id)
   }
 
   const groupJSX = groups.map((group, index) => (
@@ -77,14 +82,12 @@ const NavBar = (props) => {
     </div>
   ))
 
-  console.log(pathname)
-
   return (
     <div className="nav-container">
       <div className="nav-bar">
         <AppBar
           position="static"
-          className={open ? classes.root1 : classes.root}
+          className={open || openGroupSettings ? classes.root1 : classes.root}
         >
           <Toolbar>
             {pathname === "/user/dashboard" ? (
@@ -111,9 +114,25 @@ const NavBar = (props) => {
               <span onClick={scrollToTop}>ClubHouse</span>
               <GolfCourseIcon />
             </Typography>
+            {pathname.startsWith("/group") && (pathname !== "/group/new-group") ? (
+              <div className="group-button-nav">
+              <IconButton
+                edge="start"
+                color="inherit"
+                aria-label="menu"
+                onClick={(e) => setOpenGroupSettings((curr) => !curr)}
+                >
+                    <Badge badgeContent={group?.requests?.length}  classes={{ badge: classes.customBadge }}>
+                    <GroupIcon fontSize="large" color="primary" />
+                    </Badge>
+                </IconButton>
+                </div>
+            ) : null}
           </Toolbar>
         </AppBar>
       </div>
+
+      <GroupMenu open={openGroupSettings} group={group} setOpen={setOpenGroupSettings} currentUser={currentUser}/>
 
       <div className={open ? "burger-open" : "burger-closed"}>
         <div className="menu-header">
@@ -156,7 +175,7 @@ const NavBar = (props) => {
       >
             Groups
       </Button>
-          <div className="menu-groups">{groupJSX}</div>{/* GROUPS GO HERE */}
+          <div className="menu-groups">{groupJSX}</div>
 
           <Button
         className={classes.button}
@@ -169,7 +188,7 @@ const NavBar = (props) => {
         className={classes.button}
             startIcon={<GroupAddIcon style={{ height: "28px", width: "28px" }}/>}
             style={{ marginBottom: "10px", fontSize: "18px" }}
-            onClick={(e) => setTimeout(() => history.push("/group/new-group"), 120)}
+            onClick={() => setTimeout(() => history.push("/group/new-group"), 120)}
       >
             New Group
       </Button>
@@ -183,7 +202,7 @@ const NavBar = (props) => {
         </div>
       </div> 
 
-      <div className={open ? "children-open" : "children-closed"}>
+      <div className={open || openGroupSettings ? "children-open" : "children-closed"}>
         {props.children}
       </div>
     </div>

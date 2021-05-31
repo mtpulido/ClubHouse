@@ -4,12 +4,14 @@ import { useState, useEffect } from "react"
 import {postGroup} from "../services/group"
 import React from 'react'
 import NewGroup from "../screens/newGroup/newGroup"
+import Group from "../screens/group/Group"
 
 const GroupContainer = (props) => {
 
   const { currentUser, setCurrentUser } = props
   const [entryError, setEntryError] = useState([])
   const history = useHistory()
+  const [group, setGroup] = useState({})
   
   const handlePostGroup = async (groupData) => {
     setEntryError([])
@@ -25,10 +27,10 @@ const GroupContainer = (props) => {
 
   return (
     <>
-      <NavBar currentUser={currentUser}>
+      <NavBar currentUser={currentUser} group={group}>
         
         <Route path="/group/:id">
-          
+          < Group group={group} setGroup={setGroup}/>
       </Route>
 
       
