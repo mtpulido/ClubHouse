@@ -63,11 +63,17 @@
   overflow-x: hidden;
 }
 
-.details-fairways,
-.details-greens {
+.details-fairways {
   font-size: 20px;
   font-weight: 500;
   padding-right: 10px;
+  width: 175px;
+}
+
+.details-greens {
+  font-size: 20px;
+  font-weight: 500;
+  padding-left: 35px;
   width: 175px;
 }
 

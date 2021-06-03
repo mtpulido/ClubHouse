@@ -39,14 +39,15 @@ const useStyles = makeStyles({
   },
   customBadge: {
     backgroundColor: "#b82828",
-    color: "white"
+    color: "white",
+    marginTop: "3px"
   }
 });
 
 const NavBar = (props) => {
   const { open, setOpen, currentUser, group } = props;
   const classes = useStyles();
-  let { pathname } = useLocation();
+  const { pathname } = useLocation();
   const history = useHistory();
   const [groups, setGroups] = useState([])
   const [openGroupSettings, setOpenGroupSettings] = useState(false)
@@ -114,7 +115,7 @@ const NavBar = (props) => {
               <span onClick={scrollToTop}>ClubHouse</span>
               <GolfCourseIcon />
             </Typography>
-            {pathname.startsWith("/group") && (pathname !== "/group/new-group") ? (
+            {pathname.startsWith("/group") && (pathname !== "/group/new/group") && (pathname !== "/group/find/group")? (
               <div className="group-button-nav">
               <IconButton
                 edge="start"
@@ -122,7 +123,7 @@ const NavBar = (props) => {
                 aria-label="menu"
                 onClick={(e) => setOpenGroupSettings((curr) => !curr)}
                 >
-                    <Badge badgeContent={group?.requests?.length}  classes={{ badge: classes.customBadge }}>
+                    <Badge badgeContent={group?.requests?.length + 2}  classes={{ badge: classes.customBadge }}>
                     <GroupIcon fontSize="large" color="primary" />
                     </Badge>
                 </IconButton>
@@ -157,7 +158,7 @@ const NavBar = (props) => {
             <div className="menu-display-name">{currentUser?.displayName}</div>
           </div>
           <div className="menu-rounds">
-            <CreateIcon fontSize="small"/> {currentUser?.recentRounds.length} Posted Rounds</div>
+            <CreateIcon fontSize="small"/> {currentUser?.recentRounds?.length} Posted Rounds</div>
         </div>
         <div className="menu-links">
         <Button
@@ -180,7 +181,8 @@ const NavBar = (props) => {
           <Button
         className={classes.button}
             startIcon={<SearchIcon style={{ height: "28px", width: "28px" }}/>}
-            style={{ marginBottom: "10px", fontSize: "18px"}}
+            style={{ marginBottom: "10px", fontSize: "18px" }}
+            onClick={(e) => setTimeout(() => history.push("/group/find/group"), 120)}
       >
             Find Group
       </Button>
@@ -188,7 +190,7 @@ const NavBar = (props) => {
         className={classes.button}
             startIcon={<GroupAddIcon style={{ height: "28px", width: "28px" }}/>}
             style={{ marginBottom: "10px", fontSize: "18px" }}
-            onClick={() => setTimeout(() => history.push("/group/new-group"), 120)}
+            onClick={() => setTimeout(() => history.push("/group/new/group"), 120)}
       >
             New Group
       </Button>

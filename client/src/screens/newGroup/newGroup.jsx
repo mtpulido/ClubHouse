@@ -74,8 +74,6 @@ const NewGroup = (props) => {
     formData.append("name", newGroup.name)
     formData.append("avatar", newGroup.avatar)
 
-    console.log(formData)
-
     props.handlePostGroup(formData)
   }
   

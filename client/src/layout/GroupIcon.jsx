@@ -1,20 +1,12 @@
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
 import "./NavBar.css";
 import CloseIcon from "@material-ui/icons/Close";
-import GolfCourseIcon from "@material-ui/icons/GolfCourse";
 import { makeStyles } from "@material-ui/core/styles";
 import { useLocation, useHistory } from "react-router-dom";
-import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import Avatar from "@material-ui/core/Avatar";
 import SettingsIcon from "@material-ui/icons/Settings";
-import DashboardIcon from '@material-ui/icons/Dashboard';
-import GroupIcon from '@material-ui/icons/Group';
-import GroupAddIcon from '@material-ui/icons/GroupAdd';
-import CreateIcon from '@material-ui/icons/Create';
-import SearchIcon from '@material-ui/icons/Search';
 import { useState, useEffect } from "react"
 import "./Burger.css"
 import StarIcon from '@material-ui/icons/Star';
@@ -40,6 +32,8 @@ const GroupMenu = (props) => {
   const classes = useStyles();
   const { open, group, setOpen, currentUser } = props
   
+
+
   const membersJSX = group?.members?.map((member) => (
     <div className="members-menu">
       <div className="avatar">
@@ -53,6 +47,9 @@ const GroupMenu = (props) => {
       <div className = "members-name">{member.displayName}</div>
     </div>
   ))
+
+
+
   return (
     <div>
       <div className={open ? "group-burger-open" : "group-burger-closed"}>

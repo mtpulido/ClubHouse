@@ -17,7 +17,6 @@ function App() {
       const payload = await verifyUser();
       const user = await getUser(payload.id)
       setCurrentUser(user)
-      // console.log("user has been updated")
     };
     handleVerify();
   }, []);

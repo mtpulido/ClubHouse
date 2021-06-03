@@ -76,10 +76,6 @@ const DetailsRound = (props) => {
           </div>
         </div>
         <div className="details-analysis">
-          <div className="details-greens">
-            Greens:{" "}
-            {round?.greens ? round?.greens + " / " + round?.holes : "No Data"}
-          </div>
           <div>
             <ReactStoreIndicator
               value={Math.round((round?.greens / round?.holes) * 128)}
@@ -87,6 +83,10 @@ const DetailsRound = (props) => {
               width={140}
               fadedOpacity={25}
             />
+          </div>
+          <div className="details-greens">
+            Greens:{" "}
+            {round?.greens ? round?.greens + " / " + round?.holes : "No Data"}
           </div>
         </div>
       </div>
@@ -112,9 +112,6 @@ const DetailsRound = (props) => {
           </div>
         </div>
         <div className="details-analysis">
-          <div className="details-greens">
-            Putting: {round?.putts ? round?.putts : "No Data"}
-          </div>
           <div>
             <ReactStoreIndicator
               value={Math.round(Math.pow(round?.holes / round?.putts, 2) * 220)}
@@ -122,6 +119,9 @@ const DetailsRound = (props) => {
               width={140}
               fadedOpacity={25}
             />
+          </div>
+          <div className="details-greens">
+            Putting: {round?.putts ? round?.putts : "No Data"}
           </div>
         </div>
       </div>

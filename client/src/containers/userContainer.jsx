@@ -55,11 +55,13 @@ const UserContainer = (props) => {
             <NewRound handlePostRound={handlePostRound} entryError={entryError} isError={isError}/>
           </Route>
 
-          <Route path="/user/round/edit/:id">
-            <EditRound currentUser={currentUser} entryError={entryError} isError={isError} handleEditRound={handleEditRound}/>
-          </Route>
-          <Route path="/user/round/:id">
+          <Route exact path="/user/round/:id">
             <DetailsRound currentUser={currentUser}/>
+          </Route>
+
+
+          <Route exact path="/user/round/edit/:id">
+            <EditRound currentUser={currentUser} entryError={entryError} isError={isError} handleEditRound={handleEditRound}/>
           </Route>
 
           </NavBar>

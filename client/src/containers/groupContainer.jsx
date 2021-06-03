@@ -1,46 +1,62 @@
-import NavBar from "../layout/NavBar"
-import { Switch, Route, useHistory } from "react-router-dom"
-import { useState, useEffect } from "react"
-import {postGroup} from "../services/group"
-import React from 'react'
-import NewGroup from "../screens/newGroup/newGroup"
-import Group from "../screens/group/Group"
+import NavBar from "../layout/NavBar";
+import { Switch, Route, useHistory } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { postGroup, getGroups } from "../services/group";
+import React from "react";
+import NewGroup from "../screens/newGroup/newGroup";
+import OneGroup from "../screens/group/Group";
+import FindGroup from "../screens/findGroup/FindGroup";
 
 const GroupContainer = (props) => {
+  const { currentUser, setCurrentUser } = props;
+  const [entryError, setEntryError] = useState([]);
+  const history = useHistory();
+  const [group, setGroup] = useState({});
+  const [findGroup, setFindGroup] = useState([])
 
-  const { currentUser, setCurrentUser } = props
-  const [entryError, setEntryError] = useState([])
-  const history = useHistory()
-  const [group, setGroup] = useState({})
-  
   const handlePostGroup = async (groupData) => {
-    setEntryError([])
+    setEntryError([]);
     try {
-      const updatedUser = await postGroup(groupData)
-      setCurrentUser(updatedUser)
-      history.push("/user/dashboard")
+      const updatedUser = await postGroup(groupData);
+      setCurrentUser(updatedUser);
+      history.push("/user/dashboard");
     } catch (error) {
-      setEntryError(error)
+      setEntryError(error);
+    }
+  };
+
+  const handleGetGroups = async (groupData) => {
+    setEntryError([]);
+    setFindGroup([])
+    try {
+      const group = await getGroups(groupData);
+      setFindGroup(group);
+    } catch (error) {
+      setEntryError(error.response.data.error);
     }
   }
 
-
   return (
     <>
-      <NavBar currentUser={currentUser} group={group}>
-        
-        <Route path="/group/:id">
-          < Group group={group} setGroup={setGroup}/>
-      </Route>
+      <Switch>
+        <NavBar currentUser={currentUser} group={group}>
 
-      
-        <Route path="/group/new-group">
-          <NewGroup handlePostGroup={handlePostGroup}/>
-      </Route>
+        <Route exact path="/group/new/group">
+            <NewGroup handlePostGroup={handlePostGroup} />
+          </Route>
 
-      </NavBar>
+          <Route exact path="/group/find/group">
+            <FindGroup handleGetGroups={handleGetGroups} entryError={entryError} findGroup={findGroup}/>
+          </Route>
+
+          <Route exact path="/group/:id">
+            <OneGroup group={group} setGroup={setGroup} />
+          </Route>
+          
+        </NavBar>
+      </Switch>
     </>
-  )
-}
+  );
+};
 
-export default GroupContainer
+export default GroupContainer;
