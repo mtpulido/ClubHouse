@@ -7,9 +7,10 @@ import { makeStyles } from "@material-ui/core/styles";
 import { useLocation, useHistory } from "react-router-dom";
 import Avatar from "@material-ui/core/Avatar";
 import SettingsIcon from "@material-ui/icons/Settings";
-import { useState, useEffect } from "react"
-import "./Burger.css"
-import StarIcon from '@material-ui/icons/Star';
+import { useState, useEffect } from "react";
+import "./Burger.css";
+import StarIcon from "@material-ui/icons/Star";
+import Badge from "@material-ui/core/Badge";
 
 const useStyles = makeStyles({
   root: {
@@ -26,34 +27,40 @@ const useStyles = makeStyles({
     width: "50px",
     height: "50px",
   },
+  customBadge: {
+    backgroundColor: "#b82828",
+    color: "white",
+    marginTop: "3px",
+  },
 });
 
 const GroupMenu = (props) => {
   const classes = useStyles();
-  const { open, group, setOpen, currentUser } = props
-  
-
+  const { open, group, setOpen, currentUser } = props;
+  const history = useHistory();
 
   const membersJSX = group?.members?.map((member) => (
     <div className="members-menu">
       <div className="avatar">
-      <Avatar
-              src={`/uploads/users/${member.avatar}`}
-              alt={member.name}
-        className={classes.large}
+        <Avatar
+          src={`/uploads/users/${member?.avatar}`}
+          alt={member?.displayName?.toUpperCase()}
+          className={classes.large}
         />
-        </div>
-      {member._id === group.admin.id ? <StarIcon style={{fill: "gold", alignSelf: "flex-start", marginTop: "3px"}}/> : null}
-      <div className = "members-name">{member.displayName}</div>
+      </div>
+      {member._id === group.admin.id ? (
+        <StarIcon
+          style={{ fill: "gold", alignSelf: "flex-start", marginTop: "3px" }}
+        />
+      ) : null}
+      <div className="members-name">{member.displayName}</div>
     </div>
-  ))
-
-
+  ));
 
   return (
     <div>
       <div className={open ? "group-burger-open" : "group-burger-closed"}>
-      <div className="menu-header">
+        <div className="menu-header">
           <div className="header-group-name">{group?.name}</div>
           <IconButton
             edge="start"
@@ -65,22 +72,49 @@ const GroupMenu = (props) => {
             <CloseIcon fontSize="large" color="primary" />
           </IconButton>
         </div>
+        {currentUser?._id === group?.admin?.id ? (
+          <div className="admin-settings-group">
+            <Badge
+              color="primary"
+              badgeContent={group?.requests?.length}
+              classes={{ badge: classes.customBadge }}
+            >
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={() => history.push(`/group/requests/${group?._id}`)}
+                size="small"
+                style={{height: "40px"}}
+              >
+                Requests
+              </Button>
+            </Badge>
+            <IconButton
+              // edge="start"
+              color="inherit"
+              aria-label="settings"
+              // onClick={(e) => setOpen((curr) => !curr)}
+            >
+              <SettingsIcon fontSize="large" color="primary" />
+            </IconButton>
+          </div>
+        ) : null}
 
         <div className="group-burger-menu">
-        <div className="avatar">
-      <Avatar
+          <div className="avatar">
+            <Avatar
               src={`/uploads/groups/${group?.avatar}`}
               alt={group?.name}
-          className={classes.large}
-          style={{ marginTop: "10px"}}
+              className={classes.large}
+              style={{ marginTop: "10px" }}
             />
-            </div>
+          </div>
           <div className="group-name">{group?.members?.length} Members</div>
-      </div>  
+        </div>
         {membersJSX}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default GroupMenu
+export default GroupMenu;

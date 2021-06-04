@@ -1,11 +1,12 @@
 import NavBar from "../layout/NavBar";
 import { Switch, Route, useHistory } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { postGroup, getGroups, requestGroup } from "../services/group";
+import { postGroup, getGroups, requestGroup, adminResponse } from "../services/group";
 import React from "react";
 import NewGroup from "../screens/newGroup/newGroup";
 import OneGroup from "../screens/group/Group";
 import FindGroup from "../screens/findGroup/FindGroup";
+import GroupRequests from "../screens/groupRequests/GroupRequests"
 
 const GroupContainer = (props) => {
   const { currentUser, setCurrentUser, setToggleFetch2 } = props;
@@ -47,6 +48,16 @@ const GroupContainer = (props) => {
     }
   };
 
+  const handleAdminResponse = async (id, data) => {
+    try {
+      const group = await adminResponse(id, data)
+      setGroup(group)
+      // setToggleFetch((curr) => !curr);
+    } catch (error) {
+      throw error;
+    }
+  }
+
   return (
     <>
       <Switch>
@@ -64,6 +75,9 @@ const GroupContainer = (props) => {
               handleRequestGroup={handleRequestGroup}
               toggleFetch={toggleFetch}
             />
+          </Route>
+          <Route exact path="/group/requests/:id">
+            <GroupRequests group={group} handleAdminResponse={handleAdminResponse} />
           </Route>
 
           <Route exact path="/group/:id">

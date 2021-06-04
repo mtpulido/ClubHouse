@@ -39,8 +39,15 @@
   padding-left: 25px;
 }
 
+.menu-header-group {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 15px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
 .group-burger-menu {
-  margin-bottom: 35px;
+  margin-bottom: 15px;
   display: flex;
   align-items: center;
   max-width: 230px;
@@ -74,4 +81,14 @@
 
 .avatar {
   filter: drop-shadow(0 0 1px rgba(163, 163, 163, .4));
+}
+
+.admin-settings-group {
+  margin: 15px 0;
+  padding-left: 15px;
+  padding-right: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  max-height: 45px;
 }

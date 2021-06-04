@@ -1,6 +1,7 @@
 const Group = require("../models/group");
 const db = require("../db/connection");
 const User = require("../models/user");
+const { request } = require("express");
 
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
@@ -107,10 +108,37 @@ const requestGroup = async (req, res) => {
   }
 };
 
+const groupRequestAction = async (req, res) => {
+  try {
+    const group = await Group.findById(req.params.id)
+    const user = await User.findById(req.body.userId)
+
+    console.log(req.body)
+
+    if (req.body.decision === "accept") {
+      group.members.push(req.body.userId)
+      user.groups.push(group)
+    }
+
+    const newRequests =  group.requests.filter((userRequest) => {
+        return !userRequest.userId === req.body.userId
+    })
+
+    console.log(newRequests)
+    group.requests = newRequests
+    await group.save()
+    await user.save()
+    res.status(201).json(group)
+  } catch (error) {
+    res.status(500).json({ error: error.message })
+  }
+}
+
 module.exports = {
   getGroup,
   createGroup,
   deleteGroup,
   requestGroup,
-  getGroups
+  getGroups,
+  groupRequestAction,
 };

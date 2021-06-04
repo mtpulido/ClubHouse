@@ -56,7 +56,10 @@ const NavBar = (props) => {
     if (currentUser) {
       setGroups(currentUser.groups)
     }
-  }, [currentUser])
+    if (pathname.startsWith("/group/requests")) {
+      setOpenGroupSettings(false)
+    }
+  }, [currentUser, pathname])
 
   const scrollToTop = () => {
     window.scrollTo({
@@ -74,8 +77,8 @@ const NavBar = (props) => {
     <div className="group-menu" onClick={() => handleGroupOpen(group._id)}>
       <div className="avatar">
     <Avatar
-              src={`/uploads/groups/${group.avatar}`}
-              alt={group.name}
+              src={`/uploads/groups/${group?.avatar}`}
+              alt={group?.name?.toUpperCase()}
         className={classes.large}
         />
         </div>
@@ -115,7 +118,7 @@ const NavBar = (props) => {
               <span onClick={scrollToTop}>ClubHouse</span>
               <GolfCourseIcon />
             </Typography>
-            {pathname.startsWith("/group") && (pathname !== "/group/new/group") && (pathname !== "/group/find/group")? (
+            {pathname.startsWith("/group") && (pathname !== "/group/new/group") && (pathname !== "/group/find/group") && (!pathname.startsWith("/group/requests"))? (
               <div className="group-button-nav">
               <IconButton
                 edge="start"
@@ -123,7 +126,7 @@ const NavBar = (props) => {
                 aria-label="menu"
                 onClick={(e) => setOpenGroupSettings((curr) => !curr)}
                 >
-                    <Badge badgeContent={group?.requests?.length + 2}  classes={{ badge: classes.customBadge }}>
+                    <Badge badgeContent={group?.requests?.length}  classes={{ badge: classes.customBadge }}>
                     <GroupIcon fontSize="large" color="primary" />
                     </Badge>
                 </IconButton>
@@ -151,8 +154,8 @@ const NavBar = (props) => {
         <div className="menu-user">
           <div className="menu-user-icons">
             <Avatar
-              alt={currentUser?.displayName}
-              src="/broken-image.jpg"
+              src={`/uploads/users/${currentUser?.avatar}`}
+              alt={currentUser?.displayName?.toUpperCase()}
               className={classes.large}
             />
             <div className="menu-display-name">{currentUser?.displayName}</div>

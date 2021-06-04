@@ -30,7 +30,7 @@ const GroupMember = (props) => {
     <div className="avatar">
       <Avatar
               src={`/uploads/users/${member?.avatar}`}
-              alt={member.name}
+              alt={member?.displayName.toUpperCase()}
         className={classes.large}
         />
         </div>

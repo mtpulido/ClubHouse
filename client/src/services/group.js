@@ -36,3 +36,13 @@ export const requestGroup = async (id) => {
     throw error
   }
 }
+
+export const adminResponse = async (id, data) => {
+  try {
+    const response = await api.put(`/groups/edit-requests/${id}`, data)
+    return response.data
+  } catch (error) {
+    console.log(error)
+    throw error
+  }
+}
