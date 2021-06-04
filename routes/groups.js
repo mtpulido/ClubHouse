@@ -5,9 +5,10 @@ const {uploadPhoto, resizeGroupPhoto} = require("../middleware/imageUpload")
 
 const router = Router();
 
+router.post("/", controllers.getGroups);
 router.get("/:id", controllers.getGroup);
 router.post("/add-group", checkAuthentication, uploadPhoto, resizeGroupPhoto, controllers.createGroup); // need checkAuthentication
-router.put("/edit-group/:id/", controllers.editGroup);
+router.put("/edit-group/:id", checkAuthentication, controllers.requestGroup);
 router.delete("/delete-group/:id", adminAuthorization, controllers.deleteGroup); // need adminAuthorization
 
 module.exports = router;

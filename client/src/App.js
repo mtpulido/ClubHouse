@@ -10,7 +10,7 @@ import { getUser } from "./services/user"
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const history = useHistory();
-  // const [toggleFetch, setToggleFetch] = useState(false)
+  const [toggleFetch, setToggleFetch] = useState(false)
 
   useEffect(() => {
     const handleVerify = async () => {
@@ -19,7 +19,7 @@ function App() {
       setCurrentUser(user)
     };
     handleVerify();
-  }, []);
+  }, [toggleFetch]);
   // const handleSignOut = () => {
   //   setCurrentUser(null);
   //   localStorage.removeItem("token");
@@ -32,15 +32,15 @@ function App() {
       <Switch>
 
       <Route path="/user">
-          <UserContainer currentUser={currentUser} setCurrentUser={setCurrentUser} />
+          <UserContainer currentUser={currentUser} setCurrentUser={setCurrentUser} setToggleFetch={setToggleFetch}/>
         </Route>
 
         <Route path="/group">
-          <GroupContainer setCurrentUser={setCurrentUser} currentUser={currentUser}/>
+          <GroupContainer setCurrentUser={setCurrentUser} currentUser={currentUser} setToggleFetch2={setToggleFetch}/>
         </Route>
 
         <Route path="/">
-          <LandingContainer setCurrentUser={setCurrentUser} />
+          <LandingContainer setCurrentUser={setCurrentUser} setToggleFetch={setToggleFetch}/>
         </Route>
 
       </Switch>

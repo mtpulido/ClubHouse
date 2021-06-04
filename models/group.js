@@ -17,11 +17,10 @@ const Group = new Schema(
       displayName: { type: String, required: true },
     },
     requests: [{
-      id: { type: String, required: true },
+      userId: { type: String, required: true },
       displayName: { type: String, required: true },
       avatar: {
-        data: Buffer,
-        contentType: String,
+        type: String,
         required: false
       },
     }],

@@ -70,7 +70,7 @@ const NavBar = (props) => {
     history.push(`/group/${id}`)
   }
 
-  const groupJSX = groups.map((group, index) => (
+  const groupJSX = groups?.map((group, index) => (
     <div className="group-menu" onClick={() => handleGroupOpen(group._id)}>
       <div className="avatar">
     <Avatar

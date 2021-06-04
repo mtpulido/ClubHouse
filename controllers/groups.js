@@ -17,6 +17,19 @@ const handleErrors = (err) => {
 };
 
 
+const getGroups = async (req, res) => {
+  try {
+    const group = await Group.find({ name: req.body.name })
+    if (group.length > 0) {
+      res.status(201).json(group)
+    } else {
+      res.status(400).json({ error: "-Group does not exist. Search is case sensitive." })
+    }
+  } catch (error) {
+    res.status(500).json({ error: error.message});
+  }
+}
+
 const getGroup = async (req, res) => {
   try {
     const { id } = req.params;
@@ -37,7 +50,6 @@ const getGroup = async (req, res) => {
 
 const createGroup = async (req, res) => {
   try {
-    console.log("start of controller")
     let user = res.locals.authorizedUser;
     const group = await new Group(req.body);
  
@@ -47,7 +59,10 @@ const createGroup = async (req, res) => {
       id: user._id,
       displayName: user.displayName,
     };
-    group.avatar = req.file.filename
+
+    if (req.file) {
+      group.avatar = req.file.filename
+    } 
     await group.save();
 
     user.groups.push(group)
@@ -75,14 +90,27 @@ const deleteGroup = async (req, res) => {
 };
 
 //this is no where close to finished. Need to figure out the joining groups and removing from groups for members.
-const editGroup = async (req, res) => {
-  const group = await Group.findById(req.params.id);
-  const user = await user.findById(req.body._id);
+const requestGroup = async (req, res) => {
+  try {
+    const group = await Group.findById(req.params.id);
+    const user = res.locals.authorizedUser
+
+    group.requests.push({
+      userId: user._id,
+      displayName: user.displayName,
+      avatar: user.avatar
+    })
+    await group.save()
+    res.status(201).json(group)
+  } catch (error) {
+    res.status(500).json({ error: error.message })
+  }
 };
 
 module.exports = {
   getGroup,
   createGroup,
   deleteGroup,
-  editGroup,
+  requestGroup,
+  getGroups
 };

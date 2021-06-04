@@ -74,13 +74,17 @@ const User = new Schema(
       ref: "groups"
     }],
   },
-  { timestamps: true }
+  { timestamps: true,
+  toJSON: { virtuals: true}}
 );
 
 //mongoose 'pre' hook on the save action to hash the password.
 User.pre('save', async function (next) {
-  const salt = await bcrypt.genSalt()
-  this.passwordDigest = await bcrypt.hash(this.passwordDigest, salt)
+  if (this.isNew) {
+    const salt = await bcrypt.genSalt()
+    this.passwordDigest = await bcrypt.hash(this.passwordDigest, salt)
+    next()
+  }
   next()
 })
 
@@ -95,5 +99,153 @@ User.statics.login = async function (email, password) {
   }
   throw Error('incorrect email')
 }
+
+User.virtual('last30Days').get(function () {
+  let date = new Date()
+  date.setDate(date.getDate() - 30)
+
+  let totals = {
+    scoring: 0,
+    holes: 0,
+    fairwaysHit: 0,
+    possibleFairways: 0,
+    greens: 0,
+    putting: 0,
+    rounds: 0,
+  }
+
+  this.recentRounds.forEach((round) => {
+    if (round.createdAt > date) {
+      totals.scoring += round.score
+      totals.holes += round.holes
+      totals.fairwaysHit += round.fairwaysHit
+      totals.possibleFairways += round.possibleFairways
+      totals.greens += round.greens
+      totals.putting += round.putts
+      totals.rounds += 1
+    }
+  })
+
+  let last30Days = {
+    scoring: (totals.scoring / totals.rounds).toFixed(2),
+    driving: (totals.fairwaysHit / totals.possibleFairways).toFixed(2),
+    greens: (totals.greens / totals.holes).toFixed(2),
+    putting: (totals.putting / totals.rounds).toFixed(2),
+  }
+
+  
+  return last30Days
+})
+
+User.virtual('last60Days').get(function () {
+  let date = new Date()
+  date.setDate(date.getDate() - 60)
+
+  let totals = {
+    scoring: 0,
+    holes: 0,
+    fairwaysHit: 0,
+    possibleFairways: 0,
+    greens: 0,
+    putting: 0,
+    rounds: 0,
+  }
+
+  this.recentRounds.forEach((round) => {
+    if (round.createdAt > date) {
+      totals.scoring += round.score
+      totals.holes += round.holes
+      totals.fairwaysHit += round.fairwaysHit
+      totals.possibleFairways += round.possibleFairways
+      totals.greens += round.greens
+      totals.putting += round.putts
+      totals.rounds += 1
+    }
+  })
+
+  let last60Days = {
+    scoring: (totals.scoring / totals.rounds).toFixed(2),
+    driving: (totals.fairwaysHit / totals.possibleFairways).toFixed(2),
+    greens: (totals.greens / totals.holes).toFixed(2),
+    putting: (totals.putting / totals.rounds).toFixed(2),
+  }
+
+  
+  return last60Days
+})
+
+User.virtual('last90Days').get(function () {
+  let date = new Date()
+  date.setDate(date.getDate() - 90)
+
+  let totals = {
+    scoring: 0,
+    holes: 0,
+    fairwaysHit: 0,
+    possibleFairways: 0,
+    greens: 0,
+    putting: 0,
+    rounds: 0,
+  }
+
+  this.recentRounds.forEach((round) => {
+    if (round.createdAt > date) {
+      totals.scoring += round.score
+      totals.holes += round.holes
+      totals.fairwaysHit += round.fairwaysHit
+      totals.possibleFairways += round.possibleFairways
+      totals.greens += round.greens
+      totals.putting += round.putts
+      totals.rounds += 1
+    }
+  })
+
+  let last90Days = {
+    scoring: (totals.scoring / totals.rounds).toFixed(2),
+    driving: (totals.fairwaysHit / totals.possibleFairways).toFixed(2),
+    greens: (totals.greens / totals.holes).toFixed(2),
+    putting: (totals.putting / totals.rounds).toFixed(2),
+  }
+
+  
+  return last90Days
+})
+
+User.virtual('last6Months').get(function () {
+  let date = new Date()
+  date.setDate(date.getDate() - 183)
+
+  let totals = {
+    scoring: 0,
+    holes: 0,
+    fairwaysHit: 0,
+    possibleFairways: 0,
+    greens: 0,
+    putting: 0,
+    rounds: 0,
+  }
+
+  this.recentRounds.forEach((round) => {
+    if (round.createdAt > date) {
+      totals.scoring += round.score
+      totals.holes += round.holes
+      totals.fairwaysHit += round.fairwaysHit
+      totals.possibleFairways += round.possibleFairways
+      totals.greens += round.greens
+      totals.putting += round.putts
+      totals.rounds += 1
+    }
+  })
+
+  let last6Months = {
+    scoring: (totals.scoring / totals.rounds).toFixed(2),
+    driving: (totals.fairwaysHit / totals.possibleFairways).toFixed(2),
+    greens: (totals.greens / totals.holes).toFixed(2),
+    putting: (totals.putting / totals.rounds).toFixed(2),
+  }
+
+  
+  return last6Months
+})
 
 module.exports = mongoose.model("users", User);

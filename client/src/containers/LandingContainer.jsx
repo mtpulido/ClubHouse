@@ -7,7 +7,7 @@ import Landing from "../screens/landingPage/Landing";
 
 
 const LandingContainer = (props) => {
-  const { setCurrentUser } = props
+  const { setCurrentUser, setToggleFetch } = props
   const [credentialsError, setCredentialsError] = useState([]);
   const history = useHistory();
 
@@ -16,6 +16,7 @@ const LandingContainer = (props) => {
       const userData = await signIn(credentials);
       setCurrentUser(userData);
       history.push("/user/dashboard");
+      setToggleFetch((curr) => !curr)
     } catch (error) {
       setCredentialsError(error);
     }
@@ -26,6 +27,7 @@ const LandingContainer = (props) => {
       const userData = await signUp(credentials);
       setCurrentUser(userData);
       history.push("/user/dashboard");
+      setToggleFetch((curr) => !curr)
     } catch (error) {
       setCredentialsError(error);
     }

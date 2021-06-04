@@ -5,7 +5,6 @@ const sharp = require("sharp");
 const multerStorage = multer.memoryStorage();
 
 const multerFilter = (req, file, cb) => {
-  console.log(file)
   if (file.mimetype.startsWith("image")) {
     cb(null, true);
   } else {
@@ -35,9 +34,7 @@ const resizeUserPhoto = (req, res, next) => {
 };
 
 const resizeGroupPhoto = (req, res, next) => {
-  console.log("test test ")
   if (!req.file) return next();
-  console.log("test test test")
   req.file.filename = `group-${res.locals.authorizedUser._id}-${Date.now()}.jpeg`
 
   sharp(req.file.buffer)
@@ -46,7 +43,6 @@ const resizeGroupPhoto = (req, res, next) => {
     .jpeg({ quality: 85 })
     .toFile(`./client/public/uploads/groups/${req.file.filename}`)
   
-  console.log("test in middleware")
   next()
 };
 

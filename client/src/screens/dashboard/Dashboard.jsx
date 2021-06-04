@@ -33,19 +33,19 @@ const Dashboard = (props) => {
   const handleFilter = (type) => {
     switch (type) {
       case "5 rounds":
-        setUserRounds(props.currentUser.recentRounds.slice(0, 5));
+        setUserRounds(props.currentUser.recentRounds?.slice(0, 5));
         break;
       case "10 rounds":
-        setUserRounds(props.currentUser.recentRounds.slice(0, 10));
+        setUserRounds(props.currentUser.recentRounds?.slice(0, 10));
         break;
       case "15 rounds":
-        setUserRounds(props.currentUser.recentRounds.slice(0, 15));
+        setUserRounds(props.currentUser.recentRounds?.slice(0, 15));
         break;
       case "25 rounds":
-        setUserRounds(props.currentUser.recentRounds.slice(0, 25));
+        setUserRounds(props.currentUser.recentRounds?.slice(0, 25));
         break;
       case "50 rounds":
-        setUserRounds(props.currentUser.recentRounds.slice(0, 50));
+        setUserRounds(props.currentUser.recentRounds?.slice(0, 50));
         break;
       case "All rounds":
         setUserRounds(props.currentUser.recentRounds);
@@ -57,7 +57,7 @@ const Dashboard = (props) => {
     setValue(newValue);
   };
 
-  const roundJSX = userRounds.map((round, index) => (
+  const roundJSX = userRounds?.map((round, index) => (
     <Round
       course={round.course}
       score={round.score}

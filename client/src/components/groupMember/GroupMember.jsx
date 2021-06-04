@@ -19,7 +19,7 @@ const GroupMember = (props) => {
 
   const handlePercent = (number) => {
     if (number < 1) {
-      return (number*100)+ "%"
+      return (number*100).toFixed(2)+ "%"
     }
    return number
   }

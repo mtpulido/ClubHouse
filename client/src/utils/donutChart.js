@@ -1,6 +1,6 @@
 export const populateScoring = (userRounds) => {
   let array = [0,0,0,0,0]
-  userRounds.map((round, index) => {
+  userRounds?.map((round, index) => {
     if (round.score >= 100) {
       array[0] += 1
     } else if (round.score >= 90) {
@@ -18,7 +18,7 @@ export const populateScoring = (userRounds) => {
 
 export const populateDriving = (userRounds) => {
   let array = [0,0,0,0,0]
-  userRounds.map((round, index) => {
+  userRounds?.map((round, index) => {
     if ((round.fairwaysHit / round.possibleFairways) < .15) {
       array[0]+= 1
     } else if ((round.fairwaysHit / round.possibleFairways) <= .30) {
@@ -36,7 +36,7 @@ export const populateDriving = (userRounds) => {
 
 export const populateGreens = (userRounds) => {
   let array = [0,0,0,0,0]
-  userRounds.map((round, index) => {
+  userRounds?.map((round, index) => {
     if ((round.greens / round.holes) < .15) {
       array[0]+= 1
     } else if ((round.greens / round.holes) <= .30) {
@@ -54,7 +54,7 @@ export const populateGreens = (userRounds) => {
 
 export const populatePutting = (userRounds) => {
   let array = [0,0,0,0,0]
-  userRounds.map((round, index) => {
+  userRounds?.map((round, index) => {
     if ((round.putts) <= 30) {
       array[4]+= 1
     } else if ((round.putts) <= 34) {

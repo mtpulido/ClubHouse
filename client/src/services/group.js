@@ -27,3 +27,12 @@ export const getGroups = async (groupData) => {
     throw error
   }
 }
+
+export const requestGroup = async (id) => {
+  try {
+    const response = await api.put(`/groups/edit-group/${id}`)
+    return response.data
+  } catch (error) {
+    throw error
+  }
+}

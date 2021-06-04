@@ -58,7 +58,6 @@ const NewGroup = (props) => {
   };
 
   const handleChangePhoto = (event) => {
-    console.log(event.target.files[0])
     setNewGroup((prevState) => ({
       ...prevState,
       avatar: event.target.files[0]
