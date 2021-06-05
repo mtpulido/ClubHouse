@@ -50,7 +50,7 @@ const GroupMenu = (props) => {
       </div>
       {member._id === group.admin.id ? (
         <StarIcon
-          style={{ fill: "gold", alignSelf: "flex-start", marginTop: "3px" }}
+          style={{ fill: "gold", alignSelf: "flex-start", marginTop: "3px", marginRight:"-24px" }}
         />
       ) : null}
       <div className="members-name">{member.displayName}</div>

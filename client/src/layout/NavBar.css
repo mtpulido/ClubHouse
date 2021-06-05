@@ -103,7 +103,6 @@
 }
 
 .group-menu {
-  margin-bottom: 12px;
   display: flex;
   align-items: center;
   max-width: 255px;
@@ -111,6 +110,10 @@
   overflow: hidden;
   text-overflow: ellipsis;
   padding-left: 15px;
+  height: 65px;
+}
+.group-menu:hover {
+  cursor: pointer;
 }
 
 .group-name {

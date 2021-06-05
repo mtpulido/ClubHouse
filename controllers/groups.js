@@ -113,21 +113,20 @@ const groupRequestAction = async (req, res) => {
     const group = await Group.findById(req.params.id)
     const user = await User.findById(req.body.userId)
 
-    console.log(req.body)
-
     if (req.body.decision === "accept") {
       group.members.push(req.body.userId)
       user.groups.push(group)
+      await user.save()
     }
 
-    const newRequests =  group.requests.filter((userRequest) => {
-        return !userRequest.userId === req.body.userId
+
+    const newRequests = group.requests.filter((userRequest, index) => {
+        return !user._id.equals(userRequest.userId)
     })
 
-    console.log(newRequests)
     group.requests = newRequests
+    console.log(group.requests)
     await group.save()
-    await user.save()
     res.status(201).json(group)
   } catch (error) {
     res.status(500).json({ error: error.message })

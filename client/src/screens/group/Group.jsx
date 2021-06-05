@@ -1,15 +1,16 @@
-import React from 'react'
-import { useParams } from "react-router-dom"
-import { useState, useEffect } from "react"
-import { getGroup } from "../../services/group"
-import GroupMember from "../../components/groupMember/GroupMember"
-import FilterGroup from "../../components/FilterGroup/FilterGroup"
+import React from "react";
+import { useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { getGroup } from "../../services/group";
+import GroupMember from "../../components/groupMember/GroupMember";
+import FilterGroup from "../../components/FilterGroup/FilterGroup";
 import Tab from "@material-ui/core/Tab";
 import TabContext from "@material-ui/lab/TabContext";
 import Tabs from "@material-ui/lab/TabList";
 import AppBar from "@material-ui/core/AppBar";
 import { makeStyles } from "@material-ui/core/styles";
-import "./Group.css"
+import "./Group.css";
+import {sortGroupMembers} from "../../utils/sort"
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -21,31 +22,41 @@ const useStyles = makeStyles((theme) => ({
 
 const OneGroup = (props) => {
   const classes = useStyles();
-  const { id } = useParams()
-  const { group, setGroup } = props
-  const [value, setValue] = useState("scoring");
+  const { id } = useParams();
+  const { group, setGroup } = props;
+  const [category, setCategory] = useState("scoring");
   const [roundsTimeframe, setRoundsTimeframe] = useState("last30Days");
-  const [memberOrder, setMemberOrder] = useState([])
+  const [members, setMembers] = useState([])
+  const [memberOrder, setMemberOrder] = useState([]);
   const [loading, setLoading] = useState(false);
-
 
   useEffect(() => {
     const fetchGroup = async () => {
-      const newGroup = await getGroup(id)
-      setGroup(newGroup)
-      setMemberOrder(newGroup.members.slice())
-    }
-    fetchGroup()
-  }, [id])
+      const newGroup = await getGroup(id);
+      setGroup(newGroup);
+      setMembers(newGroup.members.slice())
+      setMemberOrder(newGroup.members.slice().sort((a, b) => {
+        return a[roundsTimeframe][category] - b[roundsTimeframe][category]
+      }))
+    };
+    fetchGroup();
+  }, [id]);
 
   useEffect(() => {
-    setMemberOrder((prevState) => {
-      prevState.sort((a, b) => {
-        return a[roundsTimeframe][value] - b[roundsTimeframe][value]
-      })
-      return prevState
+    setMemberOrder(() => {
+      let order = []
+      if (category === "driving" || category === "greens") {
+        order = members.slice().sort((a, b) => {
+          return b[roundsTimeframe][category] - a[roundsTimeframe][category];
+        });
+      } else {
+       order = members.slice().sort((a, b) => {
+          return a[roundsTimeframe][category] - b[roundsTimeframe][category];
+        });
+      }
+      return order
     })
-  }, [value, roundsTimeframe])
+  }, [category, roundsTimeframe]);
 
   const handleFilter = (type) => {
     switch (type) {
@@ -55,27 +66,31 @@ const OneGroup = (props) => {
       case "last60Days":
         setRoundsTimeframe("last60Days");
         break;
-       case "last90Days":
+      case "last90Days":
         setRoundsTimeframe("last90Days");
         break;
-       case "last6Months":
+      case "last6Months":
         setRoundsTimeframe("last6Months");
         break;
     }
   };
 
   const handleChange = (event, newValue) => {
-    setValue(newValue);
+    setCategory(newValue);
   };
 
   const groupMemberJSX = memberOrder?.map((member) => (
-    <GroupMember member={member} category={value} roundsTimeframe={roundsTimeframe}/>
-  ))
-  
+    <GroupMember
+      member={member}
+      category={category}
+      roundsTimeframe={roundsTimeframe}
+    />
+  ));
+
   return (
     <div className="group-container">
       <div className="app-bar-">
-        <TabContext value={value}>
+        <TabContext value={category}>
           <AppBar position="static" style={{ marginTop: "-5px" }}>
             <Tabs
               onChange={handleChange}
@@ -100,11 +115,11 @@ const OneGroup = (props) => {
         </TabContext>
       </div>
 
-        <FilterGroup handleFilter={handleFilter}/>
+      <FilterGroup handleFilter={handleFilter} roundsTimeframe={roundsTimeframe}/>
 
       <div>{groupMemberJSX}</div>
     </div>
-  )
-}
+  );
+};
 
-export default OneGroup
+export default OneGroup;

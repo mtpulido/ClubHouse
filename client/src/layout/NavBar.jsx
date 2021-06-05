@@ -76,11 +76,17 @@ const NavBar = (props) => {
   const groupJSX = groups?.map((group, index) => (
     <div className="group-menu" onClick={() => handleGroupOpen(group._id)}>
       <div className="avatar">
+      <Badge
+              color="primary"
+              badgeContent={group?.requests?.length}
+              classes={{ badge: classes.customBadge }}
+            >
     <Avatar
               src={`/uploads/groups/${group?.avatar}`}
               alt={group?.name?.toUpperCase()}
         className={classes.large}
-        />
+          />
+            </Badge>
         </div>
     <div className="group-name">{group.name}</div>
     </div>

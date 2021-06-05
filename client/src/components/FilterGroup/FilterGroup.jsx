@@ -26,17 +26,18 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const FilterGroup = (props) => {
-  const [query, setQuery] = useState("last30Days");
+  // const [query, setQuery] = useState("last30Days");
   const classes = useStyles();
 
   useEffect(() => {
-      props.handleFilter(query)
+      props.handleFilter("last30Days")
   
-  }, [query, props.group])
+  }, [])
 
   const onChange = (e) => {
+    props.handleFilter(e.target.value)
     // props.setLoading(true)
-    setQuery(e.target.value)
+    // setQuery(e.target.value)
     // setTimeout(() => {
     //   props.setLoading(false)
     // }, (Math.random() * 1000) + 500)
@@ -47,7 +48,7 @@ const FilterGroup = (props) => {
       <div><Select
         labelId="demo-simple-select-label"
         id="demo-simple-select"
-        value={query}
+        value={props.roundsTimeframe}
         onChange={onChange}
         style={{ width: "125px", height: "45px", marginTop: "10px" }}
         className={classes.select}
