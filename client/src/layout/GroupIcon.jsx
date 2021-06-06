@@ -91,9 +91,9 @@ const GroupMenu = (props) => {
             </Badge>
             <IconButton
               // edge="start"
-              color="inherit"
+              color="primary"
               aria-label="settings"
-              // onClick={(e) => setOpen((curr) => !curr)}
+              onClick={() => history.push(`/group/settings/${group?._id}`)}
             >
               <SettingsIcon fontSize="large" color="primary" />
             </IconButton>

@@ -3,6 +3,7 @@ import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import { useState, useEffect } from "react";
 import TextField from "@material-ui/core/TextField";
+import "./newGroup.css"
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -81,6 +82,7 @@ const NewGroup = (props) => {
       <form
         enctype="multipart/form-data"
         onSubmit={handleSubmit}
+        className="create-group-form"
       >
       <input
         accept="image/*"
@@ -95,9 +97,9 @@ const NewGroup = (props) => {
           Choose New Photo
         </Button>
       </label>
-      <div>{newGroup.avatar.name}</div>
+        {newGroup?.avatar ? <div style={{ marginBottom: "5px", alignSelf: "center" }}>{newGroup?.avatar?.name}</div> : null}
 
-      <div className="text-field-stepper">
+      <div className="text-field-stepper" style={{alignSelf: "center", paddingRight: "52px"}}>
         <TextField
           label="Group Name*"
           id="Group Name"
@@ -118,6 +120,7 @@ const NewGroup = (props) => {
           type="submit"
           // size="large"
           className={classes.root}
+          style={{width: "250px"}}
         >
           Submit
         </Button>

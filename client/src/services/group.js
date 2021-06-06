@@ -5,7 +5,6 @@ export const postGroup = async (groupData) => {
     const response = await api.post('/groups/add-group', groupData);
     return response.data;
   } catch (error) {
-    // throw Object.values(error.response.data.errors)
     throw error
   }
 }
@@ -42,7 +41,15 @@ export const adminResponse = async (id, data) => {
     const response = await api.put(`/groups/edit-requests/${id}`, data)
     return response.data
   } catch (error) {
-    console.log(error)
+    throw error
+  }
+}
+
+export const editGroupSettings = async (id, data) => {
+  try {
+    const response = await api.put(`/groups/edit-group-settings/${id}`, data)
+    return response.data
+  } catch (error) {
     throw error
   }
 }

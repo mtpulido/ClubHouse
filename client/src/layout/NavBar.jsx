@@ -13,14 +13,14 @@ import { useLocation, useHistory } from "react-router-dom";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import Avatar from "@material-ui/core/Avatar";
 import SettingsIcon from "@material-ui/icons/Settings";
-import DashboardIcon from '@material-ui/icons/Dashboard';
-import GroupIcon from '@material-ui/icons/Group';
-import GroupAddIcon from '@material-ui/icons/GroupAdd';
-import CreateIcon from '@material-ui/icons/Create';
-import SearchIcon from '@material-ui/icons/Search';
-import { useState, useEffect } from "react"
-import GroupMenu from "./GroupIcon"
-import Badge from '@material-ui/core/Badge';
+import DashboardIcon from "@material-ui/icons/Dashboard";
+import GroupIcon from "@material-ui/icons/Group";
+import GroupAddIcon from "@material-ui/icons/GroupAdd";
+import CreateIcon from "@material-ui/icons/Create";
+import SearchIcon from "@material-ui/icons/Search";
+import { useState, useEffect } from "react";
+import GroupMenu from "./GroupIcon";
+import Badge from "@material-ui/core/Badge";
 
 const useStyles = makeStyles({
   root: {
@@ -40,8 +40,8 @@ const useStyles = makeStyles({
   customBadge: {
     backgroundColor: "#b82828",
     color: "white",
-    marginTop: "3px"
-  }
+    marginTop: "3px",
+  },
 });
 
 const NavBar = (props) => {
@@ -49,17 +49,17 @@ const NavBar = (props) => {
   const classes = useStyles();
   const { pathname } = useLocation();
   const history = useHistory();
-  const [groups, setGroups] = useState([])
-  const [openGroupSettings, setOpenGroupSettings] = useState(false)
+  const [groups, setGroups] = useState([]);
+  const [openGroupSettings, setOpenGroupSettings] = useState(false);
 
   useEffect(() => {
     if (currentUser) {
-      setGroups(currentUser.groups)
+      setGroups(currentUser.groups);
     }
     if (pathname.startsWith("/group/requests")) {
-      setOpenGroupSettings(false)
+      setOpenGroupSettings(false);
     }
-  }, [currentUser, pathname])
+  }, [currentUser, pathname]);
 
   const scrollToTop = () => {
     window.scrollTo({
@@ -67,30 +67,30 @@ const NavBar = (props) => {
       left: 0,
       behavior: "smooth",
     });
-  }
+  };
 
   const handleGroupOpen = (id) => {
-    history.push(`/group/${id}`)
-  }
+    history.push(`/group/${id}`);
+  };
 
   const groupJSX = groups?.map((group, index) => (
     <div className="group-menu" onClick={() => handleGroupOpen(group._id)}>
       <div className="avatar">
-      <Badge
-              color="primary"
-              badgeContent={group?.requests?.length}
-              classes={{ badge: classes.customBadge }}
-            >
-    <Avatar
-              src={`/uploads/groups/${group?.avatar}`}
-              alt={group?.name?.toUpperCase()}
-        className={classes.large}
+        <Badge
+          color="primary"
+          badgeContent={group?.requests?.length}
+          classes={{ badge: classes.customBadge }}
+        >
+          <Avatar
+            src={`/uploads/groups/${group?.avatar}`}
+            alt={group?.name?.toUpperCase()}
+            className={classes.large}
           />
-            </Badge>
-        </div>
-    <div className="group-name">{group.name}</div>
+        </Badge>
+      </div>
+      <div className="group-name">{group.name}</div>
     </div>
-  ))
+  ));
 
   return (
     <div className="nav-container">
@@ -124,25 +124,37 @@ const NavBar = (props) => {
               <span onClick={scrollToTop}>ClubHouse</span>
               <GolfCourseIcon />
             </Typography>
-            {pathname.startsWith("/group") && (pathname !== "/group/new/group") && (pathname !== "/group/find/group") && (!pathname.startsWith("/group/requests"))? (
+            {pathname.startsWith("/group") &&
+            pathname !== "/group/new/group" &&
+            pathname !== "/group/find/group" &&
+            !pathname.startsWith("/group/requests") &&
+            !pathname.startsWith("/group/settings") ? (
               <div className="group-button-nav">
-              <IconButton
-                edge="start"
-                color="inherit"
-                aria-label="menu"
-                onClick={(e) => setOpenGroupSettings((curr) => !curr)}
+                <IconButton
+                  edge="start"
+                  color="inherit"
+                  aria-label="menu"
+                  onClick={(e) => setOpenGroupSettings((curr) => !curr)}
                 >
-                    <Badge badgeContent={group?.requests?.length}  classes={{ badge: classes.customBadge }}>
+                  <Badge
+                    badgeContent={group?.requests?.length}
+                    classes={{ badge: classes.customBadge }}
+                  >
                     <GroupIcon fontSize="large" color="primary" />
-                    </Badge>
+                  </Badge>
                 </IconButton>
-                </div>
+              </div>
             ) : null}
           </Toolbar>
         </AppBar>
       </div>
 
-      <GroupMenu open={openGroupSettings} group={group} setOpen={setOpenGroupSettings} currentUser={currentUser}/>
+      <GroupMenu
+        open={openGroupSettings}
+        group={group}
+        setOpen={setOpenGroupSettings}
+        currentUser={currentUser}
+      />
 
       <div className={open ? "burger-open" : "burger-closed"}>
         <div className="menu-header">
@@ -167,53 +179,71 @@ const NavBar = (props) => {
             <div className="menu-display-name">{currentUser?.displayName}</div>
           </div>
           <div className="menu-rounds">
-            <CreateIcon fontSize="small"/> {currentUser?.recentRounds?.length} Posted Rounds</div>
+            <CreateIcon fontSize="small" /> {currentUser?.recentRounds?.length}{" "}
+            Posted Rounds
+          </div>
         </div>
         <div className="menu-links">
-        <Button
-        className={classes.button}
-            startIcon={<DashboardIcon style={{ height: "28px", width: "28px" }}/>}
+          <Button
+            className={classes.button}
+            startIcon={
+              <DashboardIcon style={{ height: "28px", width: "28px" }} />
+            }
             style={{ marginBottom: "10px", fontSize: "18px" }}
-            onClick={(e) => setTimeout(() => history.push("/user/dashboard"), 120)}
-      >
+            onClick={(e) =>
+              setTimeout(() => history.push("/user/dashboard"), 120)
+            }
+          >
             Dashboard
-      </Button>
-      <Button
-        className={classes.button}
-            startIcon={<GroupIcon style={{ height: "28px", width: "28px" }}/>}
-            style={{ marginBottom: "10px", fontSize: "18px"}}
-      >
+          </Button>
+          <Button
+            className={classes.button}
+            startIcon={<GroupIcon style={{ height: "28px", width: "28px" }} />}
+            style={{ marginBottom: "10px", fontSize: "18px" }}
+          >
             Groups
-      </Button>
+          </Button>
           <div className="menu-groups">{groupJSX}</div>
 
           <Button
-        className={classes.button}
-            startIcon={<SearchIcon style={{ height: "28px", width: "28px" }}/>}
+            className={classes.button}
+            startIcon={<SearchIcon style={{ height: "28px", width: "28px" }} />}
             style={{ marginBottom: "10px", fontSize: "18px" }}
-            onClick={(e) => setTimeout(() => history.push("/group/find/group"), 120)}
-      >
+            onClick={(e) =>
+              setTimeout(() => history.push("/group/find/group"), 120)
+            }
+          >
             Find Group
-      </Button>
+          </Button>
           <Button
-        className={classes.button}
-            startIcon={<GroupAddIcon style={{ height: "28px", width: "28px" }}/>}
+            className={classes.button}
+            startIcon={
+              <GroupAddIcon style={{ height: "28px", width: "28px" }} />
+            }
             style={{ marginBottom: "10px", fontSize: "18px" }}
-            onClick={() => setTimeout(() => history.push("/group/new/group"), 120)}
-      >
+            onClick={() =>
+              setTimeout(() => history.push("/group/new/group"), 120)
+            }
+          >
             New Group
-      </Button>
-      <Button
-        className={classes.button}
-            startIcon={<SettingsIcon style={{ height: "28px", width: "28px" }}/>}
-            style={{ marginBottom: "10px", fontSize: "18px"}}
-      >
+          </Button>
+          <Button
+            className={classes.button}
+            startIcon={
+              <SettingsIcon style={{ height: "28px", width: "28px" }} />
+            }
+            style={{ marginBottom: "10px", fontSize: "18px" }}
+          >
             Settings
-      </Button>
+          </Button>
         </div>
-      </div> 
+      </div>
 
-      <div className={open || openGroupSettings ? "children-open" : "children-closed"}>
+      <div
+        className={
+          open || openGroupSettings ? "children-open" : "children-closed"
+        }
+      >
         {props.children}
       </div>
     </div>

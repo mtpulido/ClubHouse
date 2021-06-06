@@ -9,7 +9,6 @@ import { getUser } from "./services/user"
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
-  const history = useHistory();
   const [toggleFetch, setToggleFetch] = useState(false)
 
   useEffect(() => {

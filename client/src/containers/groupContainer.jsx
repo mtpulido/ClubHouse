@@ -1,12 +1,13 @@
 import NavBar from "../layout/NavBar";
 import { Switch, Route, useHistory } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { postGroup, getGroups, requestGroup, adminResponse } from "../services/group";
+import { postGroup, getGroups, requestGroup, adminResponse, editGroupSettings } from "../services/group";
 import React from "react";
 import NewGroup from "../screens/newGroup/newGroup";
 import OneGroup from "../screens/group/Group";
 import FindGroup from "../screens/findGroup/FindGroup";
 import GroupRequests from "../screens/groupRequests/GroupRequests"
+import GroupSettings from "../screens/groupSettings/GroupSettings"
 
 const GroupContainer = (props) => {
   const { currentUser, setCurrentUser, setToggleFetch2 } = props;
@@ -58,6 +59,15 @@ const GroupContainer = (props) => {
     }
   }
 
+  const handleEditGroupSettings = async (id, data) => {
+    try {
+      const group = await editGroupSettings(id, data)
+      setGroup(group)
+    } catch (error) {
+      throw error
+    }
+  }
+
   return (
     <>
       <Switch>
@@ -78,6 +88,10 @@ const GroupContainer = (props) => {
           </Route>
           <Route exact path="/group/requests/:id">
             <GroupRequests group={group} handleAdminResponse={handleAdminResponse} />
+          </Route>
+
+          <Route exact path="/group/settings/:id">
+            <GroupSettings group={group} handleEditGroupSettings={handleEditGroupSettings} />
           </Route>
 
           <Route exact path="/group/:id">

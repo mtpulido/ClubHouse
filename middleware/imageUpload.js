@@ -22,12 +22,12 @@ const uploadPhoto = upload.single("avatar");
 const resizeUserPhoto = (req, res, next) => {
   if (!req.file) return next();
 
-  req.file.filename = `user-${res.locals.user._id}-${Date.now()}.jpeg`
+  req.file.filename = `user-${res.locals.user._id}.jpeg`
 
   sharp(req.file.buffer)
-    .resize(300, 300, { fit: "inside" })
+    .resize(100, 100, { fit: "inside" })
     .toFormat("jpeg")
-    .jpeg({ quality: 80 })
+    .jpeg({ quality: 85 })
     .toFile(`./client/public/uploads/users/${req.file.filename}`)
   
   next()
@@ -35,10 +35,14 @@ const resizeUserPhoto = (req, res, next) => {
 
 const resizeGroupPhoto = (req, res, next) => {
   if (!req.file) return next();
-  req.file.filename = `group-${res.locals.authorizedUser._id}-${Date.now()}.jpeg`
+  if (!req.params.id) {
+    req.file.filename = `group-${res.locals.authorizedUser._id}-${Date.now()}.jpeg`
+  } else {
+    req.file.filename = `group-${req.params.id}.jpeg`
+  }
 
   sharp(req.file.buffer)
-    .resize(300, 300, { fit: "inside" })
+    .resize(100, 100, { fit: "inside" })
     .toFormat("jpeg")
     .jpeg({ quality: 85 })
     .toFile(`./client/public/uploads/groups/${req.file.filename}`)
@@ -50,5 +54,4 @@ module.exports = {
   uploadPhoto,
   resizeUserPhoto,
   resizeGroupPhoto
-  
 }

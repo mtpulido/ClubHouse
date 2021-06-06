@@ -10,7 +10,6 @@ import Tabs from "@material-ui/lab/TabList";
 import AppBar from "@material-ui/core/AppBar";
 import { makeStyles } from "@material-ui/core/styles";
 import "./Group.css";
-import { sortGroupMembers } from "../../utils/sort"
 import CircularProgress from "@material-ui/core/CircularProgress";
 
 const useStyles = makeStyles((theme) => ({
@@ -32,6 +31,10 @@ const OneGroup = (props) => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+    });
     const fetchGroup = async () => {
       const newGroup = await getGroup(id);
       setGroup(newGroup);
