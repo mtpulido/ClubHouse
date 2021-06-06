@@ -7,6 +7,12 @@ import "./FindGroup.css";
 import Button from "@material-ui/core/Button";
 import { useState, useEffect } from "react";
 import Avatar from "@material-ui/core/Avatar";
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 const useStyles = makeStyles({
   root: {
@@ -38,6 +44,7 @@ const FindGroup = (props) => {
   const [formData, setFormData] = useState({
     name: "",
   });
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     if (formData.name) {
@@ -73,6 +80,14 @@ const FindGroup = (props) => {
     return isRequested
   }
 
+  const onJoinClick = (groupId) => {
+    handleRequestGroup(groupId)
+    setOpen(true)
+    setTimeout(() => {
+      setOpen(false)
+    }, 3200)
+  }
+
   const groupsJSX = findGroup?.map((group) => (
     <div className="searched-group-container">
       <div className="avatar">
@@ -92,7 +107,7 @@ const FindGroup = (props) => {
             variant="outlined"
             color="primary"
             size="small"
-            onClick={() => handleRequestGroup(group._id)}
+            onClick={() => onJoinClick(group._id)}
             disabled={checkIfRequested(group)}
           >
             Join
@@ -104,6 +119,11 @@ const FindGroup = (props) => {
 
   return (
     <div className="find-group-container">
+      <Snackbar open={open}>
+        <Alert severity="success" style={{position: "fixed", top: "0", width: "90vw", marginTop: "3px", display: "flex", justifyContent: "center"}}>
+          Request Sent!
+        </Alert>
+      </Snackbar>
       <form onSubmit={handleSubmit}>
         <div className="search-bar-container">
           <TextField

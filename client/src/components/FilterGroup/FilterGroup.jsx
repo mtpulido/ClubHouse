@@ -35,12 +35,11 @@ const FilterGroup = (props) => {
   }, [])
 
   const onChange = (e) => {
+    props.setLoading(true)
     props.handleFilter(e.target.value)
-    // props.setLoading(true)
-    // setQuery(e.target.value)
-    // setTimeout(() => {
-    //   props.setLoading(false)
-    // }, (Math.random() * 1000) + 500)
+    setTimeout(() => {
+      props.setLoading(false)
+    }, (Math.random() * 1000) + 500)
   }
   return (
     <div className="filter-container-group">

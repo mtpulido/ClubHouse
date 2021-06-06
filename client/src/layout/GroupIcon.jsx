@@ -53,7 +53,7 @@ const GroupMenu = (props) => {
           style={{ fill: "gold", alignSelf: "flex-start", marginTop: "3px", marginRight:"-24px" }}
         />
       ) : null}
-      <div className="members-name">{member.displayName}</div>
+      <div className="members-name">{member?.displayName}</div>
     </div>
   ));
 

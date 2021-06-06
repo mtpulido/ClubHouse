@@ -7,6 +7,12 @@ import "./GroupRequests.css"
 import AddBoxIcon from '@material-ui/icons/AddBox';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import IconButton from "@material-ui/core/IconButton";
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 const useStyles = makeStyles({
   large: {
@@ -18,6 +24,7 @@ const useStyles = makeStyles({
 const GroupRequests = (props) => {
   const classes = useStyles()
   const { group, handleAdminResponse } = props
+  const [open, setOpen] = useState(false);
 
   const handleAccept = (id) => {
     const data = {
@@ -25,6 +32,10 @@ const GroupRequests = (props) => {
       decision: "accept"
     }
     handleAdminResponse(group?._id, data)
+    setOpen(true)
+    setTimeout(() => {
+      setOpen(false)
+    }, 2000)
   }
   
   const handleReject = (id) => {
@@ -71,7 +82,13 @@ const GroupRequests = (props) => {
 
   return (
     <div className="group-request-container">
-      {requestsJSX}
+          <Snackbar open={open}>
+        <Alert severity="success" style={{position: "fixed", top: "0", width: "90vw", marginTop: "3px", display: "flex", justifyContent: "center"}}>
+          New Member Accepted!
+        </Alert>
+      </Snackbar>
+      <div className="requests-label">Requests:</div>
+      {group?.requests?.length > 0 ? <div>{ requestsJSX }</div> : <div className="leaderboard-name" style={{ padding: "5px 0 0 20px", color: "#b6b6b6" }}>- No open requests</div>}
     </div>
   )
 }

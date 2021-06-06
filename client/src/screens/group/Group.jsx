@@ -10,7 +10,8 @@ import Tabs from "@material-ui/lab/TabList";
 import AppBar from "@material-ui/core/AppBar";
 import { makeStyles } from "@material-ui/core/styles";
 import "./Group.css";
-import {sortGroupMembers} from "../../utils/sort"
+import { sortGroupMembers } from "../../utils/sort"
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -26,7 +27,7 @@ const OneGroup = (props) => {
   const { group, setGroup } = props;
   const [category, setCategory] = useState("scoring");
   const [roundsTimeframe, setRoundsTimeframe] = useState("last30Days");
-  const [members, setMembers] = useState([])
+  // const [members, setMembers] = useState([])
   const [memberOrder, setMemberOrder] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -34,7 +35,7 @@ const OneGroup = (props) => {
     const fetchGroup = async () => {
       const newGroup = await getGroup(id);
       setGroup(newGroup);
-      setMembers(newGroup.members.slice())
+      // setMembers(newGroup.members.slice())
       setMemberOrder(newGroup.members.slice().sort((a, b) => {
         return a[roundsTimeframe][category] - b[roundsTimeframe][category]
       }))
@@ -43,14 +44,14 @@ const OneGroup = (props) => {
   }, [id]);
 
   useEffect(() => {
-    setMemberOrder(() => {
+    setMemberOrder((prevState) => {
       let order = []
       if (category === "driving" || category === "greens") {
-        order = members.slice().sort((a, b) => {
+        order = prevState.slice().sort((a, b) => {
           return b[roundsTimeframe][category] - a[roundsTimeframe][category];
         });
       } else {
-       order = members.slice().sort((a, b) => {
+       order = prevState.slice().sort((a, b) => {
           return a[roundsTimeframe][category] - b[roundsTimeframe][category];
         });
       }
@@ -115,9 +116,14 @@ const OneGroup = (props) => {
         </TabContext>
       </div>
 
-      <FilterGroup handleFilter={handleFilter} roundsTimeframe={roundsTimeframe}/>
-
-      <div>{groupMemberJSX}</div>
+      <FilterGroup handleFilter={handleFilter} roundsTimeframe={roundsTimeframe} setLoading={setLoading}/>
+      {loading ? (
+        <div className="loading-container">
+          <CircularProgress color="primary" />
+        </div>
+      ) : (
+        <div>{groupMemberJSX}</div>
+      )}
     </div>
   );
 };
