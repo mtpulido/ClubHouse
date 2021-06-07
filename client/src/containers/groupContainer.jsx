@@ -3,11 +3,11 @@ import { Switch, Route, useHistory } from "react-router-dom";
 import { useState } from "react";
 import { postGroup, getGroups, requestGroup, adminResponse, editGroupSettings } from "../services/group";
 import React from "react";
-import NewGroup from "../screens/newGroup/NewGroup";
 import OneGroup from "../screens/group/Group";
 import FindGroup from "../screens/findGroup/FindGroup";
 import GroupRequests from "../screens/groupRequests/GroupRequests"
 import GroupSettings from "../screens/groupSettings/GroupSettings"
+import CreateGroup from "../screens/createGroup/CreateGroup"
 
 const GroupContainer = (props) => {
   const { currentUser, setCurrentUser, setToggleFetch2 } = props;
@@ -82,7 +82,7 @@ const GroupContainer = (props) => {
       <Switch>
         <NavBar currentUser={currentUser} group={group}>
           <Route exact path="/group/new/group">
-            <NewGroup handlePostGroup={handlePostGroup} entryError={entryError} currentUser={currentUser}/>
+            <CreateGroup handlePostGroup={handlePostGroup} entryError={entryError} currentUser={currentUser}/>
           </Route>
 
           <Route exact path="/group/find/group">

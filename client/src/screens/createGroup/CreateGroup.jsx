@@ -3,7 +3,7 @@ import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import { useState, useEffect } from "react";
 import TextField from "@material-ui/core/TextField";
-import "./newGroup.css"
+import "./CreateGroup.css"
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,7 +35,7 @@ const useFormStyles = makeStyles((theme) => ({
   },
 }));
 
-const NewGroup = (props) => {
+const CreateGroup = (props) => {
   const classes = useStyles();
   const formClasses = useFormStyles();
   const [newGroup, setNewGroup] = useState({
@@ -133,4 +133,4 @@ const NewGroup = (props) => {
   );
 };
 
-export default NewGroup;
+export default CreateGroup;
