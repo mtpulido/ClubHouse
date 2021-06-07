@@ -236,7 +236,7 @@ const NavBar = (props) => {
             startIcon={
               <SettingsIcon style={{ height: "28px", width: "28px" }} />
             }
-            style={{ marginBottom: "60px", fontSize: "18px" }}
+            style={{ marginBottom: "90px", fontSize: "18px" }}
             onClick={(e) =>
               setTimeout(() => history.push("/user/settings"), 120)
             }
