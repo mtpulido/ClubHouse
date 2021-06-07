@@ -18,6 +18,9 @@ const GroupMember = (props) => {
     if (number < 1) {
       return (number * 100).toFixed(2) + "%";
     }
+    if (isNaN(number)) {
+      number = "--"
+    }
     return number;
   };
 
@@ -34,7 +37,7 @@ const GroupMember = (props) => {
         <div className="leaderboard-name">{member?.displayName}</div>
       </div>
       <div className="leaderboard-number">
-        {member?.[roundsTimeframe]?.[category] ? handlePercent(member?.[roundsTimeframe]?.[category]) : null}
+        {handlePercent(member?.[roundsTimeframe]?.[category])}
       </div>
     </div>
   );
