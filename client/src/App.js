@@ -3,8 +3,8 @@ import { useState, useEffect } from "react";
 import { Route, Switch, useHistory } from "react-router-dom";
 import { signOut, verifyUser } from "./services/auth";
 import LandingContainer from "./containers/LandingContainer"
-import UserContainer from "./containers/UserContainer"
-import GroupContainer from "./containers/GroupContainer"
+import UserContainer from "./containers/userContainer"
+import GroupContainer from "./containers/groupContainer"
 import { getUser } from "./services/user"
 
 function App() {
