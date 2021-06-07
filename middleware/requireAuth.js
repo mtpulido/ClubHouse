@@ -1,14 +1,14 @@
 const jwt = require("jsonwebtoken");
 const Group = require("../models/group");
 const User = require("../models/user");
-const { tokenKey } = require('../dotenv')
-const dotenv = require('dotenv');
-dotenv.config();
+
+
+const secretKey = process.env.TOKEN_KEY
 
 const checkAuthentication = async (req, res, next) => {
   const token = req.headers.authorization.split(" ")[1];
   if (token) {
-    jwt.verify(token, tokenKey, async (err, decodedToken) => {
+    jwt.verify(token, secretKey, async (err, decodedToken) => {
       if (err) {
         return res.status(403).json({ error: "Must be logged in" });
       } else {
@@ -25,7 +25,7 @@ const checkAuthentication = async (req, res, next) => {
 const adminAuthorization = async (req, res, next) => {
   const token = req.headers.authorization.split(" ")[1];
   if (token) {
-    jwt.verify(token, tokenKey, async (err, decodedToken) => {
+    jwt.verify(token, secretKey, async (err, decodedToken) => {
       if (err) {
         return res.status(403).json({ error: "Must be logged in" });
       }
