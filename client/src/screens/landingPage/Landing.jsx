@@ -2,7 +2,6 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import "./Landing.css";
-import golfPhoto from "../../golfPhoto.png";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles({
@@ -30,7 +29,6 @@ const Landing = () => {
         <div className="landing-caption">
           Improve your game, beat your friends.
         </div>
-        <img src={golfPhoto} alt="golf course" />
         <Button
           variant="contained"
           color="primary"

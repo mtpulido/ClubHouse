@@ -1,6 +1,6 @@
 .landing-container {
   width: 280px;
-  min-height: 480px;
+  min-height: 250px;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
