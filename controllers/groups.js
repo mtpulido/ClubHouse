@@ -1,7 +1,6 @@
 const Group = require("../models/group");
 const db = require("../db/connection");
 const User = require("../models/user");
-const { request } = require("express");
 
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
 

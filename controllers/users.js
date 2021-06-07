@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 const User = require("../models/user");
 const db = require("../db/connection");
-const TOKEN_KEY = require("../secrets");
+const { tokenKey } = require('../dotenv')
 
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
@@ -49,7 +49,7 @@ const signUp = async (req, res) => {
       email: user.email,
       id: user._id,
     };
-    const token = jwt.sign(payload, TOKEN_KEY);
+    const token = jwt.sign(payload, tokenKey);
     res.status(201).json({ token });
   } catch (error) {
     const errors = handleErrors(error);
@@ -68,7 +68,7 @@ const signIn = async (req, res) => {
       id: user._id,
     };
 
-    const token = jwt.sign(payload, TOKEN_KEY);
+    const token = jwt.sign(payload, tokenKey);
     res.status(201).json({ token });
   } catch (error) {
     const errors = handleErrors(error);
@@ -79,7 +79,7 @@ const signIn = async (req, res) => {
 const verify = async (req, res) => {
   try {
     const token = req.headers.authorization.split(" ")[1];
-    const payload = jwt.verify(token, TOKEN_KEY);
+    const payload = jwt.verify(token, tokenKey);
     const user = await User.findOne({ email: payload.email });
     const newPayload = {
       displayName: user.displayName,
