@@ -8,8 +8,6 @@ db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
 const SECRET_KEY = process.env.TOKEN_KEY
 
-console.log(SECRET_KEY)
-
 const handleErrors = (err) => {
   let errors = {
     displayName: "",
@@ -54,7 +52,6 @@ const signUp = async (req, res) => {
       email: user.email,
       id: user._id,
     };
-    console.log("this is token key", SECRET_KEY)
     const token = jwt.sign(payload, SECRET_KEY);
     res.status(201).json({ token });
   } catch (error) {
