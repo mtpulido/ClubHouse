@@ -103,7 +103,7 @@ const GroupSettings = (props) => {
     <div className="settings-container">
       <Snackbar
         open={open}
-        anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+        anchorOrigin={{ vertical: "top", horizontal: "left" }}
       >
         <Alert
           severity="success"

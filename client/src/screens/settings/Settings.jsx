@@ -104,7 +104,7 @@ const Settings = (props) => {
     <div className="settings-container">
       <Snackbar
         open={snackBar}
-        anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+        anchorOrigin={{ vertical: "top", horizontal: "left" }}
       >
         <Alert
           severity="success"

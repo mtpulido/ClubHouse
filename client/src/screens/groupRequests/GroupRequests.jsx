@@ -82,7 +82,7 @@ const GroupRequests = (props) => {
     <div className="group-request-container">
       <Snackbar
         open={open}
-        anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+        anchorOrigin={{ vertical: "top", horizontal: "left" }}
       >
         <Alert
           severity="success"
