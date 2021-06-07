@@ -7,7 +7,7 @@ import StepLabel from "@material-ui/core/StepLabel";
 import StepContent from "@material-ui/core/StepContent";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
-import "./newRound.css";
+import "./CreateRound.css";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -57,7 +57,7 @@ const useFormStyles = makeStyles((theme) => ({
   },
 }));
 
-const NewRound = (props) => {
+const CreateRound = (props) => {
   const classes = useStyles();
   const iconClasses = useIconStyles();
   const formClasses = useFormStyles();
@@ -412,4 +412,4 @@ const NewRound = (props) => {
   );
 };
 
-export default NewRound;
+export default CreateRound;
