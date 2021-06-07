@@ -8,6 +8,8 @@ db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
 const SECRET_KEY = process.env.TOKEN_KEY
 
+console.log(SECRET_KEY)
+
 const handleErrors = (err) => {
   let errors = {
     displayName: "",
