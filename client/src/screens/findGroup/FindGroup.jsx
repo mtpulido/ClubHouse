@@ -47,6 +47,10 @@ const FindGroup = (props) => {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+    });
     if (formData.name) {
       handleGetGroups(formData);
     }
