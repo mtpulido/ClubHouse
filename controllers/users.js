@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 const User = require("../models/user");
 const db = require("../db/connection");
-const tokenKey  = require('../dotenv')
+const { tokenKey } = require('../dotenv')
 const dotenv = require('dotenv');
 dotenv.config();
 
@@ -50,7 +50,7 @@ const signUp = async (req, res) => {
       email: user.email,
       id: user._id,
     };
-    const token = jwt.sign(payload, { tokenKey });
+    const token = jwt.sign(payload, tokenKey);
     res.status(201).json({ token });
   } catch (error) {
     console.log(error)
