@@ -137,3 +137,21 @@
   top: 0;
   padding-right: 10px;
 }
+
+
+@media screen and (min-width: 768px) {
+  .nav-bar,
+  .nav-bar-open,
+  .children-open,
+  .children-closed {
+    max-width: 768px;
+    overflow-x: hidden;
+  }
+  .group-button-nav {
+    display: flex;
+    position: fixed;
+    left: 710px;
+    top: 0;
+    padding-right: 10px;
+  }
+}

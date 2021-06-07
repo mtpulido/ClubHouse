@@ -69,12 +69,12 @@ const FindGroup = (props) => {
     let isRequested = false
     group.requests.map((request) => {
       if (request.userId === currentUser._id) {
-        isRequested = true
+        return isRequested = true
       } 
     })
     group.members.map((member) => {
       if (member === currentUser._id) {
-        isRequested = true
+        return isRequested = true
       } 
     })
     return isRequested
@@ -119,11 +119,15 @@ const FindGroup = (props) => {
 
   return (
     <div className="find-group-container">
-      <Snackbar open={open}>
-        <Alert severity="success" style={{position: "fixed", top: "0", width: "90vw", marginTop: "3px", display: "flex", justifyContent: "center"}}>
+      <div className="snackbar-container">
+        <Snackbar open={open} anchorOrigin={{ vertical: "bottom", horizontal: "left" }}>
+        <Alert severity="success"
+          style={{ width: "275px", display: "flex", justifyContent: "center" }}
+        >
           Request Sent!
         </Alert>
-      </Snackbar>
+        </Snackbar>
+        </div>
       <form onSubmit={handleSubmit}>
         <div className="search-bar-container">
           <TextField
@@ -133,7 +137,7 @@ const FindGroup = (props) => {
             label="Find Group"
             placeholder="Enter Group name"
             className={classes.root}
-            style={{ width: "80vw" }}
+            style={{ width: "275px"}}
             value={formData.name}
             autoComplete="off"
             onChange={handleChange}
@@ -153,7 +157,7 @@ const FindGroup = (props) => {
           color="primary"
           type="submit"
           size="large"
-          style={{ width: "80vw", marginTop: "20px" }}
+          style={{ width: "275px", marginTop: "20px" }}
           className={classes.root}
         >
           Find Group

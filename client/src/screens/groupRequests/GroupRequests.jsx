@@ -1,6 +1,5 @@
 import React from 'react'
 import Avatar from "@material-ui/core/Avatar";
-import Button from "@material-ui/core/Button";
 import { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import "./GroupRequests.css"
@@ -82,8 +81,8 @@ const GroupRequests = (props) => {
 
   return (
     <div className="group-request-container">
-          <Snackbar open={open}>
-        <Alert severity="success" style={{position: "fixed", top: "0", width: "90vw", marginTop: "3px", display: "flex", justifyContent: "center"}}>
+          <Snackbar open={open} anchorOrigin={{ vertical: "bottom", horizontal: "left" }}>
+        <Alert severity="success" style={{ width: "275px", display: "flex", justifyContent: "center" }}>
           New Member Accepted!
         </Alert>
       </Snackbar>

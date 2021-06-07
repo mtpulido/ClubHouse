@@ -20,7 +20,7 @@ const DetailsRound = (props) => {
     if (currentUser) {
       setRound(currentUser.recentRounds[id]);
     }
-  }, [currentUser]);
+  }, [currentUser, id]);
 
   const convertDate = (roundDate) => {
     let date = new Date(roundDate);

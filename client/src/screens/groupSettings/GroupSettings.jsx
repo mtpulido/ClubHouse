@@ -4,8 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { useState, useEffect } from "react";
 import TextField from "@material-ui/core/TextField";
 import "./GroupSettings.css";
-import Avatar from "@material-ui/core/Avatar";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 import Switch from "@material-ui/core/Switch";
@@ -31,12 +30,12 @@ const useFormStyles = makeStyles((theme) => ({
     "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
       borderColor: "#E4E4E4",
       opacity: 0.4,
-      width: "250px",
+      // width: "250px",
     },
     "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline": {
       borderColor: "#4CAF50",
       opacity: 1,
-      width: "250px",
+      // width: "250px",
 
     },
     "& .MuiButton-label": {
@@ -49,7 +48,7 @@ const useFormStyles = makeStyles((theme) => ({
 const GroupSettings = (props) => {
   const classes = useStyles();
   const formClasses = useFormStyles();
-  const { group, handleEditGroupSettings } = props;
+  const { group, handleEditGroupSettings, open } = props;
   const [isOpen, setIsOpen] = useState(group?.isOpen);
   const [groupSettings, setGroupSettings] = useState({
     name: "",
@@ -57,9 +56,9 @@ const GroupSettings = (props) => {
   });
   const [disabled, setDisabled] = useState(true);
   const { id } = useParams();
-  const [open, setOpen] = useState(false);
 
   useEffect(() => {
+    props.setEntryError([])
     window.scrollTo({
       top: 0,
       left: 0,
@@ -99,31 +98,20 @@ const GroupSettings = (props) => {
     formData.append("isOpen", isOpen);
 
     handleEditGroupSettings(id, formData);
-    setOpen(true);
-    setTimeout(() => {
-      setOpen(false);
-    }, 2000);
   };
 
   return (
-    <div>
-      <Snackbar open={open}>
+    <div className="settings-container">
+      <Snackbar open={open} anchorOrigin={{ vertical: "bottom", horizontal: "left" }}>
         <Alert
           severity="success"
-          style={{
-            position: "fixed",
-            top: "0",
-            width: "90vw",
-            marginTop: "3px",
-            display: "flex",
-            justifyContent: "center",
-          }}
+          style={{ width: "275px", display: "flex", justifyContent: "center" }}
         >
           Group Succesfully Updated!
         </Alert>
       </Snackbar>
       <form
-        enctype="multipart/form-data"
+        encType="multipart/form-data"
         onSubmit={handleSubmit}
         className="update-group-form"
       >
@@ -143,7 +131,7 @@ const GroupSettings = (props) => {
           </label>
         </div>
           <div style={{ marginBottom: "5px", alignSelf: "center"}}>{groupSettings?.avatar?.name}</div>
-        <div className="text-field-stepper" style={{alignSelf: "center", paddingRight: "50px"}}>
+        <div className="text-field-stepper" style={{alignSelf: "center"}}>
           <TextField
             label="Group Name*"
             id="Group Name"
@@ -153,9 +141,10 @@ const GroupSettings = (props) => {
             value={groupSettings?.name}
             className={formClasses.root}
             onChange={handleChange}
+            style={{width: "275px"}}
             autoComplete="off"
-            // helperText={props.entryError[3]}
-            // error={props.entryError[3] ? true : false}
+            helperText={props.entryError}
+            error={props.entryError?.length > 0 ? true : false}
           />
           </div>
           <div style={{alignSelf: "center"}}>
@@ -179,7 +168,7 @@ const GroupSettings = (props) => {
           // size="large"
           className={classes.root}
           disabled={disabled}
-          style={{width: "250px"}}
+          style={{width: "275px"}}
         >
           Submit
         </Button>

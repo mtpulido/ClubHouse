@@ -4,7 +4,7 @@ const Schema = mongoose.Schema
 const Group = new Schema(
   {
     name: {
-      type: String, required: [true, "Groups must have a name"]
+      type: String, required: [true, "-Groups must have a name"]
     },
     avatar: {
       type: String,

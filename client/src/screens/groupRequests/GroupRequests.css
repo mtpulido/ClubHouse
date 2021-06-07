@@ -1,10 +1,18 @@
 .group-request-container {
   padding-top: 15px;
-
+  max-width: 100vw;
+  overflow-x: hidden;
 }
 
 .requests-label {
   font-size: 25px;
   font-weight: 500;
   padding-left: 20px;
+}
+
+@media screen and (min-width: 768px) {
+  .group-request-container {
+    max-width: 768px;
+    overflow-x: hidden;
+  }
 }

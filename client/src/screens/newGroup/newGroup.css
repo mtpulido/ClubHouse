@@ -7,3 +7,11 @@
   width: 100vw;
   margin-top: 15px
 }
+
+
+@media screen and (min-width: 768px) {
+  .create-group-form {
+    max-width: 768px;
+    overflow-x: hidden;
+  }
+}

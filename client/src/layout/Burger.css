@@ -92,3 +92,10 @@
   justify-content: space-between;
   max-height: 45px;
 }
+
+@media screen and (min-width: 768px) {
+  .group-burger-open {
+    left: 490px;
+    
+  }
+}

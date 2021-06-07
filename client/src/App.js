@@ -1,6 +1,6 @@
 import "./App.css";
 import { useState, useEffect } from "react";
-import { Route, useHistory, Switch } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import { signOut, verifyUser } from "./services/auth";
 import LandingContainer from "./containers/LandingContainer"
 import UserContainer from "./containers/UserContainer"

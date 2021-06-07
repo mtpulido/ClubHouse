@@ -1,13 +1,11 @@
-import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import "./NavBar.css";
 import CloseIcon from "@material-ui/icons/Close";
 import { makeStyles } from "@material-ui/core/styles";
-import { useLocation, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import Avatar from "@material-ui/core/Avatar";
 import SettingsIcon from "@material-ui/icons/Settings";
-import { useState, useEffect } from "react";
 import "./Burger.css";
 import StarIcon from "@material-ui/icons/Star";
 import Badge from "@material-ui/core/Badge";

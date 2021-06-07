@@ -37,3 +37,12 @@
   padding-right: 15px;
   margin-bottom: 10px;
 }
+
+@media screen and (min-width: 768px) {
+  .pie-chart,
+  .loading-container {
+    max-width: 768px;
+    overflow-x: hidden;
+    overflow-y: hidden;
+  }
+}

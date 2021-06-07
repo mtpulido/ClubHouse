@@ -21,12 +21,12 @@ const useFormStyles = makeStyles((theme) => ({
     "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
       borderColor: "#E4E4E4",
       opacity: 0.4,
-      width: "250px",
+      // width: "250px",
     },
     "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline": {
       borderColor: "#4CAF50",
       opacity: 1,
-      width: "250px",
+      // width: "250px",
     },
     "& .MuiButton-label": {
       color: "black",
@@ -78,9 +78,11 @@ const NewGroup = (props) => {
   }
   
   return (
-    <div>
+    <div style={{maxWidth: '100vw',
+      overflowX: 'hidden'
+    }}>
       <form
-        enctype="multipart/form-data"
+        encType="multipart/form-data"
         onSubmit={handleSubmit}
         className="create-group-form"
       >
@@ -94,12 +96,12 @@ const NewGroup = (props) => {
       />
       <label htmlFor="avatar">
         <Button variant="outlined" color="primary" component="span">
-          Choose New Photo
+          Choose Photo
         </Button>
       </label>
         {newGroup?.avatar ? <div style={{ marginBottom: "5px", alignSelf: "center" }}>{newGroup?.avatar?.name}</div> : null}
 
-      <div className="text-field-stepper" style={{alignSelf: "center", paddingRight: "52px"}}>
+      <div className="text-field-stepper" style={{alignSelf: "center"}}>
         <TextField
           label="Group Name*"
           id="Group Name"
@@ -107,11 +109,12 @@ const NewGroup = (props) => {
           placeholder="The Golfers"
           name="name"
           value={newGroup.name}
-          className={formClasses.root}
+            className={formClasses.root}
+            style={{ width: "275px" }}
           onChange={handleChange}
           autoComplete="off"
-          // helperText={props.entryError[3]}
-          // error={props.entryError[3] ? true : false}
+          helperText={props.entryError}
+          error={props.entryError?.length > 0 ? true : false}
         />
         </div>
         <Button
@@ -120,7 +123,7 @@ const NewGroup = (props) => {
           type="submit"
           // size="large"
           className={classes.root}
-          style={{width: "250px"}}
+          style={{width: "275px"}}
         >
           Submit
         </Button>
