@@ -52,6 +52,7 @@ const signUp = async (req, res) => {
     const token = jwt.sign(payload, tokenKey);
     res.status(201).json({ token });
   } catch (error) {
+    console.log(error)
     const errors = handleErrors(error);
     res.status(400).json({ errors });
   }
@@ -71,6 +72,7 @@ const signIn = async (req, res) => {
     const token = jwt.sign(payload, tokenKey);
     res.status(201).json({ token });
   } catch (error) {
+    console.log(errors)
     const errors = handleErrors(error);
     res.status(400).json({ errors });
   }

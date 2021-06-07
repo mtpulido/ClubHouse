@@ -3,7 +3,6 @@ const db = require("../db/connection");
 const User = require("../models/user");
 
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
-
 const handleErrors = (err) => {
   let errors = {};
 
