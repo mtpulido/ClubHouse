@@ -10,7 +10,6 @@ const Rounds = (props) => {
     <div className="one-round">
       <div className="round-row">
         <div className="round-course">{course}</div>
-        <div className="round-icon">🔥</div>
       </div>
       <div className="round-row">
         <div className="round-score">{score}</div>
