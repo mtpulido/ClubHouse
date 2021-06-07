@@ -1,0 +1,20 @@
+.filter-container-group{
+  display: flex;
+  justify-content: space-around;
+  width: 100vw;
+  align-items: flex-end;
+  margin-bottom: 20px;
+}
+
+.leaderboard-group {
+  font-size: 30px;
+  font-weight: 500;
+  margin-top: 10px;
+}
+
+@media screen and (min-width: 768px) {
+  .filter-container-group {
+    max-width: 768px;
+    overflow-x: hidden;
+  }
+}

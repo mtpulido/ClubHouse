@@ -1,0 +1,32 @@
+.one-round {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  min-height: 125px;
+  border-top: 1px solid rgba(193, 193, 193, 0.2);
+}
+
+.round-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 15px;
+}
+
+.round-course {
+  font-size: 20px;
+  max-width: 80%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.round-icon {
+  font-size: 22px;
+}
+
+.round-score {
+  font-size: 30px;
+  padding-left: 10px;
+
+}

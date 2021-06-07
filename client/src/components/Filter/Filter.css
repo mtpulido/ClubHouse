@@ -1,0 +1,13 @@
+.filter-container{
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+  padding-left: 180px;
+}
+
+@media screen and (min-width: 768px) {
+  .filter-container {
+    max-width: 768px;
+    overflow-x: hidden;
+  }
+}

@@ -1,0 +1,94 @@
+.details-date {
+  padding:0 15px;
+  font-size: 15px;
+  margin: 12px 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.details-info-container {
+  display: flex;  
+  flex-direction: column;
+}
+
+.info-one, 
+.info-two {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 15px;
+  height: 55px;
+}
+
+.info-two {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.details-course {
+  font-size: 20px;
+  max-width: 80%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.details-score {
+  font-size: 35px;
+  font-weight: 500;
+}
+
+.details-par, 
+.details-holes {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+
+.details-longgame-container {
+  display: flex;
+  padding-left: 15px;
+  padding-top: 10px;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: flex-start;
+  max-width: 100vw;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.details-analysis {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 90vw;
+  overflow-x: hidden;
+}
+
+.details-fairways {
+  font-size: 20px;
+  font-weight: 500;
+  padding-right: 10px;
+  width: 175px;
+}
+
+.details-greens {
+  font-size: 20px;
+  font-weight: 500;
+  padding-left: 35px;
+  width: 175px;
+}
+
+.details-label {
+  font-size: 15px;
+  align-self: flex-start;
+}
+
+
+@media screen and (min-width: 768px) {
+  .details-longgame-container {
+    max-width: 768px;
+    overflow-x: hidden;
+  }
+  .details-analysis {
+    max-width: 90%
+  }
+}

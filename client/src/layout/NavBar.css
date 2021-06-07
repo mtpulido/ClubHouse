@@ -1,0 +1,157 @@
+.burger-closed {
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: -280px;
+  z-index: 600;
+  background-color: #1e2124;
+  width: 250;
+  transition: 0.45s;
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+}
+
+.burger-open {
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 600;
+  background-color: #1e2124;
+  width: 280px;
+  transition: 0.3s;
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  filter: drop-shadow(0 0 6px rgba(163, 163, 163, 0.4));
+}
+
+.nav-bar {
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  border-bottom: 1px solid rgb(158, 157, 157, .6);
+  transition: .35s;
+}
+
+.nav-bar-open {
+  position: sticky;
+  top: 0;
+  left: 0;
+  max-width: 100vw;
+  z-index: 10;
+  border-bottom: 1px solid rgb(158, 157, 157, .6);
+  transition: .25s;
+}
+
+.children-open {
+  background-color: #363b40;
+  min-height: 100vh;
+  transition: .25s;
+}
+
+.children-closed {
+  background-color: #1e2124;
+  min-height: 100vh;
+  transition: .35s;
+}
+
+
+.menu-header {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 15px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.menu-menu {
+  font-size: 25px;
+  align-self: center;
+  font-weight: 500;
+}
+
+.menu-user-icons {
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+  margin-top: 15px;
+}
+
+.menu-display-name {
+  padding-left: 5px;
+  font-size: 15px;
+  font-weight: 500;
+  display: flex;
+  align-items: flex-end;
+  height: 50px;
+}
+
+.menu-rounds {
+  padding-left: 15px;
+  margin: 10px 0 40px 0;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.menu-links {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-left: 15px;
+}
+
+.group-menu {
+  display: flex;
+  align-items: center;
+  max-width: 255px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-left: 15px;
+  height: 65px;
+}
+.group-menu:hover {
+  cursor: pointer;
+}
+
+.group-name {
+  padding-left: 5px;
+  font-size: 15px;
+  font-weight: 500;
+  margin-top: 25px;
+  white-space: nowrap;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+}
+
+.avatar {
+  filter: drop-shadow(0 0 1px rgba(163, 163, 163, .4));
+}
+
+.group-button-nav {
+  display: flex;
+  position: fixed;
+  right: 0;
+  top: 0;
+  padding-right: 10px;
+}
+
+
+@media screen and (min-width: 768px) {
+  .nav-bar,
+  .nav-bar-open,
+  .children-open,
+  .children-closed {
+    max-width: 768px;
+    overflow-x: hidden;
+  }
+  .group-button-nav {
+    display: flex;
+    position: fixed;
+    left: 710px;
+    top: 0;
+    padding-right: 10px;
+  }
+}
