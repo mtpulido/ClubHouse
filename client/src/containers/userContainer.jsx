@@ -8,8 +8,7 @@ import DetailsRound from "../screens/detailsRound/DetailsRound"
 import EditRound from "../screens/editRound/EditRound"
 import Settings from "../screens/settings/Settings"
 import { signOut } from "../services/auth";
-import NewRound from "../screens/NewRound/NewRound"
-
+import CreateRound from "../screens/createRound/CreateRound"
 
 const UserContainer = (props) => {
   const history = useHistory()
@@ -18,7 +17,6 @@ const UserContainer = (props) => {
   const [isError, setIsError] = useState(false)
   const [open, setOpen] = useState(false)
   const [snackBar, setSnackBar] = useState(false)
-  const [test, setTest] = useState("test")
 
 
 
@@ -82,7 +80,7 @@ const UserContainer = (props) => {
           </Route>
 
           <Route path="/user/new-round">
-            <NewRound handlePostRound={handlePostRound} entryError={entryError} isError={isError}/>
+            <CreateRound handlePostRound={handlePostRound} entryError={entryError} isError={isError}/>
           </Route>
 
           <Route exact path="/user/round/:id">
