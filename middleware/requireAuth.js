@@ -2,6 +2,8 @@ const jwt = require("jsonwebtoken");
 const Group = require("../models/group");
 const User = require("../models/user");
 const { tokenKey } = require('../dotenv')
+const dotenv = require('dotenv');
+dotenv.config();
 
 const checkAuthentication = async (req, res, next) => {
   const token = req.headers.authorization.split(" ")[1];
