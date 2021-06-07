@@ -34,7 +34,7 @@ const SignUp = (props) => {
 
   useEffect(() => {
     // props.setCredentialsError([]);
-  }, [])
+  }, []);
 
   const handleChangeSignUp = (event) => {
     const { name, value } = event.target;
@@ -74,7 +74,7 @@ const SignUp = (props) => {
           onChange={handleChangeSignUp}
           autoComplete="off"
           helperText={props.credentialsError[0]}
-          error={(props.credentialsError[0]) ? true : false}
+          error={props.credentialsError[0] ? true : false}
         />
         <TextField
           id="email"
@@ -87,7 +87,7 @@ const SignUp = (props) => {
           onChange={handleChangeSignUp}
           autoComplete="off"
           helperText={props.credentialsError[1]}
-          error={(props.credentialsError[1]) ? true : false}
+          error={props.credentialsError[1] ? true : false}
         />
         <TextField
           id="password"
@@ -100,7 +100,7 @@ const SignUp = (props) => {
           value={signUpCredentials.password}
           onChange={handleChangeSignUp}
           helperText={props.credentialsError[2]}
-          error={(props.credentialsError[2]) ? true : false}
+          error={props.credentialsError[2] ? true : false}
         />
         <TextField
           id="confirm password"
@@ -113,7 +113,7 @@ const SignUp = (props) => {
           value={confirmPassword}
           onChange={(event) => setConfirmPassword(event.target.value)}
           helperText={passwordError ? "-Passwords do not match" : ""}
-          error={(passwordError) ? true : false}
+          error={passwordError ? true : false}
         />
 
         <Button

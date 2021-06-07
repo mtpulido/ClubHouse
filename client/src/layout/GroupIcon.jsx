@@ -48,7 +48,12 @@ const GroupMenu = (props) => {
       </div>
       {member._id === group.admin.id ? (
         <StarIcon
-          style={{ fill: "gold", alignSelf: "flex-start", marginTop: "3px", marginRight:"-24px" }}
+          style={{
+            fill: "gold",
+            alignSelf: "flex-start",
+            marginTop: "3px",
+            marginRight: "-24px",
+          }}
         />
       ) : null}
       <div className="members-name">{member?.displayName}</div>
@@ -82,7 +87,7 @@ const GroupMenu = (props) => {
                 color="primary"
                 onClick={() => history.push(`/group/requests/${group?._id}`)}
                 size="small"
-                style={{height: "40px"}}
+                style={{ height: "40px" }}
               >
                 Requests
               </Button>

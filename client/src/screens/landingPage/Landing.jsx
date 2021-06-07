@@ -8,20 +8,20 @@ const useStyles = makeStyles({
   root: {
     "& .MuiButton-label": {
       color: "black",
-      fontSize: "16px"
-    }
+      fontSize: "16px",
+    },
   },
   root1: {
     "& .MuiButton-label": {
       color: "primary",
-      fontSize: "16px"
-    }
+      fontSize: "16px",
+    },
   },
-})
+});
 
 const Landing = () => {
-  const classes = useStyles()
-  const history = useHistory()
+  const classes = useStyles();
+  const history = useHistory();
   return (
     <div className="screen-container">
       <div className="landing-container">
@@ -40,16 +40,16 @@ const Landing = () => {
           Sign In
         </Button>
 
-          <Button
-            variant="outlined"
-            color="primary"
-            size="large"
-            fullWidth={true}
+        <Button
+          variant="outlined"
+          color="primary"
+          size="large"
+          fullWidth={true}
           className={classes.root1}
           onClick={(e) => setTimeout(() => history.push("/sign-up"), 190)}
-          >
-            Sign Up
-          </Button>
+        >
+          Sign Up
+        </Button>
       </div>
     </div>
   );

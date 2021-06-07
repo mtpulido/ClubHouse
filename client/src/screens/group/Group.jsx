@@ -39,27 +39,29 @@ const OneGroup = (props) => {
       const newGroup = await getGroup(id);
       setGroup(newGroup);
       // setMembers(newGroup.members.slice())
-      setMemberOrder(newGroup.members.slice().sort((a, b) => {
-        return a[roundsTimeframe][category] - b[roundsTimeframe][category]
-      }))
+      setMemberOrder(
+        newGroup.members.slice().sort((a, b) => {
+          return a[roundsTimeframe][category] - b[roundsTimeframe][category];
+        })
+      );
     };
     fetchGroup();
   }, [id]);
 
   useEffect(() => {
     setMemberOrder((prevState) => {
-      let order = []
+      let order = [];
       if (category === "driving" || category === "greens") {
         order = prevState.slice().sort((a, b) => {
           return b[roundsTimeframe][category] - a[roundsTimeframe][category];
         });
       } else {
-       order = prevState.slice().sort((a, b) => {
+        order = prevState.slice().sort((a, b) => {
           return a[roundsTimeframe][category] - b[roundsTimeframe][category];
         });
       }
-      return order
-    })
+      return order;
+    });
   }, [category, roundsTimeframe]);
 
   const handleFilter = (type) => {
@@ -119,7 +121,11 @@ const OneGroup = (props) => {
         </TabContext>
       </div>
 
-      <FilterGroup handleFilter={handleFilter} roundsTimeframe={roundsTimeframe} setLoading={setLoading}/>
+      <FilterGroup
+        handleFilter={handleFilter}
+        roundsTimeframe={roundsTimeframe}
+        setLoading={setLoading}
+      />
       {loading ? (
         <div className="loading-container">
           <CircularProgress color="primary" />

@@ -38,7 +38,7 @@ const SignIn = (props) => {
   };
 
   const handleSubmit = (event) => {
-    event.preventDefault()
+    event.preventDefault();
     props.setCredentialsError([]);
     props.handleSignIn(signInCredentials);
   };

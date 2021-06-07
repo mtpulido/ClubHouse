@@ -3,7 +3,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import "./Filter.css"
+import "./Filter.css";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -29,17 +29,17 @@ const Filter = (props) => {
 
   useEffect(() => {
     if (props.currentUser) {
-      props.handleFilter(query)
+      props.handleFilter(query);
     }
-  }, [query, props.currentUser])
+  }, [query, props.currentUser]);
 
   const onChange = (e) => {
-    props.setLoading(true)
-    setQuery(e.target.value)
+    props.setLoading(true);
+    setQuery(e.target.value);
     setTimeout(() => {
-      props.setLoading(false)
-    }, (Math.random() * 1000) + 500)
-  }
+      props.setLoading(false);
+    }, Math.random() * 1000 + 500);
+  };
   return (
     <div className="filter-container">
       <Select
@@ -58,7 +58,7 @@ const Filter = (props) => {
           style={{
             backgroundColor: "#303539",
             borderBottom: "1px solid rgba(193, 193, 193, 0.2)",
-            marginTop: "-10px"
+            marginTop: "-10px",
           }}
         >
           5 Rounds
@@ -104,7 +104,7 @@ const Filter = (props) => {
           style={{
             backgroundColor: "#303539",
             borderBottom: "1px solid rgba(193, 193, 193, 0.2)",
-            marginBottom: "-10px"
+            marginBottom: "-10px",
           }}
         >
           All Rounds

@@ -114,7 +114,11 @@ const Dashboard = (props) => {
         <Fab
           color="primary"
           aria-label="add"
-          disabled={props.open && props.currentUser?.displayName?.length > 0 ? true : false}
+          disabled={
+            props.open && props.currentUser?.displayName?.length > 0
+              ? true
+              : false
+          }
           onClick={(e) =>
             setTimeout(() => history.push("/user/new-round"), 120)
           }

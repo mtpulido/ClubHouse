@@ -77,7 +77,7 @@ const EditRound = (props) => {
     upAndDowns: currentUser?.recentRounds[id].upAndDowns,
     possibleUpAndDowns: currentUser?.recentRounds[id].possibleUpAndDowns,
     createdAt: currentUser?.recentRounds[id].createdAt,
-    _id: currentUser?.recentRounds[id]._id
+    _id: currentUser?.recentRounds[id]._id,
   });
 
   useEffect(() => {
@@ -85,7 +85,7 @@ const EditRound = (props) => {
       top: 0,
       left: 0,
     });
-  }, [])
+  }, []);
 
   const handleChangeRound = (event) => {
     const { name, value } = event.target;
@@ -400,7 +400,6 @@ const EditRound = (props) => {
           </Step>
           {props.isError ? (
             <Step key="4" className={classes.stepContent}>
-            
               <Button
                 onClick={(e) => setActiveStep(0)}
                 className={classes.button}
@@ -409,8 +408,8 @@ const EditRound = (props) => {
               >
                 Back
               </Button>
-          </Step>
-            ) : null}
+            </Step>
+          ) : null}
         </Stepper>
       </form>
     </div>

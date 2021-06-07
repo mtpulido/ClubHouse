@@ -1,11 +1,11 @@
-import React from 'react'
+import React from "react";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import { useState, useEffect } from "react";
 import TextField from "@material-ui/core/TextField";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
-import "./Settings.css"
+import "./Settings.css";
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -41,12 +41,17 @@ const useFormStyles = makeStyles((theme) => ({
   },
 }));
 
-
-
 const Settings = (props) => {
   const classes = useStyles();
   const formClasses = useFormStyles();
-  const { handleSignOut, currentUser, setEntryError, entryError, snackBar, handleEditSettings } = props
+  const {
+    handleSignOut,
+    currentUser,
+    setEntryError,
+    entryError,
+    snackBar,
+    handleEditSettings,
+  } = props;
   const [userSettings, setUserSettings] = useState({
     displayName: "",
     avatar: "",
@@ -54,7 +59,7 @@ const Settings = (props) => {
   const [disabled, setDisabled] = useState(true);
 
   useEffect(() => {
-    setEntryError([])
+    setEntryError([]);
     window.scrollTo({
       top: 0,
       left: 0,
@@ -92,80 +97,85 @@ const Settings = (props) => {
     formData.append("displayName", userSettings.displayName);
     formData.append("avatar", userSettings.avatar);
 
-    handleEditSettings(formData)
+    handleEditSettings(formData);
   };
 
   return (
     <div className="settings-container">
-    <Snackbar open={snackBar} anchorOrigin={{ vertical: "bottom", horizontal: "left" }}>
-      <Alert
-        severity="success"
-        style={{ width: "275px", display: "flex", justifyContent: "center" }}
+      <Snackbar
+        open={snackBar}
+        anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
       >
-        Settings Succesfully Updated!
-      </Alert>
-    </Snackbar>
-    <form
-      encType="multipart/form-data"
-      onSubmit={handleSubmit}
-      className="update-group-form"
-    >
-      <div style={{alignSelf: "center",}}>
-        <input
-          accept="image/*"
-          className={classes.input}
-          id="avatar"
-          name="avatar"
-          type="file"
-          onChange={handleChangePhoto}
-        />
-        <label htmlFor="avatar">
-          <Button variant="outlined" color="primary" component="span">
-            Choose New Photo
-          </Button>
-        </label>
-      </div>
-        <div style={{ marginBottom: "5px", alignSelf: "center"}}>{userSettings?.avatar?.name}</div>
-      <div className="text-field-stepper" style={{alignSelf: "center"}}>
-        <TextField
-          label="Display Name*"
-          id="Display Name"
-          variant="outlined"
-          placeholder="enter new name"
-          name="displayName"
-          value={userSettings?.displayName}
-          className={formClasses.root}
-          onChange={handleChange}
-          style={{width: "275px"}}
-          autoComplete="off"
-          helperText={entryError}
-          error={entryError?.length > 0 ? true : false}
-        />
+        <Alert
+          severity="success"
+          style={{ width: "275px", display: "flex", justifyContent: "center" }}
+        >
+          Settings Succesfully Updated!
+        </Alert>
+      </Snackbar>
+      <form
+        encType="multipart/form-data"
+        onSubmit={handleSubmit}
+        className="update-group-form"
+      >
+        <div style={{ alignSelf: "center" }}>
+          <input
+            accept="image/*"
+            className={classes.input}
+            id="avatar"
+            name="avatar"
+            type="file"
+            onChange={handleChangePhoto}
+          />
+          <label htmlFor="avatar">
+            <Button variant="outlined" color="primary" component="span">
+              Choose New Photo
+            </Button>
+          </label>
         </div>
-      <Button
-        variant="contained"
-        color="primary"
-        type="submit"
-        // size="large"
-        className={classes.root}
-        disabled={disabled}
-        style={{width: "275px"}}
-      >
-        Submit
-      </Button>
+        <div style={{ marginBottom: "5px", alignSelf: "center" }}>
+          {userSettings?.avatar?.name}
+        </div>
+        <div className="text-field-stepper" style={{ alignSelf: "center" }}>
+          <TextField
+            label="Display Name*"
+            id="Display Name"
+            variant="outlined"
+            placeholder="enter new name"
+            name="displayName"
+            value={userSettings?.displayName}
+            className={formClasses.root}
+            onChange={handleChange}
+            style={{ width: "275px" }}
+            autoComplete="off"
+            helperText={entryError}
+            error={entryError?.length > 0 ? true : false}
+          />
+        </div>
+        <Button
+          variant="contained"
+          color="primary"
+          type="submit"
+          // size="large"
+          className={classes.root}
+          disabled={disabled}
+          style={{ width: "275px" }}
+        >
+          Submit
+        </Button>
       </form>
       <div className="sign-out">
-    <Button
+        <Button
           variant="outlined"
           color="primary"
-        size="large"
-        onClick={() => handleSignOut() }
+          size="large"
+          onClick={() => handleSignOut()}
         >
           Sign Out
         </Button>
-        </div>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Settings
+export default Settings;

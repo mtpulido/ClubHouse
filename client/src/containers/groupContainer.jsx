@@ -1,13 +1,19 @@
 import NavBar from "../layout/NavBar";
 import { Switch, Route, useHistory } from "react-router-dom";
 import { useState } from "react";
-import { postGroup, getGroups, requestGroup, adminResponse, editGroupSettings } from "../services/group";
+import {
+  postGroup,
+  getGroups,
+  requestGroup,
+  adminResponse,
+  editGroupSettings,
+} from "../services/group";
 import React from "react";
 import OneGroup from "../screens/group/Group";
 import FindGroup from "../screens/findGroup/FindGroup";
-import GroupRequests from "../screens/groupRequests/GroupRequests"
-import GroupSettings from "../screens/groupSettings/GroupSettings"
-import CreateGroup from "../screens/createGroup/CreateGroup"
+import GroupRequests from "../screens/groupRequests/GroupRequests";
+import GroupSettings from "../screens/groupSettings/GroupSettings";
+import CreateGroup from "../screens/createGroup/CreateGroup";
 
 const GroupContainer = (props) => {
   const { currentUser, setCurrentUser, setToggleFetch2 } = props;
@@ -16,7 +22,7 @@ const GroupContainer = (props) => {
   const [group, setGroup] = useState({});
   const [findGroup, setFindGroup] = useState([]);
   const [toggleFetch, setToggleFetch] = useState(false);
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(false);
 
   const handlePostGroup = async (groupData) => {
     setEntryError([]);
@@ -24,8 +30,8 @@ const GroupContainer = (props) => {
       const updatedUser = await postGroup(groupData);
       setCurrentUser(updatedUser);
       history.push("/user/dashboard");
-      setToggleFetch2((curr) => !curr)
-      setEntryError([])
+      setToggleFetch2((curr) => !curr);
+      setEntryError([]);
     } catch (error) {
       setEntryError(error.response.data.errors.name);
     }
@@ -52,37 +58,40 @@ const GroupContainer = (props) => {
   };
 
   const handleAdminResponse = async (id, data) => {
-    
     try {
-      const group = await adminResponse(id, data)
-      setGroup(group)
+      const group = await adminResponse(id, data);
+      setGroup(group);
       // setToggleFetch((curr) => !curr);
     } catch (error) {
       throw error;
     }
-  }
+  };
 
   const handleEditGroupSettings = async (id, data) => {
-    setEntryError([])
+    setEntryError([]);
     try {
-      const group = await editGroupSettings(id, data)
-      setGroup(group)
-      setEntryError([])
+      const group = await editGroupSettings(id, data);
+      setGroup(group);
+      setEntryError([]);
       setOpen(true);
       setTimeout(() => {
         setOpen(false);
       }, 2000);
     } catch (error) {
-      setEntryError(error.response.data.errors.name)
+      setEntryError(error.response.data.errors.name);
     }
-  }
+  };
 
   return (
     <>
       <Switch>
         <NavBar currentUser={currentUser} group={group}>
           <Route exact path="/group/new/group">
-            <CreateGroup handlePostGroup={handlePostGroup} entryError={entryError} currentUser={currentUser}/>
+            <CreateGroup
+              handlePostGroup={handlePostGroup}
+              entryError={entryError}
+              currentUser={currentUser}
+            />
           </Route>
 
           <Route exact path="/group/find/group">
@@ -96,11 +105,20 @@ const GroupContainer = (props) => {
             />
           </Route>
           <Route exact path="/group/requests/:id">
-            <GroupRequests group={group} handleAdminResponse={handleAdminResponse} />
+            <GroupRequests
+              group={group}
+              handleAdminResponse={handleAdminResponse}
+            />
           </Route>
 
           <Route exact path="/group/settings/:id">
-            <GroupSettings group={group} handleEditGroupSettings={handleEditGroupSettings} setEntryError={setEntryError} entryError={entryError} open={open}/>
+            <GroupSettings
+              group={group}
+              handleEditGroupSettings={handleEditGroupSettings}
+              setEntryError={setEntryError}
+              entryError={entryError}
+              open={open}
+            />
           </Route>
 
           <Route exact path="/group/:id">

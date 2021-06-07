@@ -1,11 +1,11 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
-import "./Round.css"
-import{useHistory} from "react-router-dom"
+import "./Round.css";
+import { useHistory } from "react-router-dom";
 
 const Rounds = (props) => {
   const { id, score, course, open } = props;
-  const history = useHistory()
+  const history = useHistory();
   return (
     <div className="one-round">
       <div className="round-row">

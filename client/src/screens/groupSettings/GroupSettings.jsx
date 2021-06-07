@@ -36,7 +36,6 @@ const useFormStyles = makeStyles((theme) => ({
       borderColor: "#4CAF50",
       opacity: 1,
       // width: "250px",
-
     },
     "& .MuiButton-label": {
       color: "black",
@@ -58,7 +57,7 @@ const GroupSettings = (props) => {
   const { id } = useParams();
 
   useEffect(() => {
-    props.setEntryError([])
+    props.setEntryError([]);
     window.scrollTo({
       top: 0,
       left: 0,
@@ -102,7 +101,10 @@ const GroupSettings = (props) => {
 
   return (
     <div className="settings-container">
-      <Snackbar open={open} anchorOrigin={{ vertical: "bottom", horizontal: "left" }}>
+      <Snackbar
+        open={open}
+        anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+      >
         <Alert
           severity="success"
           style={{ width: "275px", display: "flex", justifyContent: "center" }}
@@ -115,7 +117,7 @@ const GroupSettings = (props) => {
         onSubmit={handleSubmit}
         className="update-group-form"
       >
-        <div style={{alignSelf: "center",}}>
+        <div style={{ alignSelf: "center" }}>
           <input
             accept="image/*"
             className={classes.input}
@@ -130,8 +132,10 @@ const GroupSettings = (props) => {
             </Button>
           </label>
         </div>
-          <div style={{ marginBottom: "5px", alignSelf: "center"}}>{groupSettings?.avatar?.name}</div>
-        <div className="text-field-stepper" style={{alignSelf: "center"}}>
+        <div style={{ marginBottom: "5px", alignSelf: "center" }}>
+          {groupSettings?.avatar?.name}
+        </div>
+        <div className="text-field-stepper" style={{ alignSelf: "center" }}>
           <TextField
             label="Group Name*"
             id="Group Name"
@@ -141,26 +145,26 @@ const GroupSettings = (props) => {
             value={groupSettings?.name}
             className={formClasses.root}
             onChange={handleChange}
-            style={{width: "275px"}}
+            style={{ width: "275px" }}
             autoComplete="off"
             helperText={props.entryError}
             error={props.entryError?.length > 0 ? true : false}
           />
-          </div>
-          <div style={{alignSelf: "center"}}>
-            <FormControlLabel
-              label="Join Requests:"
-              labelPlacement="start"
-              control={
-                <Switch
-                  checked={isOpen}
-                  onChange={() => setIsOpen((curr) => !curr)}
-                  name="isOpen"
-                  color="primary"
-                />
-              }
-            />
-          </div>
+        </div>
+        <div style={{ alignSelf: "center" }}>
+          <FormControlLabel
+            label="Join Requests:"
+            labelPlacement="start"
+            control={
+              <Switch
+                checked={isOpen}
+                onChange={() => setIsOpen((curr) => !curr)}
+                name="isOpen"
+                color="primary"
+              />
+            }
+          />
+        </div>
         <Button
           variant="contained"
           color="primary"
@@ -168,7 +172,7 @@ const GroupSettings = (props) => {
           // size="large"
           className={classes.root}
           disabled={disabled}
-          style={{width: "275px"}}
+          style={{ width: "275px" }}
         >
           Submit
         </Button>

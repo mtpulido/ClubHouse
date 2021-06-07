@@ -80,7 +80,7 @@ const CreateRound = (props) => {
       top: 0,
       left: 0,
     });
-  }, [])
+  }, []);
 
   const handleChangeRound = (event) => {
     const { name, value } = event.target;
@@ -395,7 +395,6 @@ const CreateRound = (props) => {
           </Step>
           {props.isError ? (
             <Step key="4" className={classes.stepContent}>
-            
               <Button
                 onClick={(e) => setActiveStep(0)}
                 className={classes.button}
@@ -404,8 +403,8 @@ const CreateRound = (props) => {
               >
                 Back
               </Button>
-          </Step>
-            ) : null}
+            </Step>
+          ) : null}
         </Stepper>
       </form>
     </div>

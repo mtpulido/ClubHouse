@@ -5,9 +5,8 @@ import SignUp from "../screens/signUp/SignUp";
 import SignIn from "../screens/signIn/SignIn";
 import Landing from "../screens/landingPage/Landing";
 
-
 const LandingContainer = (props) => {
-  const { setCurrentUser, setToggleFetch } = props
+  const { setCurrentUser, setToggleFetch } = props;
   const [credentialsError, setCredentialsError] = useState([]);
   const history = useHistory();
 
@@ -16,7 +15,7 @@ const LandingContainer = (props) => {
       const userData = await signIn(credentials);
       setCurrentUser(userData);
       history.push("/user/dashboard");
-      setToggleFetch((curr) => !curr)
+      setToggleFetch((curr) => !curr);
     } catch (error) {
       setCredentialsError(error);
     }
@@ -27,39 +26,37 @@ const LandingContainer = (props) => {
       const userData = await signUp(credentials);
       setCurrentUser(userData);
       history.push("/user/dashboard");
-      setToggleFetch((curr) => !curr)
+      setToggleFetch((curr) => !curr);
     } catch (error) {
       setCredentialsError(error);
     }
   };
 
-
-
   return (
     <>
       <Switch>
         <Route path="/sign-up">
-        <SignUp
+          <SignUp
             handleSignUp={handleSignUp}
             setCredentialsError={setCredentialsError}
             credentialsError={credentialsError}
           />
         </Route>
-        
+
         <Route path="/sign-in">
-        <SignIn
+          <SignIn
             handleSignIn={handleSignIn}
             setCredentialsError={setCredentialsError}
             credentialsError={credentialsError}
           />
         </Route>
-        
+
         <Route exact path="/">
-        <Landing />
-          </Route>
+          <Landing />
+        </Route>
       </Switch>
     </>
-  )
-}
+  );
+};
 
-export default LandingContainer
+export default LandingContainer;

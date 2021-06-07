@@ -3,7 +3,7 @@ import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import { useState, useEffect } from "react";
 import TextField from "@material-ui/core/TextField";
-import "./CreateGroup.css"
+import "./CreateGroup.css";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -48,7 +48,7 @@ const CreateGroup = (props) => {
       top: 0,
       left: 0,
     });
-  }, [])
+  }, []);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -61,61 +61,61 @@ const CreateGroup = (props) => {
   const handleChangePhoto = (event) => {
     setNewGroup((prevState) => ({
       ...prevState,
-      avatar: event.target.files[0]
-   })) 
+      avatar: event.target.files[0],
+    }));
   };
 
-
-
   const handleSubmit = (event) => {
-    event.preventDefault()
-    const formData = new FormData()
+    event.preventDefault();
+    const formData = new FormData();
 
-    formData.append("name", newGroup.name)
-    formData.append("avatar", newGroup.avatar)
+    formData.append("name", newGroup.name);
+    formData.append("avatar", newGroup.avatar);
 
-    props.handlePostGroup(formData)
-  }
-  
+    props.handlePostGroup(formData);
+  };
+
   return (
-    <div style={{maxWidth: '100vw',
-      overflowX: 'hidden'
-    }}>
+    <div style={{ maxWidth: "100vw", overflowX: "hidden" }}>
       <form
         encType="multipart/form-data"
         onSubmit={handleSubmit}
         className="create-group-form"
       >
-      <input
-        accept="image/*"
-        className={classes.input}
-        id="avatar"
-        name="avatar"
-        type="file"
-        onChange={handleChangePhoto}
-      />
-      <label htmlFor="avatar">
-        <Button variant="outlined" color="primary" component="span">
-          Choose Photo
-        </Button>
-      </label>
-        {newGroup?.avatar ? <div style={{ marginBottom: "5px", alignSelf: "center" }}>{newGroup?.avatar?.name}</div> : null}
+        <input
+          accept="image/*"
+          className={classes.input}
+          id="avatar"
+          name="avatar"
+          type="file"
+          onChange={handleChangePhoto}
+        />
+        <label htmlFor="avatar">
+          <Button variant="outlined" color="primary" component="span">
+            Choose Photo
+          </Button>
+        </label>
+        {newGroup?.avatar ? (
+          <div style={{ marginBottom: "5px", alignSelf: "center" }}>
+            {newGroup?.avatar?.name}
+          </div>
+        ) : null}
 
-      <div className="text-field-stepper" style={{alignSelf: "center"}}>
-        <TextField
-          label="Group Name*"
-          id="Group Name"
-          variant="outlined"
-          placeholder="The Golfers"
-          name="name"
-          value={newGroup.name}
+        <div className="text-field-stepper" style={{ alignSelf: "center" }}>
+          <TextField
+            label="Group Name*"
+            id="Group Name"
+            variant="outlined"
+            placeholder="The Golfers"
+            name="name"
+            value={newGroup.name}
             className={formClasses.root}
             style={{ width: "275px" }}
-          onChange={handleChange}
-          autoComplete="off"
-          helperText={props.entryError}
-          error={props.entryError?.length > 0 ? true : false}
-        />
+            onChange={handleChange}
+            autoComplete="off"
+            helperText={props.entryError}
+            error={props.entryError?.length > 0 ? true : false}
+          />
         </div>
         <Button
           variant="contained"
@@ -124,11 +124,11 @@ const CreateGroup = (props) => {
           // size="large"
           disabled={props.currentUser?.displayName?.length > 0 ? false : true}
           className={classes.root}
-          style={{width: "275px"}}
+          style={{ width: "275px" }}
         >
           Submit
         </Button>
-        </form>
+      </form>
     </div>
   );
 };

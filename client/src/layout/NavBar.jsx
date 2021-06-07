@@ -56,11 +56,14 @@ const NavBar = (props) => {
     if (currentUser) {
       setGroups(currentUser.groups);
     }
-    if (pathname.startsWith("/group/requests") || pathname.startsWith("/group/settings")) {
+    if (
+      pathname.startsWith("/group/requests") ||
+      pathname.startsWith("/group/settings")
+    ) {
       setOpenGroupSettings(false);
     }
     if (pathname.startsWith("/user/settings")) {
-      setOpen(false)
+      setOpen(false);
     }
   }, [currentUser, pathname]);
 

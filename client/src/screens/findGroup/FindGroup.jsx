@@ -7,8 +7,8 @@ import "./FindGroup.css";
 import Button from "@material-ui/core/Button";
 import { useState, useEffect } from "react";
 import Avatar from "@material-ui/core/Avatar";
-import Snackbar from '@material-ui/core/Snackbar';
-import MuiAlert from '@material-ui/lab/Alert';
+import Snackbar from "@material-ui/core/Snackbar";
+import MuiAlert from "@material-ui/lab/Alert";
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -38,7 +38,7 @@ const FindGroup = (props) => {
     findGroup,
     handleRequestGroup,
     currentUser,
-    toggleFetch
+    toggleFetch,
   } = props;
   const classes = useStyles();
   const [formData, setFormData] = useState({
@@ -48,9 +48,9 @@ const FindGroup = (props) => {
 
   useEffect(() => {
     if (formData.name) {
-      handleGetGroups(formData)
+      handleGetGroups(formData);
     }
-  }, [toggleFetch])
+  }, [toggleFetch]);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -66,27 +66,27 @@ const FindGroup = (props) => {
   };
 
   const checkIfRequested = (group) => {
-    let isRequested = false
+    let isRequested = false;
     group.requests.map((request) => {
       if (request.userId === currentUser._id) {
-        return isRequested = true
-      } 
-    })
+        return (isRequested = true);
+      }
+    });
     group.members.map((member) => {
       if (member === currentUser._id) {
-        return isRequested = true
-      } 
-    })
-    return isRequested
-  }
+        return (isRequested = true);
+      }
+    });
+    return isRequested;
+  };
 
   const onJoinClick = (groupId) => {
-    handleRequestGroup(groupId)
-    setOpen(true)
+    handleRequestGroup(groupId);
+    setOpen(true);
     setTimeout(() => {
-      setOpen(false)
-    }, 3200)
-  }
+      setOpen(false);
+    }, 3200);
+  };
 
   const groupsJSX = findGroup?.map((group) => (
     <div className="searched-group-container">
@@ -120,14 +120,22 @@ const FindGroup = (props) => {
   return (
     <div className="find-group-container">
       <div className="snackbar-container">
-        <Snackbar open={open} anchorOrigin={{ vertical: "bottom", horizontal: "left" }}>
-        <Alert severity="success"
-          style={{ width: "275px", display: "flex", justifyContent: "center" }}
+        <Snackbar
+          open={open}
+          anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
         >
-          Request Sent!
-        </Alert>
+          <Alert
+            severity="success"
+            style={{
+              width: "275px",
+              display: "flex",
+              justifyContent: "center",
+            }}
+          >
+            Request Sent!
+          </Alert>
         </Snackbar>
-        </div>
+      </div>
       <form onSubmit={handleSubmit}>
         <div className="search-bar-container">
           <TextField
@@ -137,7 +145,7 @@ const FindGroup = (props) => {
             label="Find Group"
             placeholder="Enter Group name"
             className={classes.root}
-            style={{ width: "275px"}}
+            style={{ width: "275px" }}
             value={formData.name}
             autoComplete="off"
             onChange={handleChange}

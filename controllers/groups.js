@@ -122,7 +122,6 @@ const groupRequestAction = async (req, res) => {
     });
 
     group.requests = newRequests;
-    console.log(group.requests);
     await group.save();
     res.status(201).json(group);
   } catch (error) {

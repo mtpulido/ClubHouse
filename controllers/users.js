@@ -41,7 +41,6 @@ const handleErrors = (err) => {
 };
 
 const signUp = async (req, res) => {
-  console.log(process.env.TOKEN_KEY)
   try {
     const { displayName, email, password } = req.body;
     const passwordDigest = password;
@@ -55,7 +54,6 @@ const signUp = async (req, res) => {
     const token = jwt.sign(payload, SECRET_KEY);
     res.status(201).json({ token });
   } catch (error) {
-    console.log(error)
     const errors = handleErrors(error);
     res.status(400).json({ errors });
   }
@@ -75,7 +73,6 @@ const signIn = async (req, res) => {
     const token = jwt.sign(payload, SECRET_KEY);
     res.status(201).json({ token });
   } catch (error) {
-    console.log(errors)
     const errors = handleErrors(error);
     res.status(400).json({ errors });
   }
