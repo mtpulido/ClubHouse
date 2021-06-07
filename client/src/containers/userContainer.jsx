@@ -4,11 +4,12 @@ import { postRound, editRound, editSettings } from "../services/user"
 import NavBar from "../layout/NavBar"
 import { Switch, Route, useHistory } from "react-router-dom"
 import Dashboard from "../screens/dashboard/Dashboard"
-import NewRound from "../screens/newRound/NewRound"
 import DetailsRound from "../screens/detailsRound/DetailsRound"
 import EditRound from "../screens/editRound/EditRound"
 import Settings from "../screens/settings/Settings"
 import { signOut } from "../services/auth";
+import NewRound from "../screens/NewRound/NewRound"
+
 
 const UserContainer = (props) => {
   const history = useHistory()
@@ -17,6 +18,7 @@ const UserContainer = (props) => {
   const [isError, setIsError] = useState(false)
   const [open, setOpen] = useState(false)
   const [snackBar, setSnackBar] = useState(false)
+  const [test, setTest] = useState("test")
 
 
 

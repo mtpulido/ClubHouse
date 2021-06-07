@@ -3,7 +3,7 @@ import { Switch, Route, useHistory } from "react-router-dom";
 import { useState } from "react";
 import { postGroup, getGroups, requestGroup, adminResponse, editGroupSettings } from "../services/group";
 import React from "react";
-import NewGroup from "../screens/newGroup/newGroup";
+import NewGroup from "../screens/newGroup/NewGroup";
 import OneGroup from "../screens/group/Group";
 import FindGroup from "../screens/findGroup/FindGroup";
 import GroupRequests from "../screens/groupRequests/GroupRequests"
