@@ -13,7 +13,8 @@
 }
 
 .burger-open {
-  min-height: 100vh;
+  height: 100vh;
+  min-height:100vh;
   margin-bottom: 50px;
   position: fixed;
   top: 0;
