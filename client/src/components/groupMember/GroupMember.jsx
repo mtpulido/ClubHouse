@@ -34,7 +34,7 @@ const GroupMember = (props) => {
         <div className="leaderboard-name">{member?.displayName}</div>
       </div>
       <div className="leaderboard-number">
-        {handlePercent(member?.[roundsTimeframe]?.[category])}
+        {member?.[roundsTimeframe]?.[category] ? handlePercent(member?.[roundsTimeframe]?.[category]) : null}
       </div>
     </div>
   );
