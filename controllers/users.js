@@ -7,7 +7,7 @@ require("dotenv").config();
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
 
-let secret = process.env.TOKEN_KEY
+const SECRET = process.env.TOKEN_KEY
 
 const handleErrors = (err) => {
   let errors = {
@@ -52,7 +52,7 @@ const signUp = async (req, res) => {
       email: user.email,
       id: user._id,
     };
-    const token = jwt.sign(payload, secret);
+    const token = jwt.sign(payload, SECRET);
     res.status(201).json({ token });
   } catch (error) {
     console.log(error)
@@ -72,7 +72,7 @@ const signIn = async (req, res) => {
       id: user._id,
     };
 
-    const token = jwt.sign(payload, secret);
+    const token = jwt.sign(payload, SECRET);
     res.status(201).json({ token });
   } catch (error) {
     console.log(errors)
@@ -84,7 +84,7 @@ const signIn = async (req, res) => {
 const verify = async (req, res) => {
   try {
     const token = req.headers.authorization.split(" ")[1];
-    const payload = jwt.verify(token, secret);
+    const payload = jwt.verify(token, SECRET);
     const user = await User.findOne({ email: payload.email });
     const newPayload = {
       displayName: user.displayName,
