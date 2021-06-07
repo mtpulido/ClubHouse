@@ -1,8 +1,11 @@
 const jwt = require("jsonwebtoken");
 const User = require("../models/user");
 const db = require("../db/connection");
+require("dotenv").config();
+
 
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
+
 
 const handleErrors = (err) => {
   let errors = {
