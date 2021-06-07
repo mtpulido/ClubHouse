@@ -6,7 +6,7 @@ require("dotenv").config();
 
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
-console.log(process.env.TOKEN_KEY)
+const SECRET_KEY = process.env.TOKEN_KEY
 
 const handleErrors = (err) => {
   let errors = {
@@ -41,6 +41,7 @@ const handleErrors = (err) => {
 };
 
 const signUp = async (req, res) => {
+  console.log(process.env.TOKEN_KEY)
   try {
     const { displayName, email, password } = req.body;
     const passwordDigest = password;
@@ -51,8 +52,8 @@ const signUp = async (req, res) => {
       email: user.email,
       id: user._id,
     };
-    console.log("this is token key", process.env.TOKEN_KEY)
-    const token = jwt.sign(payload, process.env.TOKEN_KEY);
+    console.log("this is token key", SECRET_KEY)
+    const token = jwt.sign(payload, SECRET_KEY);
     res.status(201).json({ token });
   } catch (error) {
     console.log(error)
@@ -72,7 +73,7 @@ const signIn = async (req, res) => {
       id: user._id,
     };
 
-    const token = jwt.sign(payload, process.env.TOKEN_KEY);
+    const token = jwt.sign(payload, SECRET_KEY);
     res.status(201).json({ token });
   } catch (error) {
     console.log(errors)
@@ -84,7 +85,7 @@ const signIn = async (req, res) => {
 const verify = async (req, res) => {
   try {
     const token = req.headers.authorization.split(" ")[1];
-    const payload = jwt.verify(token, process.env.TOKEN_KEY);
+    const payload = jwt.verify(token, SECRET_KEY);
     const user = await User.findOne({ email: payload.email });
     const newPayload = {
       displayName: user.displayName,
