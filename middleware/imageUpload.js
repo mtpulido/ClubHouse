@@ -22,7 +22,7 @@ const uploadPhoto = upload.single("avatar");
 const resizeUserPhoto = (req, res, next) => {
   if (!req.file) return next();
 
-  req.file.filename = `user-${res.locals.user._id}.jpeg`
+  req.file.filename = `user-${res.locals.authorizedUser._id}.jpeg`
 
   sharp(req.file.buffer)
     .resize(100, 100, { fit: "inside" })

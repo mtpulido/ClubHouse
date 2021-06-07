@@ -26,3 +26,12 @@ export const editRound = async (roundData) => {
     throw Object.values(error.response.data.errors)
   }
 }
+
+export const editSettings = async (data) => {
+  try {
+    const response = await api.put('/users/edit-settings', data)
+    return response.data
+  } catch (error) {
+    throw error
+  }
+}

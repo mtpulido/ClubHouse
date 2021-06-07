@@ -56,8 +56,11 @@ const NavBar = (props) => {
     if (currentUser) {
       setGroups(currentUser.groups);
     }
-    if (pathname.startsWith("/group/requests")) {
+    if (pathname.startsWith("/group/requests") || pathname.startsWith("/group/settings")) {
       setOpenGroupSettings(false);
+    }
+    if (pathname.startsWith("/user/settings")) {
+      setOpen(false)
     }
   }, [currentUser, pathname]);
 
@@ -190,9 +193,7 @@ const NavBar = (props) => {
               <DashboardIcon style={{ height: "28px", width: "28px" }} />
             }
             style={{ marginBottom: "10px", fontSize: "18px" }}
-            onClick={(e) =>
-              setTimeout(() => history.push("/user/dashboard"), 120)
-            }
+            onClick={() => setOpen(false)}
           >
             Dashboard
           </Button>
@@ -233,6 +234,9 @@ const NavBar = (props) => {
               <SettingsIcon style={{ height: "28px", width: "28px" }} />
             }
             style={{ marginBottom: "10px", fontSize: "18px" }}
+            onClick={(e) =>
+              setTimeout(() => history.push("/user/settings"), 120)
+            }
           >
             Settings
           </Button>

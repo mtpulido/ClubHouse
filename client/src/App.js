@@ -1,6 +1,6 @@
 import "./App.css";
 import { useState, useEffect } from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, useHistory } from "react-router-dom";
 import { signOut, verifyUser } from "./services/auth";
 import LandingContainer from "./containers/LandingContainer"
 import UserContainer from "./containers/UserContainer"
@@ -10,6 +10,7 @@ import { getUser } from "./services/user"
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [toggleFetch, setToggleFetch] = useState(false)
+  const history = useHistory()
 
   useEffect(() => {
     const handleVerify = async () => {
@@ -19,19 +20,13 @@ function App() {
     };
     handleVerify();
   }, [toggleFetch]);
-  // const handleSignOut = () => {
-  //   setCurrentUser(null);
-  //   localStorage.removeItem("token");
-  //   signOut();
-  //   history.push("/");
-  // };
 
   return (
     <div className="app">
       <Switch>
 
       <Route path="/user">
-          <UserContainer currentUser={currentUser} setCurrentUser={setCurrentUser} setToggleFetch={setToggleFetch}/>
+          <UserContainer currentUser={currentUser} setCurrentUser={setCurrentUser} setToggleFetch={setToggleFetch} />
         </Route>
 
         <Route path="/group">

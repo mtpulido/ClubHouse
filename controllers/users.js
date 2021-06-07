@@ -143,15 +143,21 @@ const editRound = async (req, res) => {
   }
 };
 
-const editAvatar = async (req, res) => {
+const editSettings = async (req, res) => {
   try {
-    const user = res.locals.authorizedUser
-    user.avatar = req.file.filename
+    let user = res.locals.authorizedUser;
 
-    await user.save()
+    user.displayName = req.body.displayName;
+
+    if (req.file) {
+      user.avatar = req.file.filename;
+    }
+
+    await user.save();
     res.status(201).json(user);
   } catch (error) {
-    res.status(400).json({error: "image too large or not an image"})
+    const errors = handleErrors(error);
+    res.status(500).json({ errors });
   }
 }
 
@@ -162,6 +168,6 @@ module.exports = {
   getUser,
   addRound,
   editRound,
-  editAvatar
+  editSettings
   // changePassword,
 };

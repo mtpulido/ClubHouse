@@ -82,7 +82,7 @@ const GroupContainer = (props) => {
       <Switch>
         <NavBar currentUser={currentUser} group={group}>
           <Route exact path="/group/new/group">
-            <NewGroup handlePostGroup={handlePostGroup} entryError={entryError}/>
+            <NewGroup handlePostGroup={handlePostGroup} entryError={entryError} currentUser={currentUser}/>
           </Route>
 
           <Route exact path="/group/find/group">

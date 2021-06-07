@@ -144,7 +144,6 @@ const editGroupSettings = async (req, res) => {
     await group.save();
     res.status(201).json(group);
   } catch (error) {
-    console.log(error);
     const errors = handleErrors(error);
     res.status(500).json({ errors });
   }

@@ -122,6 +122,7 @@ const NewGroup = (props) => {
           color="primary"
           type="submit"
           // size="large"
+          disabled={props.currentUser?.displayName?.length > 0 ? false : true}
           className={classes.root}
           style={{width: "275px"}}
         >

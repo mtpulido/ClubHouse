@@ -11,7 +11,7 @@ router.get("/verify", controllers.verify);
 router.get("/:id", controllers.getUser)
 router.put("/add-round", checkAuthentication, controllers.addRound)
 router.put("/edit-round", checkAuthentication, controllers.editRound)
-router.put("/edit-avatar", checkAuthentication, uploadPhoto, resizeUserPhoto, controllers.editAvatar)
+router.put("/edit-settings", checkAuthentication, uploadPhoto, resizeUserPhoto, controllers.editSettings)
 
 
 module.exports = router;

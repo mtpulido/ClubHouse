@@ -157,6 +157,7 @@ const FindGroup = (props) => {
           color="primary"
           type="submit"
           size="large"
+          disabled={props.currentUser?.displayName?.length > 0 ? false : true}
           style={{ width: "275px", marginTop: "20px" }}
           className={classes.root}
         >
