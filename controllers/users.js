@@ -99,7 +99,10 @@ const verify = async (req, res) => {
 const getUser = async (req, res) => {
   try {
     const { id } = req.params;
-    const user = await await User.findById(id).populate("groups");
+    const user = await await User.findById(id).populate({
+      path: "groups",
+      select: { members: 0} 
+    })
     if (user) {
       res.status(201).json(user);
     } else {

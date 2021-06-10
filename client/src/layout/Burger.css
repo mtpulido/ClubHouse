@@ -93,9 +93,34 @@
   max-height: 45px;
 }
 
+.group-placeholder {
+  font-size: 20px;
+  font-weight: 500;
+  padding-left: 15px;
+  padding-top: 15px;
+}
+
 @media screen and (min-width: 768px) {
   .group-burger-open {
     left: 490px;
     
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .group-burger-closed {
+    height: 100vh;
+    position:sticky;
+    top: 0;
+    z-index: 600;
+    background-color: #1e2124;
+    width: 280px;
+    max-width: 280px;
+    transition: 0.45s;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    border-left: 1px solid rgba(255, 255, 255, 0.2);
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
   }
 }

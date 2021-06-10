@@ -33,3 +33,22 @@
   flex-direction: column;
   justify-content: space-around;
 }
+
+@media screen and (min-width: 1200px) {
+
+.new-round-container {
+  min-width: 768px;
+  max-width: 768px;
+  overflow-x: hidden;
+  /* padding-top: 20px; */
+  min-height: 100vh;
+}
+
+  .add-button {
+    position: unset;
+    display: flex;
+    align-self: flex-end;
+    justify-self: flex-end;
+    filter: drop-shadow(0 0 7px rgba(255, 255, 255, 0.3));
+  }
+}

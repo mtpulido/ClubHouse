@@ -36,7 +36,7 @@ const useFormStyles = makeStyles((theme) => ({
     },
     "& .MuiButton-label": {
       color: "black",
-      fontSize: "16px",
+      fontSize: "18px",
     },
   },
 }));
@@ -104,7 +104,7 @@ const Settings = (props) => {
     <div className="settings-container">
       <Snackbar
         open={snackBar}
-        anchorOrigin={{ vertical: "top", horizontal: "left" }}
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
       >
         <Alert
           severity="success"
@@ -116,9 +116,9 @@ const Settings = (props) => {
       <form
         encType="multipart/form-data"
         onSubmit={handleSubmit}
-        className="update-group-form"
+        className="create-group-form"
       >
-        <div style={{ alignSelf: "center" }}>
+        {/* <div style={{ alignSelf: "center" }}>
           <input
             accept="image/*"
             className={classes.input}
@@ -132,7 +132,7 @@ const Settings = (props) => {
               Choose New Photo
             </Button>
           </label>
-        </div>
+        </div> */}
         <div style={{ marginBottom: "5px", alignSelf: "center" }}>
           {userSettings?.avatar?.name}
         </div>
@@ -157,9 +157,9 @@ const Settings = (props) => {
           color="primary"
           type="submit"
           // size="large"
-          className={classes.root}
+          className={formClasses.root}
           disabled={disabled}
-          style={{ width: "275px" }}
+          style={{ width: "275px", marginTop: "20px" }}
         >
           Submit
         </Button>

@@ -103,7 +103,7 @@ const GroupSettings = (props) => {
     <div className="settings-container">
       <Snackbar
         open={open}
-        anchorOrigin={{ vertical: "top", horizontal: "left" }}
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
       >
         <Alert
           severity="success"
@@ -117,7 +117,7 @@ const GroupSettings = (props) => {
         onSubmit={handleSubmit}
         className="update-group-form"
       >
-        <div style={{ alignSelf: "center" }}>
+        {/* <div style={{ alignSelf: "center" }}>
           <input
             accept="image/*"
             className={classes.input}
@@ -131,7 +131,7 @@ const GroupSettings = (props) => {
               Choose New Photo
             </Button>
           </label>
-        </div>
+        </div> */}
         <div style={{ marginBottom: "5px", alignSelf: "center" }}>
           {groupSettings?.avatar?.name}
         </div>

@@ -156,3 +156,42 @@
     padding-right: 10px;
   }
 }
+
+@media screen and (min-width: 1200px) {
+  .burger-closed {
+    height: 100vh;
+    position:sticky;
+    top: 0;
+    background-color: #1e2124;
+    width: 280px;
+    width: 280px;
+    transition: 0.45s;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    overflow-y:auto;
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+    border-left: 1px solid rgba(255, 255, 255, 0.2);
+    z-index: 0;
+  }
+
+  .group-button-nav {
+    display: flex;
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding-right: 10px;
+  }
+
+  .menu-header {
+    display: none;
+  } 
+
+  .menu-icon-button {
+    display: none;
+  }
+
+  .nav-container {
+    display: flex;
+  }
+}

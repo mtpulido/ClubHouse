@@ -1,5 +1,6 @@
 .sign-out {
   position: fixed;
-  bottom: 20px;
-  left: 20px;
+  bottom: 15px;
+  left: auto;
+  padding-left: 15px
 }

@@ -126,7 +126,7 @@ const FindGroup = (props) => {
       <div className="snackbar-container">
         <Snackbar
           open={open}
-          anchorOrigin={{ vertical: "top", horizontal: "left" }}
+          anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
         >
           <Alert
             severity="success"

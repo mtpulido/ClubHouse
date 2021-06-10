@@ -5,3 +5,11 @@
 .app {
   background-color: #1e2124;
 }
+
+
+@media screen and (min-width: 1200px) {
+.app {
+  display: flex;
+  justify-content: center;
+}
+}

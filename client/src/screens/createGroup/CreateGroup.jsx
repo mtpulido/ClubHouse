@@ -30,7 +30,7 @@ const useFormStyles = makeStyles((theme) => ({
     },
     "& .MuiButton-label": {
       color: "black",
-      fontSize: "16px",
+      fontSize: "18px",
     },
   },
 }));
@@ -82,7 +82,7 @@ const CreateGroup = (props) => {
         onSubmit={handleSubmit}
         className="create-group-form"
       >
-        <input
+        {/* <input
           accept="image/*"
           className={classes.input}
           id="avatar"
@@ -99,7 +99,7 @@ const CreateGroup = (props) => {
           <div style={{ marginBottom: "5px", alignSelf: "center" }}>
             {newGroup?.avatar?.name}
           </div>
-        ) : null}
+        ) : null} */}
 
         <div className="text-field-stepper" style={{ alignSelf: "center" }}>
           <TextField
@@ -110,7 +110,7 @@ const CreateGroup = (props) => {
             name="name"
             value={newGroup.name}
             className={formClasses.root}
-            style={{ width: "275px" }}
+            style={{ width: "275px", marginTop: "5px" }}
             onChange={handleChange}
             autoComplete="off"
             helperText={props.entryError}
@@ -123,8 +123,8 @@ const CreateGroup = (props) => {
           type="submit"
           // size="large"
           disabled={props.currentUser?.displayName?.length > 0 ? false : true}
-          className={classes.root}
-          style={{ width: "275px" }}
+          className={formClasses.root}
+          style={{ width: "275px", marginTop: "20px" }}
         >
           Submit
         </Button>

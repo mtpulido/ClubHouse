@@ -22,6 +22,14 @@ import { useState, useEffect } from "react";
 import GroupMenu from "./GroupIcon";
 import Badge from "@material-ui/core/Badge";
 
+function getWindowDimensions() {
+  const { innerWidth: width, innerHeight: height } = window;
+  return {
+    width,
+    height
+  };
+}
+
 const useStyles = makeStyles({
   root: {
     backgroundColor: "#1e2124",
@@ -51,6 +59,7 @@ const NavBar = (props) => {
   const history = useHistory();
   const [groups, setGroups] = useState([]);
   const [openGroupSettings, setOpenGroupSettings] = useState(false);
+  const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
 
   useEffect(() => {
     if (currentUser) {
@@ -65,6 +74,12 @@ const NavBar = (props) => {
     if (pathname.startsWith("/user/settings")) {
       setOpen(false);
     }
+
+    function handleResize() {
+      setWindowDimensions(getWindowDimensions());
+    }
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, [currentUser, pathname]);
 
   const scrollToTop = () => {
@@ -82,87 +97,22 @@ const NavBar = (props) => {
   const groupJSX = groups?.map((group, index) => (
     <div className="group-menu" onClick={() => handleGroupOpen(group._id)}>
       <div className="avatar">
-        <Badge
-          color="primary"
-          badgeContent={group?.requests?.length}
-          classes={{ badge: classes.customBadge }}
-        >
           <Avatar
             src={`/uploads/groups/${group?.avatar}`}
             alt={group?.name?.toUpperCase()}
             className={classes.large}
           />
-        </Badge>
       </div>
       <div className="group-name">{group.name}</div>
     </div>
   ));
 
+  console.log(windowDimensions)
+
   return (
     <div className="nav-container">
-      <div className="nav-bar">
-        <AppBar
-          position="static"
-          className={open || openGroupSettings ? classes.root1 : classes.root}
-        >
-          <Toolbar>
-            {pathname === "/user/dashboard" ? (
-              <IconButton
-                edge="start"
-                color="inherit"
-                aria-label="menu"
-                onClick={(e) => setOpen((curr) => !curr)}
-              >
-                <MenuIcon fontSize="large" color="primary" />
-              </IconButton>
-            ) : (
-              <IconButton
-                edge="start"
-                color="inherit"
-                aria-label="menu"
-                onClick={(e) => setTimeout(() => history.goBack(), 120)}
-              >
-                <ArrowBackIcon fontSize="large" color="primary" />
-              </IconButton>
-            )}
 
-            <Typography variant="h5">
-              <span onClick={scrollToTop}>ClubHouse</span>
-              <GolfCourseIcon />
-            </Typography>
-            {pathname.startsWith("/group") &&
-            pathname !== "/group/new/group" &&
-            pathname !== "/group/find/group" &&
-            !pathname.startsWith("/group/requests") &&
-            !pathname.startsWith("/group/settings") ? (
-              <div className="group-button-nav">
-                <IconButton
-                  edge="start"
-                  color="inherit"
-                  aria-label="menu"
-                  onClick={(e) => setOpenGroupSettings((curr) => !curr)}
-                >
-                  <Badge
-                    badgeContent={group?.requests?.length}
-                    classes={{ badge: classes.customBadge }}
-                  >
-                    <GroupIcon fontSize="large" color="primary" />
-                  </Badge>
-                </IconButton>
-              </div>
-            ) : null}
-          </Toolbar>
-        </AppBar>
-      </div>
-
-      <GroupMenu
-        open={openGroupSettings}
-        group={group}
-        setOpen={setOpenGroupSettings}
-        currentUser={currentUser}
-      />
-
-      <div className={open ? "burger-open" : "burger-closed"}>
+<div className={open ? "burger-open" : "burger-closed"}>
         <div className="menu-header">
           <div className="menu-menu">Menu</div>
           <IconButton
@@ -196,7 +146,7 @@ const NavBar = (props) => {
               <DashboardIcon style={{ height: "28px", width: "28px" }} />
             }
             style={{ marginBottom: "10px", fontSize: "18px" }}
-            onClick={() => setOpen(false)}
+            onClick={() => history.push("/user/dashboard")}
           >
             Dashboard
           </Button>
@@ -245,6 +195,62 @@ const NavBar = (props) => {
           </Button>
         </div>
       </div>
+      <div className="middle column">
+      <div className="nav-bar">
+        <AppBar
+          position="static"
+          className={open || openGroupSettings ? classes.root1 : classes.root}
+        >
+          <Toolbar>
+            {pathname === "/user/dashboard" && windowDimensions.width <= "1200" ? (
+              <IconButton
+                edge="start"
+                color="inherit"
+                aria-label="menu"
+                onClick={(e) => setOpen((curr) => !curr)}
+              >
+                <div className="menu-icon-button"><MenuIcon fontSize="large" color="primary" /></div>
+              </IconButton>
+            ) : (
+              <IconButton
+                edge="start"
+                color="inherit"
+                aria-label="menu"
+                onClick={(e) => setTimeout(() => history.goBack(), 120)}
+              >
+                <ArrowBackIcon fontSize="large" color="primary" />
+              </IconButton>
+            )}
+
+            <Typography variant="h5">
+              <span onClick={scrollToTop}>ClubHouse</span>
+              <GolfCourseIcon />
+            </Typography>
+            {pathname.startsWith("/group") &&
+            pathname !== "/group/new/group" &&
+            pathname !== "/group/find/group" &&
+            !pathname.startsWith("/group/requests") &&
+            !pathname.startsWith("/group/settings") && windowDimensions.width <= "1200" ? (
+              <div className="group-button-nav">
+                <IconButton
+                  edge="start"
+                  color="inherit"
+                  aria-label="menu"
+                  onClick={(e) => setOpenGroupSettings((curr) => !curr)}
+                >
+                  <Badge
+                    badgeContent={group?.requests?.length}
+                    classes={{ badge: classes.customBadge }}
+                  >
+                    <GroupIcon fontSize="large" color="primary" />
+                  </Badge>
+                </IconButton>
+              </div>
+            ) : null}
+          </Toolbar>
+        </AppBar>
+      </div>
+
 
       <div
         className={
@@ -252,7 +258,17 @@ const NavBar = (props) => {
         }
       >
         {props.children}
+        </div>
+        
       </div>
+      
+      <GroupMenu
+        open={openGroupSettings}
+        group={group}
+        setOpen={setOpenGroupSettings}
+        currentUser={currentUser}
+        windowDimensions={windowDimensions}
+      />
     </div>
   );
 };

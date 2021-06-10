@@ -34,7 +34,7 @@ const useStyles = makeStyles({
 
 const GroupMenu = (props) => {
   const classes = useStyles();
-  const { open, group, setOpen, currentUser } = props;
+  const { open, group, setOpen, currentUser, windowDimensions } = props;
   const history = useHistory();
 
   const membersJSX = group?.members?.map((member) => (
@@ -103,7 +103,7 @@ const GroupMenu = (props) => {
           </div>
         ) : null}
 
-        <div className="group-burger-menu">
+        {group ? <div className="group-burger-menu">
           <div className="avatar">
             <Avatar
               src={`/uploads/groups/${group?.avatar}`}
@@ -113,7 +113,7 @@ const GroupMenu = (props) => {
             />
           </div>
           <div className="group-name">{group?.members?.length} Members</div>
-        </div>
+        </div> : <div className="group-placeholder">Group Menu</div>}
         {membersJSX}
       </div>
     </div>

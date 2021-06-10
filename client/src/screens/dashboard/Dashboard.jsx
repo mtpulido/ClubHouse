@@ -102,14 +102,6 @@ const Dashboard = (props) => {
 
       <Donut value={value} userRounds={userRounds} loading={loading} />
 
-      {loading ? (
-        <div className="loading-container">
-          <CircularProgress color="primary" />
-        </div>
-      ) : (
-        <div className="rounds-container-dashboard">{roundJSX}</div>
-      )}
-
       <div className="add-button">
         <Fab
           color="primary"
@@ -127,6 +119,14 @@ const Dashboard = (props) => {
           <AddIcon />
         </Fab>
       </div>
+
+      {loading ? (
+        <div className="loading-container">
+          <CircularProgress color="primary" />
+        </div>
+      ) : (
+        <div className="rounds-container-dashboard">{roundJSX}</div>
+      )}
     </div>
   );
 };
