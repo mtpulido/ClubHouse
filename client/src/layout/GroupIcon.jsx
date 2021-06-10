@@ -3,7 +3,7 @@ import IconButton from "@material-ui/core/IconButton";
 import "./NavBar.css";
 import CloseIcon from "@material-ui/icons/Close";
 import { makeStyles } from "@material-ui/core/styles";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import Avatar from "@material-ui/core/Avatar";
 import SettingsIcon from "@material-ui/icons/Settings";
 import "./Burger.css";
@@ -35,6 +35,7 @@ const useStyles = makeStyles({
 const GroupMenu = (props) => {
   const classes = useStyles();
   const { open, group, setOpen, currentUser, windowDimensions } = props;
+  const { pathname } = useLocation();
   const history = useHistory();
 
   const membersJSX = group?.members?.map((member) => (
@@ -59,63 +60,68 @@ const GroupMenu = (props) => {
       <div className="members-name">{member?.displayName}</div>
     </div>
   ));
-
+  
   return (
     <div>
-      <div className={open ? "group-burger-open" : "group-burger-closed"}>
-        <div className="menu-header">
-          <div className="header-group-name">{group?.name}</div>
-          <IconButton
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            disabled={!open}
-            onClick={(e) => setOpen((curr) => !curr)}
-          >
-            <CloseIcon fontSize="large" color="primary" />
-          </IconButton>
-        </div>
-        {currentUser?._id === group?.admin?.id ? (
-          <div className="admin-settings-group">
-            <Badge
-              color="primary"
-              badgeContent={group?.requests?.length}
-              classes={{ badge: classes.customBadge }}
-            >
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={() => history.push(`/group/requests/${group?._id}`)}
-                size="small"
-                style={{ height: "40px" }}
-              >
-                Requests
-              </Button>
-            </Badge>
+      {group && pathname !== "/group/find/group" && pathname !== "/group/new/group"?
+        <div className={open ? "group-burger-open" : "group-burger-closed"}>
+          <div className="menu-header">
+            <div className="header-group-name">{group?.name}</div>
             <IconButton
-              // edge="start"
-              color="primary"
-              aria-label="settings"
-              onClick={() => history.push(`/group/settings/${group?._id}`)}
+              edge="start"
+              color="inherit"
+              aria-label="menu"
+              disabled={!open}
+              onClick={(e) => setOpen((curr) => !curr)}
             >
-              <SettingsIcon fontSize="large" color="primary" />
+              <CloseIcon fontSize="large" color="primary" />
             </IconButton>
           </div>
-        ) : null}
+          {currentUser?._id === group?.admin?.id ? (
+            <div className="admin-settings-group">
+              <Badge
+                color="primary"
+                badgeContent={group?.requests?.length}
+                classes={{ badge: classes.customBadge }}
+              >
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={() => history.push(`/group/requests/${group?._id}`)}
+                  size="small"
+                  style={{ height: "40px" }}
+                >
+                  Requests
+              </Button>
+              </Badge>
+              <IconButton
+                // edge="start"
+                color="primary"
+                aria-label="settings"
+                onClick={() => history.push(`/group/settings/${group?._id}`)}
+              >
+                <SettingsIcon fontSize="large" color="primary" />
+              </IconButton>
+            </div>
+          ) : null}
 
-        {group ? <div className="group-burger-menu">
-          <div className="avatar">
-            <Avatar
-              src={`/uploads/groups/${group?.avatar}`}
-              alt={group?.name}
-              className={classes.large}
-              style={{ marginTop: "10px" }}
-            />
+          <div className="group-burger-menu">
+            <div className="avatar">
+              <Avatar
+                src={`/uploads/groups/${group?.avatar}`}
+                alt={group?.name}
+                className={classes.large}
+                style={{ marginTop: "10px" }}
+              />
+            </div>
+            <div className="group-name">{group?.members?.length} Members</div>
           </div>
-          <div className="group-name">{group?.members?.length} Members</div>
-        </div> : <div className="group-placeholder">Group Menu</div>}
-        {membersJSX}
-      </div>
+          {windowDimensions.width >= 1200 ? <div className="side-bar-group-name">{group?.name}</div> : null}
+          {membersJSX}
+        </div> :
+        <div className={open ? "group-burger-open" : "group-burger-closed"}>
+          <div className="group-placeholder">Group Menu</div>
+          </div>}
     </div>
   );
 };
