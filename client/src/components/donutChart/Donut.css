@@ -46,3 +46,12 @@
     overflow-y: hidden;
   }
 }
+
+@media screen and (min-width: 1200px) {
+  .pie-chart,
+  .loading-container {
+    max-width: 650px;
+    overflow-x: hidden;
+    overflow-y: hidden;
+  }
+}

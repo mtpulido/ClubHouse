@@ -37,8 +37,8 @@
 @media screen and (min-width: 1200px) {
 
 .new-round-container {
-  min-width: 768px;
-  max-width: 768px;
+  min-width: 650px;
+  max-width: 650px;
   overflow-x: hidden;
   /* padding-top: 20px; */
   min-height: 100vh;

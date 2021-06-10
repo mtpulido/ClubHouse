@@ -20,3 +20,11 @@
     overflow-x: hidden;
   }
 }
+
+@media screen and (min-width: 1200px) {
+  .settings-container,
+  .update-group-form  {
+    max-width: 650px;
+    overflow-x: hidden;
+  }
+}

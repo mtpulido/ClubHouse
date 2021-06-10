@@ -92,3 +92,14 @@
     max-width: 90%
   }
 }
+
+@media screen and (min-width: 1200px) {
+  .details-longgame-container,
+  .details-info-container {
+    max-width: 650px;
+    overflow-x: hidden;
+  }
+  .details-analysis {
+    max-width: 100%
+  }
+}

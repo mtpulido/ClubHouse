@@ -75,3 +75,22 @@
    margin-left: 10px;
   }
 }
+
+
+@media screen and (min-width: 1200px) {
+  .find-group-container {
+    min-width: 650px;
+    max-width: 650px;
+    overflow-x: hidden;
+    display: flex;
+    align-items: center;
+  }
+
+  .search-bar-container,
+  .searched-group-container {
+    max-width: 650px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

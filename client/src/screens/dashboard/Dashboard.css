@@ -30,7 +30,7 @@
 @media screen and (min-width: 1200px) {
 
   .dashboard-container {
-    max-width: 100vw;
+    max-width: 650px;
     overflow-x: hidden;
     padding-top: 20px;
     padding-bottom: 100px;

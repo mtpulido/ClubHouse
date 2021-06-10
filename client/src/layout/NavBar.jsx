@@ -107,8 +107,6 @@ const NavBar = (props) => {
     </div>
   ));
 
-  console.log(windowDimensions)
-
   return (
     <div className="nav-container">
 

@@ -14,3 +14,10 @@
     overflow-x: hidden;
   }
 }
+
+@media screen and (min-width: 1200px) {
+  .create-group-form {
+    max-width: 650px;
+    overflow-x: hidden;
+  }
+}

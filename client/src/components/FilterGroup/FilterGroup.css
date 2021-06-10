@@ -18,3 +18,10 @@
     overflow-x: hidden;
   }
 }
+
+@media screen and (min-width: 1200px) {
+  .filter-container-group {
+    max-width: 650px;
+    overflow-x: hidden;
+  }
+}

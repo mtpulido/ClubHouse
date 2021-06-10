@@ -3,3 +3,11 @@
   overflow-x: hidden;
   padding-top: 20px;
 }
+
+
+@media screen and (min-width: 1200px) {
+  .group-container {
+    max-width: 650px;
+    overflow-x: hidden;
+  }
+}
