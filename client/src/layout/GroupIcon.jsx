@@ -118,10 +118,11 @@ const GroupMenu = (props) => {
           </div>
           {windowDimensions.width >= 1200 ? <div className="side-bar-group-name">{group?.name}</div> : null}
           {membersJSX}
-        </div> :
-        <div className={open ? "group-burger-open" : "group-burger-closed"}>
-          <div className="group-placeholder">Group Menu</div>
-          </div>}
+        </div> : null
+        // <div className={open ? "group-burger-open" : "group-burger-closed"}>
+        //   <div className="group-placeholder">Group Menu</div>
+        // </div>
+      }
     </div>
   );
 };
