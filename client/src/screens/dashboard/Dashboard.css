@@ -3,6 +3,9 @@
   bottom: 40px;
   right: 15px;
   filter: drop-shadow(0 0 7px rgba(255, 255, 255, 0.3));
+  display: flex;
+  align-items: center;
+  overflow-y: hidden;
 }
 
 .dashboard-container {
@@ -13,6 +16,26 @@
   min-height: 100vh;
 }
 
+.pointer-arrow {
+  animation-duration: 1.8s;
+  animation-iteration-count: infinite;
+}
+
+.bounce-5 {
+  animation-name: bounce-5;
+  animation-timing-function: ease;
+}
+@keyframes bounce-5 {
+  0%   { transform: scale(1,1)    translateX(0); }
+  10%  { transform: scale(1.1,.9) translateX(0); }
+  30%  { transform: scale(.9,1.1) translateX(-40px); }
+  50%  { transform: scale(1,1)    translateX(0); }
+  57%  { transform: scale(1,1)    translateX(-8px); }
+  64%  { transform: scale(1,1)    translateX(0); }
+  100% { transform: scale(1,1)    translateX(0); }
+}
+
+
 @media screen and (min-width: 768px) {
   .dashboard-container  {
     max-width: 768px;
@@ -22,8 +45,8 @@
     .add-button {
       position: fixed;
       bottom: 40px;
-      left: 660px;
-      overflow-x: hidden
+      left: 530px;
+      overflow-x: hidden;
     }
 }
 

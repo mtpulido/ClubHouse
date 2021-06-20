@@ -13,6 +13,7 @@ import AppBar from "@material-ui/core/AppBar";
 import Donut from "../../components/donutChart/Donut";
 import Filter from "../../components/Filter/Filter";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import ArrowRightAltIcon from "@material-ui/icons/ArrowRightAlt";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -100,9 +101,16 @@ const Dashboard = (props) => {
         setLoading={setLoading}
       />
 
-      <Donut value={value} userRounds={userRounds} loading={loading} />
+      {props.currentUser?.recentRounds?.length > 0 ? (
+        <Donut value={value} userRounds={userRounds} loading={loading} />
+      ) : null}
 
       <div className="add-button">
+        {props.currentUser?.recentRounds?.length === 0 ? (
+          <div className="bounce-5 pointer-arrow">
+            <ArrowRightAltIcon style={{ fontSize: "150px", color: "red" }} />
+          </div>
+        ) : null}
         <Fab
           color="primary"
           aria-label="add"

@@ -60,15 +60,15 @@ const DetailsRound = (props) => {
         <div className="details-analysis">
           <div className="details-fairways">
             Fairways:{" "}
-            {round?.fairwaysHit
+            {round?.fairwaysHit && round?.possibleFairways
               ? round?.fairwaysHit + " / " + round?.possibleFairways
               : "No Data"}
           </div>
           <div>
             <ReactStoreIndicator
-              value={Math.round(
+              value={round?.fairwaysHit && round?.possibleFairways ? Math.round(
                 (round?.fairwaysHit / round?.possibleFairways) * 128
-              )}
+              ) : 0}
               maxValue={100}
               width={140}
               fadedOpacity={25}
@@ -78,7 +78,7 @@ const DetailsRound = (props) => {
         <div className="details-analysis">
           <div>
             <ReactStoreIndicator
-              value={Math.round((round?.greens / round?.holes) * 128)}
+              value={ round?.greens ? Math.round((round?.greens / round?.holes) * 128) : 0}
               maxValue={100}
               width={140}
               fadedOpacity={25}
@@ -102,9 +102,9 @@ const DetailsRound = (props) => {
           </div>
           <div>
             <ReactStoreIndicator
-              value={Math.round(
+              value={ round?.upAndDowns && round?.possibleUpAndDowns ? Math.round(
                 (round?.upAndDowns / round?.possibleUpAndDowns) * 140
-              )}
+              ) : 0}
               maxValue={100}
               width={140}
               fadedOpacity={25}
@@ -114,7 +114,7 @@ const DetailsRound = (props) => {
         <div className="details-analysis">
           <div>
             <ReactStoreIndicator
-              value={Math.round(Math.pow(round?.holes / round?.putts, 2) * 220)}
+              value={ round?.putts ? Math.round(Math.pow(round?.holes / round?.putts, 2) * 220) : 0}
               maxValue={100}
               width={140}
               fadedOpacity={25}
